@@ -3,16 +3,17 @@
 		'use-strict'
 		
 		let player;
+	    let youtube__title;
 	    
 		document.addEventListener('click',e=>{
-			if(e.target.tagName === 'A'){
+			if(e.target.tagName === 'A' && e.target.classList.contains("table-data__link")){
 				let href = e.target.href;
 				let youtubeId = youtube_parser(href);
-				let title = e.target.parentElement.parentElement.querySelector(".table-data__column:nth-child(2)").textContent;
 				if(youtubeId != false){
-					console.log(youtubeId);
+					let title = e.target.parentElement.parentElement.querySelector(".table-data__column:nth-child(2)").textContent;
 					if(document.querySelector(".mod--youtube")){
 						player.loadVideoById(youtubeId,0)
+						youtube__title.textContent = title;
 				    	document.querySelector(".mod--youtube").classList.add("mod--active");
 				    }else{
 				    	createModalYoutube(youtubeId,title);
@@ -35,8 +36,8 @@
 			
 			modalContainer.innerHTML = `
 				<div class="mod__inner">
-					<i class="mod__close mod__close--light fas fa-close"></i>
 					<div class="youtube">
+						<i class="mod__close mod__close--dark fas fa-close"></i>
 						<div class="youtube__inner">
 							<h1 class="youtube__title">${title}</h1>
 							<div class="youtube__wrapper">
@@ -62,6 +63,8 @@
 			});
 			
 			createYoutubeIframe(youtubeId, "youtube__video");
+			
+			youtube__title = modalContainer.querySelector(".youtube__title");
 			
 		};
 		

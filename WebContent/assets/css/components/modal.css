@@ -75,6 +75,13 @@
 	border-radius: 10px;
 	background: #fff;
 	box-shadow: 0 0 10px 2px var(--red-school-alt);
+	position: relative;
+}
+
+.youtube .mod__close{
+	transform: translate(50%,-50%);
+	right: 0;
+	top: 1rem;
 }
 
 .youtube__title{
@@ -84,7 +91,6 @@
 	text-align: center;
 	margin: 0;
 	margin-bottom: .5rem;
-	
 }
 
 .youtube__wrapper {
@@ -115,11 +121,18 @@
 @media screen and (max-width: 850px) and (orientation: landscape) {
 	
 	.youtube__wrapper {
-	    padding-bottom: 42%;
+	    padding-bottom: 38%;
     }
 	
 	.youtube{
 		/*max-width: 55%;*/
+	}
+	
+}
+
+@media screen and (min-width: 1000px){
+	.youtube .mod__close{
+		top: 0;
 	}
 }
 
