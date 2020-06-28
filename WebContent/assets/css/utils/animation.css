@@ -1,0 +1,50 @@
+@keyframes fromRightToLeft{
+	from{
+		transform: translateX(100%);
+	}
+	to{
+		transform: translateX(0);
+	}
+}
+
+@Keyframes toTop{
+	from{
+		transform: translateY(0);
+	}
+	to{
+		transform: translateY(-60px);
+	}
+}
+
+@keyframes fromTopToBottom{
+	from{
+		transform: translateY(-100%);
+	}
+	to{
+		transform: translateY(0);
+	}
+}
+
+@keyframes scale{
+	from{
+		transform: scale(1);
+	}
+	to{
+		transform: scale(1.2);
+	}
+}
+
+@keyframes boxShadowFadeIn{
+	0%,25%{
+		box-shadow: 0 0 0 -2px var(--color-negative);
+	}
+	25%,50%{
+		box-shadow: 0 0 0 2px var(--color-negative);
+	}
+	50%, 75%{
+		box-shadow: 0 0 0 -2px var(--color-negative);
+	}
+	75%, 100%{
+		box-shadow: 0 0 0 2px var(--color-negative);
+	}
+}

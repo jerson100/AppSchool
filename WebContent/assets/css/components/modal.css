@@ -1,0 +1,105 @@
+.mod{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,.5);
+	width: 100vw;
+	height: 100vh;
+	/*border: solid 1px red;*/
+	opacity: 0;
+	visibility: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100000;
+}
+
+.mod--active{
+	transition: opacity 500ms, vibility 500ms;
+	opacity: 1;
+	visibility: visible;
+}
+
+.mod__inner{
+	padding-left: .5rem;
+	padding-right: .5rem;
+	/*border: solid 1px red;*/
+	/*position: relative;*/
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.mod__close{
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	font-size: 1.4em;
+	color: rgba(0,0,0,.6);
+	cursor: pointer;
+}
+
+.mod__close--light{
+	color: #fff;
+}
+
+.mod--bg-op2{
+	background-color: rgba(0,0,0,.8);
+}
+
+.youtube{
+	width: 90%;
+	max-width: 1300px;
+	padding: 1rem;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 0 10px 2px var(--red-school-alt);
+}
+
+.youtube__title{
+	font-size: 1.3em;
+	padding: .5rem 0;
+	font-weight: bold;
+	text-align: center;
+	margin: 0;
+	margin-bottom: .5rem;
+	
+}
+
+.youtube__wrapper {
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    position: relative;
+}
+
+.youtube__wrapper iframe,
+.youtube__wrapper object,
+.youtube__wrapper embed,
+.youtube__wrapper video {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px){
+	.youtube__title{
+		font-size: 1.4em;
+	}
+}
+
+@media screen and (max-width: 850px) and (orientation: landscape) {
+	
+	.youtube__wrapper {
+	    padding-bottom: 42%;
+    }
+	
+	.youtube{
+		/*max-width: 55%;*/
+	}
+}
+
+

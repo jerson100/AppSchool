@@ -1,0 +1,39 @@
+.goUp{
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: var(--blue-school);
+	opacity: 0;
+	visibility: hidden;
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+	z-index: 99999;
+	transform: translateX(100%) rotate(0deg) scale(0);
+	transition: transform 500ms, opacity 0s 500ms, visibility 0s 500ms, background-color 500ms;
+	cursor: pointer;
+}
+/*
+.goUp--active:active{
+	transform: scale(1.2);
+	transition: transform 500ms, opacity 0s, visibility 0s, background-color 500ms;
+}
+*/
+.goUp__icon{
+	color: #fff;
+	font-size: 20px;
+}
+
+.goUp:hover{
+	background-color: var(--red-school-alt);
+}
+
+.goUp--active{
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(0) rotate(360deg) scale(1);
+	transition: transform 500ms, opacity 0s, visibility 0s, background-color 500ms;
+}

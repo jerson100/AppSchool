@@ -1,0 +1,55 @@
+.glide img{
+	width: 100%;
+	object-fit: cover;
+	height: 250px;
+}
+
+.glide ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+.glide li{
+	margin: 0;
+	padding: 0;
+}
+
+/***************BANNER******************/
+
+.banner-inner{
+	width: 100%;
+}
+
+.banner-inner .title-banner{
+	text-align: center;
+	font-size: 20px;
+	padding: 1.5rem 0;
+	
+}
+
+
+/*************FIN BANNER****************/
+
+
+/*************DETAILS*******************/
+
+.details-container{
+	width: 100%;
+}
+
+.details-container .container-button{
+	height: 101px;
+}
+
+@media screen and (min-width:700px){
+	
+	.glide img{
+		height: 450px;
+	}
+	
+	.details-container .container-button{
+		height: 120px;
+	}
+	
+}
