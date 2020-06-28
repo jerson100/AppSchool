@@ -9,7 +9,9 @@
 			  $modalOptions = dom.querySelector(".mod--resource");
 			  $modalOptionsClose = dom.querySelector(".mod--resource .mod__close"),
 			  $nombreProfesorSeleccionado = dom.getElementById("nombreProfesorSeleccionado"),
-			  $modalHeader = document.querySelector(".resource__header");
+			  $modalHeader = document.querySelector(".resource__header"),
+			  $tagFileName = document.querySelector(".tag__file-name"),
+			  $tagSections = Array.from($modalOptions.querySelectorAll(".tag__section")),
 			  tableContent=null,tableClass=null,tableWork=null,idSecCurPro=null;
 			  
 			  /*BOOLEANS*/
@@ -87,6 +89,13 @@
 			]);
 		};
 		
+		const clearTagSection = () => {
+			let tags = Array.from($modalOptions.querySelector(".tag__section"));
+			tags.forEach(tag=>{
+				tag.classList.remove("tag__section--active");
+			});
+		};
+		
 		/*
 		 * Oyente de las interacciones de los clientes
 		 * en la ventana modal, ya sea para que agreguen, modifiquen 
@@ -95,7 +104,10 @@
 		const modalListener = () => {
 			if($addCharacteristic){
 				$addCharacteristic.addEventListener('click',e=>{//cuando pulsa en el ícono +
-					$modalOptions.classList.add("mod--active");//abrimos el modal
+					$modalOptions.classList.add("mod--active");
+					ELEMENTS.removeClass($tagSections,["tag__section--active"]);
+					$tagSections[0].classList.add("tag__section--active");
+					$tagFileName.textContent = "";
 					$modalHeader.innerHTML = `
 						<p class="resource__title" style="animation:fromTopToBottom 250ms 1 linear;">Seleccione una opción</p>					
 					`;
@@ -104,7 +116,9 @@
 			if($modalOptionsClose){
 				$modalOptionsClose.addEventListener('click',e=>{//cuando da click en x
 					$modalOptions.classList.remove("mod--active");//cerramos el modal
-					$modalOptions.querySelector(".tag__wrapper").style.transform = "translateX(0%)";
+					ELEMENTS.removeClass($tagSections,["tag__section--active"]);
+					$tagSections[0].classList.add("tag__section--active");
+					$tagFileName.textContent = "";
 					flagUpdateContent = false;
 					flagUpdateClass = false;
 					flagUpdateWork = false;
@@ -272,12 +286,13 @@
 				if(validations){
 					$form.reset();
 					load.remove();
+					$tagFileName.textContent = "";
 					flagUpdateClass = false;
 					flagUpdateContent = false;
 					flagUpdateWork = false;
 					showModalMessage(msg,5000);
-					$modalOptions.querySelector(".tag__wrapper")
-					.style.transform = "translateX(0%)";
+					ELEMENTS.removeClass($tagSections,["tag__section--active"]);
+					$tagSections[0].classList.add("tag__section--active");
 					if(action.replace(/(?:contenido|clase|trabajo)/gi,"") === 'actualizar'){//ocultamos el modal
 						$modalOptions.classList.remove("mod--active");
 					}
@@ -669,21 +684,19 @@
 		const showModalUpdate = async (tableName,data) => {
 			$modalOptions.classList.add("mod--active");
 			changeTitleModal("Actualizando");
+			ELEMENTS.removeClass($tagSections,["tag__section--active"]);
 			let $form;
 			switch(tableName){
 				case 'tableContent':
-					$modalOptions.querySelector(".tag__wrapper")
-					.style.transform = "translateX(-100%)";
 					$form = $modalOptions.querySelector(".tag__section--content .tag__form");
 					$form[0].value = data.descContenido;
 					$form[1].value = data.link;
 					$form[3].value = data.idContenido;
 					$form[5].value = data.codContenido;
+					$form.parentElement.classList.add("tag__section--active");
 					flagUpdateContent = true;
 					break;
 				case 'tableClass':
-					$modalOptions.querySelector(".tag__wrapper")
-					.style.transform = "translateX(-200%)";
 				    $form = $modalOptions.querySelector(".tag__section--class .tag__form");
 					/*console.log(data);*/
 					$form[0].value = data.descClase;
@@ -692,27 +705,27 @@
 					$form[3].value = data.horaClase;
 					$form[5].value = data.idClass;
 					$form[6].value = data.codClase;
+					$form.parentElement.classList.add("tag__section--active");
 					flagUpdateClass = true;
 					break;
 				case 'tableWork':
-					$modalOptions.querySelector(".tag__wrapper")
-					.style.transform = "translateX(-300%)";
 					$form = $modalOptions.querySelector(".tag__section--work .tag__form");
 					$form.querySelector(".tag__file-name").textContent = data.nombreArchivo;
 					$form[0].value = data.descTrabajo;
 					$form[3].value = data.fechaIni;
 					$form[5].value = data.fechaFin;
-					$form[6].checked = data.isFlagLimite;
+					$form[6].checked = data.flagLimite;
 					$form[7].value = data.diasLimite;
-					$form[8].value = data.replicartodos;
+					$form[8].checked = data.replicar_todos;
 					$form[9].value = data.idTrabajo;
 					$form[10].value = data.codTrabajo;
 					$form[11].value = data.rutaArchivo;
-					/*$form[12].value = "false";*/
+					$form[12].value = data.nombreArchivo;
 					$form.querySelector(".tag__file-delete").classList.add("tag__file-delete--active");
 					flagUpdateWork = true;
 					break;
 			}	
+			$form.parentElement.classList.add("tag__section--active");
 			if($form){
 				$form.parentElement.firstElementChild.classList.add("tag__return--hidden");
 			}
@@ -779,6 +792,12 @@
 				mensaje = "Ingrese la fecha Fin";
 			}if(form[6].checked && form[7].value === ''){
 				mensaje = "Especifique los días de fuera de fecha";
+			}else{
+				let fechI = new Date(form[3].value.trim().replace("T"," ")).getTime();
+				let fechF = new Date(form[5].value.trim().replace("T"," ")).getTime();
+				if(fechI > fechF){
+					mensaje = "La fecha inicial no puede ser mayor que la fecha fin";
+				}
 			}
 			return mensaje;
 		};
@@ -791,18 +810,26 @@
 		
 		const validateMinDateInputs = () => {
 			const $inputsDateTime = Array.from($modalOptions.querySelectorAll("input[type=datetime-local]"));
+			const $inputDate = Array.from($modalOptions.querySelectorAll("input[type=date]")); 
 			const date = new Date(),
-			      agnoMonthDay = d(date);
+			      agnoMonthDayWork = getDateFormat(date),
+			      agnoMonthDayClass = getDateFormat(date,false);
 			$inputsDateTime.forEach(input=>{
-				input.min = agnoMonthDay;
+				input.min = agnoMonthDayWork;
 			});
+			$inputDate.forEach(input=>{
+				input.min = agnoMonthDayClass;
+			})
 		};
 		
-		const d = (date) => {
-	        return (date.getFullYear().toString() + '-' 
-	           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
-	           + ("0" + (date.getDate())).slice(-2))
-	           + 'T' + date.toTimeString().slice(0,5);
+		const getDateFormat = (date, time = true) => {
+			let rspt = (date.getFullYear().toString() + '-' 
+			           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
+			           + ("0" + (date.getDate())).slice(-2));
+			if(time){
+				rspt += 'T' + date.toTimeString().slice(0,5);
+			}
+			return rspt;
 	    }
 		
 		init();

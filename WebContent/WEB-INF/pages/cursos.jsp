@@ -213,21 +213,21 @@
 						</div>
 						<div class="tag">
 							<div class="tag__wrapper">
-								<div class="tag__inner">
+								<div class="tag__section tag__section--active tag__inner">
 									<ul class="tag__list">
-										<li class="tag__item tag__item--red flex--center" data-num=1
+										<li class="tag__item tag__item--red flex--center" data-class="tag__section--content"
 											data-title="Agregar Contenido" data-color="#ff3c32"><a
-											class="tag__link" href="#" data-num=1
+											class="tag__link" href="#" data-class="tag__section--content"
 											data-title="Agregar Contenido" data-color="#ff3c32">Contenido</a>
 										</li>
-										<li class="tag__item tag__item--blue flex--center" data-num=2
+										<li class="tag__item tag__item--blue flex--center" data-class="tag__section--class"
 											data-title="Agregar Clases" data-color="#007bdf"><a
-											class="tag__link" href="#" data-num=2
+											class="tag__link" href="#" data-class="tag__section--class"
 											data-title="Agregar Clases" data-color="#007bdf">Clases
 												en vivo</a></li>
 										<li class="tag__item tag__item--yellow flex--center"
-											data-num=3 data-title="Agregar Tareas" data-color="#fba905">
-											<a class="tag__link" href="#" data-num=3
+											data-class="tag__section--work" data-title="Agregar Tareas" data-color="#fba905">
+											<a class="tag__link" href="#" data-class="tag__section--work"
 											data-title="Agregar Tareas" data-color="#fba905">Tarea y
 												Trabajos</a>
 										</li>
@@ -339,7 +339,7 @@
 										<input type="hidden" name="idTrabajo" value="">
 										<input type="hidden" name="codTrabajo" value="">
 										<input type="hidden" name="rutaArchivo" value="">
-										<input type="hidden" name="eliminarArchivo" value="false">
+										<input type="hidden" name="nombreArchivoAnterior">
 										<div class="tag__buttons flex--center">
 											<button
 												class="tag__btn tag__btn--first je-btn je-btn--smaller"

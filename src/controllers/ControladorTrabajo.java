@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +25,7 @@ import dao.Aul_TrabajoDao;
 import dao.manager.DaoManager;
 import enumerados.EDaoManager;
 import exceptions.NotAll;
+import exceptions.NotCreated;
 import exceptions.NotDeleted;
 import interfaces.ICrud;
 import models.Aul_Trabajo;
@@ -138,12 +138,12 @@ public class ControladorTrabajo extends HttpServlet {
 		
 	}
 
-	private void actualizarTrabajo(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void actualizarTrabajo(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String mensaje = "";
 		boolean estado = false;
 		
-		try {
+		//try {
 			
 			response.setContentType("Application/json;charset=UTF-8");
 			
@@ -154,11 +154,10 @@ public class ControladorTrabajo extends HttpServlet {
 			String descTrabajo = request.getParameter("descTrabajo");
 			String fechaIni = request.getParameter("fechaIni");
 			String fechaFin = request.getParameter("fechaFin");
+			String nombreArchivoAnterior = request.getParameter("nombreArchivoAnterior");
 			
-			String extensionArchivo = "";
-			String nombreArchivoGenerado = "";
-			String nombreArchivo  = "";
-			
+			String extensionArchivo = JeVlidate.obtenerExtension(nombreArchivoAnterior);
+
 			String rutaArchivo = request.getParameter("rutaArchivo");
 			String isFlagLimite = request.getParameter("isFlagLimite");
 			String diasLimite = request.getParameter("diasLimite");
@@ -168,74 +167,87 @@ public class ControladorTrabajo extends HttpServlet {
 			
 			Aul_Trabajo obj = new Aul_Trabajo();
 			
-			try {
-				
-				if(nuevoNombreArchivo != null && nuevoNombreArchivo.isEmpty() && !rutaArchivo.isEmpty() ||
-				   !file.getSubmittedFileName().isEmpty() && !rutaArchivo.isEmpty()) {
+				boolean estadoU = false;
+				System.out.println(file.getSubmittedFileName().isEmpty());
+				if(!file.getSubmittedFileName().isEmpty()) {
 					try {
-						System.out.println("eliminando: "+rutaArchivo);
+						
+						String newPath = this.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
+						
+						//insertamos el nuevo
+						Storage.addAndUpdateBlob(request, "PROFESORES", newPath, file.getContentType(), "2020", file.getInputStream(), file.getSize());
+						
+						if(!rutaArchivo.isEmpty() && (replicartodos!=null && replicartodos.equals("on"))) {
+							try {
+								//eliminamos el anterior
+								Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
+								nombreArchivoAnterior = file.getSubmittedFileName();
+								extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
+								rutaArchivo = "2020/PROFESORES/"+newPath;
+								estadoU = true;
+							}catch(Exception e) {
+								mensaje = "No se pudo actualizar";
+							}
+						}else {
+							nombreArchivoAnterior = file.getSubmittedFileName();
+							extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
+							rutaArchivo = "2020/PROFESORES/"+newPath;
+							estadoU = true;
+						}
+						
+					}catch(Exception e) {
+						mensaje = "No se pudo agregar el nuevo archivo";
+					}
+				}else if(!nombreArchivoAnterior.equals(nuevoNombreArchivo)) {
+					//eliminamos el anterior
+					try {
 						Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
-						nombreArchivo = "";
+						nombreArchivoAnterior = "";
 						extensionArchivo = "";
 						rutaArchivo = "";
-					}catch(Exception e) {e.printStackTrace();}
+						estadoU = true;
+					}catch(Exception e) {
+						mensaje = "No se pudo actualizar";
+					}
+					
+				}else {
+					estadoU = true;
 				}
-				
-				if(!file.getSubmittedFileName().isEmpty()) {
-					System.out.println("agregando");
-					extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
-					nombreArchivo = file.getSubmittedFileName();
-				    nombreArchivoGenerado = generarNombreArchivo(nombreArchivo,new Date().getTime(),JeVlidate.generarNumeroAleatorio(50, 9999999),extensionArchivo);
-					rutaArchivo = "2020/PROFESORES/" + nombreArchivoGenerado;
+								
+				if(estadoU) {
+					
+					obj.setIdTrabajo(idTrabajo);
+					obj.setIdSecCur(idSeCur);
+					obj.setCodTrabajo(codTrabajo);
+					obj.setDescTrabajo(descTrabajo);
+					obj.setFechaIni(fechaIni);
+					obj.setFechaFin(fechaFin);
+					obj.setRutaArchivo(rutaArchivo);
+					obj.setExtensionArchivo(extensionArchivo);
+					obj.setNombreArchivo(nombreArchivoAnterior);
+					obj.setIdUsuario(sesion.getIdUsuario()); 
+					obj.setFlagLimite(isFlagLimite!=null && isFlagLimite.equals("on"));
+					obj.setDiasLimite(diasLimite!=null && !diasLimite.isEmpty()?Short.parseShort(diasLimite):0);
+					obj.setReplicar_solo(replicarsolo!=null && replicarsolo.equals("on"));
+					obj.setReplicar_todos(replicartodos!=null && replicartodos.equals("on"));
+					
 					try {
-						Storage.addAndUpdateBlob(request, "PROFESORES", nombreArchivoGenerado, file.getContentType(), "2020", file.getInputStream(), file.getSize());
-					}catch(Exception e) {e.printStackTrace();}
+						dao.create(obj);
+						mensaje = "Trabajo actualizado satisfactoriamente";
+						estado = true;
+					} catch (NotCreated e) {
+						e.printStackTrace();
+					} 
+					
+				}	
+
+				map.put("mensaje", mensaje);
+				map.put("estado",estado);
+				
+				try(Writer w = response.getWriter()){
+					w.write(JSON.toJson(map));
 				}
-				
-				System.out.println("nueva ruta del archivo: "+rutaArchivo);
-				System.out.println("Extensión archivo: "+extensionArchivo);
-				System.out.println("Nombre Archivo: "+nombreArchivo);
-				obj.setIdTrabajo(idTrabajo);
-				obj.setIdSecCur(idSeCur);
-				obj.setCodTrabajo(codTrabajo);
-				obj.setDescTrabajo(descTrabajo);
-				obj.setFechaIni(fechaIni);
-				obj.setFechaFin(fechaFin);
-				obj.setRutaArchivo(rutaArchivo);
-				obj.setExtensionArchivo(extensionArchivo);
-				obj.setNombreArchivo(nombreArchivo);
-				obj.setIdUsuario(sesion.getIdUsuario()); 
-				obj.setFlagLimite(isFlagLimite!=null && isFlagLimite.equals("on"));
-				obj.setDiasLimite(diasLimite!=null && !diasLimite.isEmpty()?Short.parseShort(diasLimite):0);
-				obj.setReplicar_solo(replicarsolo!=null && replicarsolo.equals("on"));
-				obj.setReplicar_todos(replicartodos!=null && replicartodos.equals("on"));
-				
-				dao.create(obj);
-				
-				mensaje = "Trabajo actualizado satisfactoriamente";
-				
-				estado = true;
-				
-			} catch (Exception e) {
-				//e.printStackTrace();
-				mensaje = "No se pudo actualizar el trabajo";
-				
-				response.setStatus(404);
-				
-			}
-			
-		}catch(Exception e) {
-			
-			response.setStatus(404);
-			
-		}
 		
-		map.put("mensaje", mensaje);
-		map.put("estado",estado);
-		
-		try(Writer w = response.getWriter()){
-			w.write(JSON.toJson(map));
-		}
 	}
 
 	private void agregarTrabajo(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException {

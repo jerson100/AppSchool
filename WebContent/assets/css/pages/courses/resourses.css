@@ -53,15 +53,15 @@
 }
 
 .tag__wrapper{
-	white-space: nowrap;
+	/*white-space: nowrap;*/
 	transition: transform 500ms;
 }
 
 .tag__inner,
 .tag__section{
-	display: inline-block;
+	/*display: inline-block;*/
 	width: 100%;
-	vertical-align: top;
+	/*vertical-align: top;*/
 }
 
 .tag__list{
@@ -71,7 +71,7 @@
 	align-items: center;
 	list-style: none;
 	margin:0;
-	white-space: normal;
+	/*white-space: normal;*/
 	padding: .5rem 0;
 }
 
@@ -234,6 +234,11 @@
 	position: relative;
 	/*border: solid 1px red;*/
 	padding: 2rem 1rem; 
+	display: none;
+}
+
+.tag__section--active{
+	display: block;
 }
 
 @media screen and (min-width: 768px){
@@ -290,11 +295,9 @@
 		}
 	}
 	
-	
-	
 	.tag__inner,
 	.tag__section{
-		vertical-align: middle;
+		/*vertical-align: middle;*/
 	}
 	
 	.tag__list{

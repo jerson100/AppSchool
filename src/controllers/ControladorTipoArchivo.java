@@ -57,13 +57,6 @@ public class ControladorTipoArchivo extends HttpServlet {
 		
 		if(us != null) {
 			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 			if(us.getIdPerfil() == AppColegio.TIPO_ADMINISTRADOR || 
 			   us.getIdPerfil() == AppColegio.TIPO_DOCENTE ||
 			   us.getIdPerfil() == AppColegio.TIPO_ALUMNO) {
