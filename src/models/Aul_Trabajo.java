@@ -20,6 +20,35 @@ public class Aul_Trabajo extends Aul_Comun{
 	private String color;
 	private String notas;
 	private String link;
+	private String color2;
+	private String icono2;
+	
+	public String getColor2() {
+		return color2;
+	}
+	public void setColor2(String color2) {
+		this.color2 = color2;
+	}
+	public String getIcono2() {
+		return icono2;
+	}
+	public void setIcono2(String icono2) {
+		this.icono2 = icono2;
+	}
+	public String getLink2() {
+		return link2;
+	}
+	public void setLink2(String link2) {
+		this.link2 = link2;
+	}
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	private String link2;
+	private String comentario;
 	
 	public String getLink() {
 		return link;

@@ -72,7 +72,6 @@ public class ControladorTrabajo extends HttpServlet {
 				estado = true;
 				mensaje = "ok!";
 			} catch (NotAll e) {
-				//e.printStackTrace();
 				mensaje = e.getMessage();
 			} catch(Exception e) {e.printStackTrace();
 				mensaje = "No se pudo llevar a cabo la operación";
@@ -101,7 +100,7 @@ public class ControladorTrabajo extends HttpServlet {
 		if(sesion != null) {
 			
 			String action = request.getParameter("action");
-			System.out.println(action);
+		
 			if(action != null) {
 				
 				switch(action) {
@@ -143,7 +142,7 @@ public class ControladorTrabajo extends HttpServlet {
 		String mensaje = "";
 		boolean estado = false;
 		
-		//try {
+		try {
 			
 			response.setContentType("Application/json;charset=UTF-8");
 			
@@ -247,7 +246,12 @@ public class ControladorTrabajo extends HttpServlet {
 				try(Writer w = response.getWriter()){
 					w.write(JSON.toJson(map));
 				}
-		
+				
+		}catch(Exception e) {
+			
+			response.sendError(404);
+			
+		}
 	}
 
 	private void agregarTrabajo(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -277,8 +281,7 @@ public class ControladorTrabajo extends HttpServlet {
 			Aul_Trabajo obj = new Aul_Trabajo();
 			
 			try {
-				System.out.println(file.getSubmittedFileName());
-				System.out.println(file.getSubmittedFileName().isEmpty());
+				
 				if(file != null && !file.getSubmittedFileName().isEmpty()) {
 					
 					extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
@@ -302,22 +305,7 @@ public class ControladorTrabajo extends HttpServlet {
 				obj.setDiasLimite(diasLimite!=null && !diasLimite.trim().equals("")?Short.parseShort(diasLimite):0);
 				obj.setReplicar_solo(replicarsolo!=null && replicarsolo.equals("on"));
 				obj.setReplicar_todos(replicartodos!=null && replicartodos.equals("on"));
-				
-				/*
-				System.out.println(idSeCur);
-				System.out.println(descTrabajo);
-				System.out.println(fechaIni);
-				System.out.println(fechaFin);
-				System.out.println(extensionArchivo);
-				System.out.println(nombreArchivo);
-				System.out.println(rutaArchivo);
-				System.out.println(isFlagLimite);
-				System.out.println(diasLimite);
-				System.out.println(replicartodos);*/
-				
-				//primero intentamos almacenar en azure
-				
-				
+
 				dao.create(obj);
 				
 				mensaje = "Trabajo creado satisfactoriamente";
@@ -393,70 +381,46 @@ public class ControladorTrabajo extends HttpServlet {
 					
 					co.setReplicar_todos(replicartodos!=null && replicartodos.equals("on"));
 					
-					int index = rutaArchivo.indexOf("/");
+					boolean state = true;
 					
-					String container = rutaArchivo.substring(0,index);
-					
-					String path = rutaArchivo.substring(index + 1);
-					
-					try {
-						
-						if(co.isReplicar_todos()) {
-							
-							Storage.deleteBlob(request, path, container);
-							
+					if(!rutaArchivo.isEmpty()) {
+						int index = rutaArchivo.indexOf("/");
+						String container = rutaArchivo.substring(0,index);
+						String path = rutaArchivo.substring(index + 1);
+						try {
+							if(co.isReplicar_todos()) {
+								Storage.deleteBlob(request, path, container);
+								state = true;
+							}
+						}catch(Exception e) {
+							message  = "No se pudo eliminar";
+							state = false;
 						}
-						
-					}catch(StorageException e){
-					}catch(URISyntaxException ex) {
-					}catch(InvalidKeyException exx) {
 					}
-					
-					try {
-						
-						dao.delete(co);
-						
-						estado = true;
-						
-						message = "Trabajo eliminado satisfactoriamente";
-						
-					}catch (NotDeleted e) {
-						
-						message = "No se pudo eliminar el trabajo";
-						
+					if(state) {
+						try {
+							dao.delete(co);
+							estado = true;
+							message = "Trabajo eliminado satisfactoriamente";
+						}catch (NotDeleted e) {
+							message = "No se pudo eliminar el trabajo";
+						}
 					}
-					
 					Map<String, Object> map = new HashMap<>();
-					
 					map.put("mensaje", message);
-					
 					map.put("estado", estado);
-					
 					try(Writer w = response.getWriter()){
-						
 						w.write(JSON.toJson(map));
-						
 					}
-					
 				}else {
-					
 					response.sendError(403);
-					
 				}
-				
 			}else {
-				
 				response.sendError(401);
-				
 			}
-			
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 			response.sendError(404);
-			
 		}
 	}
-	
-	
-
 }

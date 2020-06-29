@@ -10,6 +10,7 @@
 		/*const weave = document.querySelector(".resource__wave-path");*/
 		const resource = document.querySelector(".resource");
 		const tagFile = document.querySelector(".tag__file-name");
+		const tagLimite = document.getElementById("diasLimite");
 		
 		list.addEventListener('click',ee=>{
 			if(ee.target.classList.contains("tag__item") ||
@@ -43,6 +44,7 @@
 				icon.classList.remove("tag__file-delete--active");
 			});
 			tagFile.textContent = "";
+			tagLimite.disabled = true;
 		};
 		
 	});

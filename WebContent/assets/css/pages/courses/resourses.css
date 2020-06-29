@@ -11,6 +11,12 @@
 	--bg--dinamic: rgb(0, 136, 255)
 }
 
+.mod__resource--close{
+	top: 0 !important;
+	right: 0 !important;
+	transform: translate(50%,-50%);
+}
+
 .resource__wave-path{
 	fill: var(--bg--dinamic);
 	stroke: none;
@@ -159,12 +165,18 @@
 	margin-bottom: 1rem;
 }
 
+.tag__input[type="checkbox"]{
+	width: 20px;
+    height: 20px;
+    margin: 0 !important;
+}
+
 .tag__buttons{
 	padding-top: 1rem; 
 }
 
 .tag__label{
-	flex: 0 0 100px;
+	flex: 0 0 120px;
 	margin-right: 1rem;
 	margin-bottom: 0;
 	font-weight: bold;
@@ -179,7 +191,10 @@
 }
 
 .tag__file-button{
-	width: 50px;
+    padding: 0;
+    height: 37px;
+    flex: 0 0 37px;
+    border: none;
 }
 
 .tag__file-name{
@@ -213,6 +228,15 @@
 	font-size: .95em;
 	padding: .7em .8em;
 	line-height: 1.5;
+}
+
+.tag__input{
+	height: 37px;
+}
+
+.tag__input-number{
+	flex: 0 0 60px !important;
+    margin-left: 1rem;
 }
 
 .tag__input[type="file"]{

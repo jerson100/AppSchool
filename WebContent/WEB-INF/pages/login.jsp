@@ -65,7 +65,7 @@
 				                </div>
 				                <button class="login__button je-btn je-btn--fill je-btn--upper je-btn--shadow" type="submit">Ingresar</button>
 				                <div class="login__reset-pass txt-align-c">
-					                <a class="login__pass" href="">Olvidó su contraseña</a>
+					                <!--<a class="login__pass" href="">Olvidó su contraseña</a>-->
 				                </div>
 				            </form>
 				        </div>

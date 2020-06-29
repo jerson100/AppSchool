@@ -203,7 +203,7 @@
 			<div class="mod__inner">
 				<div class="resource">
 				    <!--<div class="resource__triang"></div>-->
-					<i class="mod__close mod__close--light fas fa-close"></i>
+					<i class="mod__resource--close mod__close mod__close--dark fas fa-close"></i>
 					<div class="resource__header">
 						<p class="resource__title">Seleccione una opción</p>
 					</div>
@@ -249,10 +249,11 @@
 												class="tag__input" type="text" name="link" id="link" required>
 										</div>
 										<div class="tag__group">
-											<label class="tag__label" for="replicartodos">Replicar:</label> <input
+											<label class="tag__label" for="replicartodos">Replicar *:</label> <input
 												class="tag__input" type="checkbox" name="replicartodos"
 												id="replicar">
 										</div>
+										<span class="tag__info">* Si se marca se replicarán en las demás secciones del mismo grado.</span>
 									    <input type="hidden" name="idContenido">
 									    <input type="hidden" name="action" value="agregarContenido">
 									    <input type="hidden" name="codContenido">
@@ -287,9 +288,10 @@
 										<input type="hidden" name="idClass">
 										<input type="hidden" name="codClase">
 										<div class="tag__group">
-											<label class="tag__label" for="replicartodos2">Replicar:</label> 
+											<label class="tag__label" for="replicartodos2">Replicar *:</label> 
 											<input class="tag__input" type="checkbox" name="replicartodos" id="replicartodos2">
 										</div>
+										<span class="tag__info">* Si se marca se replicarán en las demás secciones del mismo grado.</span>
 										<div class="tag__buttons flex--center">
 											<button
 												class="tag__btn tag__btn--first je-btn je-btn--smaller"
@@ -318,28 +320,25 @@
 										</div>
 										<div class="tag__group">
 											<label class="tag__label" for="fechaIni">Fecha
-												Inicio:</label> <input class="tag__input" type="datetime-local"
+												de inicio:</label> <input class="tag__input" type="datetime-local"
 												name="fechaIni" id="fechaIni">
 										</div>
 										<input type="hidden" name="action" value="agregarTrabajo">
 										<div class="tag__group">
-											<label class="tag__label" for="fechaFin">Fecha Fin:</label>
+											<label class="tag__label" for="fechaFin">Fecha de entrega:</label>
 											<input class="tag__input" type="datetime-local"
 												name="fechaFin" id="fechaFin">
 										</div>
-										<div class="tag__group">
-											<label class="tag__label" for="isFlagLimite">Fuera de
-												fecha:</label> <input class="tag__input" type="checkbox"
-												name="isFlagLimite" id="isFlagLimite">
+										<div class="tag__group tag__group--flex">					
+										    <label class="tag__label" for="isFlagLimite">Prórroga (Días): </label> 
+											<input class="tag__input" type="checkbox" name="isFlagLimite" id="isFlagLimite">
+											<input class="tag__input tag__input-number" type="number" name="diasLimite" id="diasLimite" disabled min="0">
 										</div>
 										<div class="tag__group">
-											<label class="tag__label" for="diasLimite">Días:</label> <input
-												class="tag__input" type="number" name="diasLimite" id="diasLimite">
-										</div>
-										<div class="tag__group">
-											<label class="tag__label" for="replicartodos3">Replicar:</label> 
+											<label class="tag__label" for="replicartodos3">Replicar *:</label> 
 											<input class="tag__input" type="checkbox" name="replicartodos" id="replicartodos3">
 										</div>
+									    <span class="tag__info">* Si se marca se replicarán en las demás secciones del mismo grado.</span>
 										<input type="hidden" name="idTrabajo" value="">
 										<input type="hidden" name="codTrabajo" value="">
 										<input type="hidden" name="rutaArchivo" value="">
@@ -427,7 +426,7 @@
 	</div>
 	-->
 	<!--
-	<div class="mod mod--active mod--updload-student">
+	<div class="mod mod--active mod--upload-student">
 		<div class="mod__inner mod__inner--pd-1">
 			<div class="upload-student">
 				<i class="upload-student__close mod__close mod__close--dark fas fa-close"></i>

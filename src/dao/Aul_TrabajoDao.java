@@ -322,6 +322,10 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 				aulC.setFlagLimite2(rs.getInt(17));
 				aulC.setImg(rs.getString(13));
 				aulC.setLink(rs.getString(18));
+				aulC.setLink2(rs.getString(19));
+				aulC.setIcono2(rs.getString(20));
+				aulC.setColor2(rs.getString(21));
+				aulC.setComentario(rs.getString(22));
 				
 				list.add(aulC);
 
@@ -348,6 +352,10 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 					aulC.setFlagLimite2(rs.getInt(17));
 					aulC.setImg(rs.getString(13));
 					aulC.setLink(rs.getString(18));
+					aulC.setLink2(rs.getString(19));
+					aulC.setIcono2(rs.getString(20));
+					aulC.setColor2(rs.getString(21));
+					aulC.setComentario(rs.getString(22));
 					
 					list.add(aulC);
 

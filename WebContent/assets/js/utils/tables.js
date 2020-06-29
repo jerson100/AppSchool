@@ -89,7 +89,13 @@ class DataTable {
                     .parentElement
                     .parentElement
                     .firstElementChild.textContent-1]);
-            } 
+            } else if(e.target.classList.contains("table-data__upload")){
+            	this.upload(this.DEFAULT.data[e.target.parentElement
+                    .parentElement
+                    .parentElement
+                    .parentElement
+                    .firstElementChild.textContent-1]);
+            }
 
         });
 
@@ -187,11 +193,11 @@ class DataTable {
 						`;
                         break;
                     case 'icon':
-                    	if(metaColumn.settings.colorvar){
+                    	if(metaColumn.settings){
                     		row.innerHTML += `
     							<td class="table-data__column table-data__column--pd-tb-0">
     								<a class="table-data__link" href="${obj[metaColumn.var]}" target="_blank">
-    								    <i style="color:${obj[metaColumn.settings.colorvar]}" class="table-data__extension ${obj['img']}"></i>
+    								    <i style="color:${obj[metaColumn.settings.colorvar]}" class="table-data__extension ${obj[metaColumn.settings.icon]}"></i>
     								</a>
     							</td>
     						`;
@@ -223,6 +229,8 @@ class DataTable {
                     actionText += `<i class="table-data__action-icon table-data__edit fas fa-edit"></i>`;
                 } else if (action === 'remove') {
                     actionText += `<i class="table-data__action-icon table-data__remove fas fa-trash-alt"></i>`;
+                } else if (action === 'upload') {
+                	actionText += `<i class="table-data__action-icon table-data__upload fas fa-upload"></i>`;
                 }
             });
 
@@ -252,6 +260,10 @@ class DataTable {
 
     view() {
         this.actions.view();
+    }
+    
+    upload(obj){
+    	this.actions.upload(obj,this);
     }
         
 }

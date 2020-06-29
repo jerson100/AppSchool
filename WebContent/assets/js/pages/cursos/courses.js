@@ -184,6 +184,12 @@
 						namaeFileWork.textContent = '';
 					}
 				});
+				$formWk[6].addEventListener('change',e=>{
+					if(!e.target.checked){
+						e.target.nextElementSibling.value = "";
+					}
+					e.target.nextElementSibling.disabled = !e.target.checked;
+				});
 				
 			}
 		};
@@ -579,6 +585,55 @@
                 }
             });
 			
+			let columnsWork = [
+				{
+                    name: 'Título',
+                    var: 'descTrabajo',
+                    type: 'text'
+                },
+                {
+                    name: 'Fecha Inicio',
+                    var: 'fechaIniS',
+                    type: 'text'
+                },
+                {
+                    name: 'Fecha entrega',
+                    var: 'fechaFinS',
+                    type: 'text'
+                },
+                {
+                    name: 'Prórroga (Días)',
+                    var: 'diasLimite',
+                    type: 'text'
+                },
+                {
+                    name: 'Doc. Profesor',
+                    var: 'link',
+                    type: 'icon',
+                    settings:{
+                    	colorvar: 'color',
+                    	icon: 'icono'
+                    }
+                }
+			];
+			console.log("Alumno: "+tipoPerfil);
+			if(tipoPerfil == 1){
+				columnsWork.push({
+                    name: 'Mi trabajo',
+                    var: 'link2',
+                    type: 'icon',
+                    settings:{
+                    	colorvar: 'color2',
+                    	icon: 'icono2'
+                    }
+                });
+				columnsWork.push({
+                	name: 'Nota',
+                	var: 'notas',
+                	type: 'text'
+                });
+			}
+			console.log(columnsWork);
 			tableWork = new DataTable({
                 table: '[data-table="tableWork"] table',
                 options: {
@@ -587,47 +642,12 @@
                 		var: 'flagLimite2'
                 	}         
                 },
-                columns: [
-                    {
-                        name: 'Título',
-                        var: 'descTrabajo',
-                        type: 'text'
-                    },
-                   /* {
-                        name: 'Fecha inicio',
-                        var: 'urlDescarga',
-                        type: 'img'
-                    },*/
-                    {
-                        name: 'Fecha Inicio',
-                        var: 'fechaIniS',
-                        type: 'text'
-                    },
-                    {
-                        name: 'Fecha entrega',
-                        var: 'fechaFinS',
-                        type: 'text'
-                    },
-                    {
-                        name: 'Fuera de tiempo',
-                        var: 'diasLimite',
-                        type: 'text'
-                    },
-                    {
-                        name: 'Descarga',
-                        var: 'link',
-                        type: 'icon',
-                        settings:{
-                        	colorvar: 'color'
-                        }
-                    }
-                ],
+                columns: columnsWork,
                 rowsCount: 10,
                 navigator: true,
                 actions: {
-                    options: tipoPerfil == 1 ? '' : 'view edit remove',
+                    options: tipoPerfil == 1 ? 'view upload remove' : 'view edit remove',
                     edit: (data,objDataTable) => {
-                        console.log(data);
                         showModalUpdate('tableWork',data);
                     },
                     remove: function (data) {
@@ -654,11 +674,75 @@
 	                		}
 	                	});
                     },
+                    upload: function(data){
+                    	console.log("----Upload----");
+                    	console.log(data.idTraAlu);
+                    	createModalUploadAlumn(data.idTraAlu);
+                    },
                     view: function (data) {
     
                     }
                 }
             });
+		};
+		
+		const createModalUploadAlumn = async (idTraAlu) => {
+			const containerUploadAl = document.createElement("div");
+			containerUploadAl.innerHTML = `
+				<div class="mod mod--active mod--upload-student">
+					<div class="mod__inner mod__inner--pd-1">
+						<div class="upload-student">
+							<i class="upload-student__close mod__close mod__close--dark fas fa-close"></i>
+							<h2 class="upload-student__title">
+								Subir Archivo
+							</h2>
+							<div class="upload-student__body">
+								<form class="upload-student__form">
+									<div class="upload-student__group">
+										<div class="upload-btn">
+											<button class="upload-btn__button je-btn je-btn--fill" type="button">
+												<i class="upload-btn__icon fas fa-upload"></i>
+											</button>
+											<span class="upload-btn__button-name"></span>
+											<input class="upload-btn__input" style="display:none;" type="file" name="file">
+										</div>
+									</div>
+									<div class="upload-student__group upload-student__buttons">
+										<input type="submit" class="updload-student-save je-btn je-btn--smaller" value="Guardar">
+										<input type="button" class="je-btn je-btn--smaller" value="Eliminar">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			`;
+			document.body.appendChild(containerUploadAl);
+			containerUploadAl.addEventListener('click',function(e){
+				if(e.target.classList.contains("upload-student__close")){
+					this.remove();
+				}
+			});
+			let load = loader();
+			let formData = new FormData();
+			formData.append('idTraAlu',idTraAlu);
+			formData.append('action','obtenerArchivo');
+			
+			try{
+				const response = await API.getData('trabajo',{
+					method: 'POST',
+					body: formData
+				});
+			}catch(error){
+				if(error == 401 || error === 403){
+					location.href = "";
+				}else{
+					console.log("Error");
+				}
+			}finally{
+				load.remove();
+			}
+			
 		};
 		
 		const validateUrl = (txt) => {
@@ -790,8 +874,12 @@
 				mensaje = "Ingrese la fecha de inicio";
 			}else if(form[5].value.trim() === ''){
 				mensaje = "Ingrese la fecha Fin";
-			}if(form[6].checked && form[7].value === ''){
-				mensaje = "Especifique los días de fuera de fecha";
+			}if(form[6].checked){
+				if(form[7].value === ''){
+					mensaje = "Especifique la prórroga";
+				}else if(form[7].value === '0'){
+					mensaje = "La prórroga debe ser mayor a 0";
+				}
 			}else{
 				let fechI = new Date(form[3].value.trim().replace("T"," ")).getTime();
 				let fechF = new Date(form[5].value.trim().replace("T"," ")).getTime();
