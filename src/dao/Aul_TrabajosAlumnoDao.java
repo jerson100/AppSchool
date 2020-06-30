@@ -86,7 +86,7 @@ public class Aul_TrabajosAlumnoDao implements IAul_TrabajosAlumno {
 		ResultSet rs = null;
 		
 		try {
-			
+			/*
 			ps = c.prepareStatement("{call dbo.sp_TRABAJOSALUMNO_ins_upd(?,?,?,?,?,?,?)}");
 			
 			ps.setInt(1, t.getIdTraAlu());
@@ -101,7 +101,22 @@ public class Aul_TrabajosAlumnoDao implements IAul_TrabajosAlumno {
 			
 			ps.setString(6, t.getNombreArchivo());
 			
-			ps.setInt(7, t.getIdUsuario());
+			ps.setInt(7, t.getIdUsuario());*/
+			
+			ps = c.prepareStatement("{call dbo.sp_TRABAJOSALUMNO_ins_upd_by_PROFESOR(?,?,?,?,?,?)}");
+			
+			ps.setInt(1, t.getIdTraAlu());
+			
+			ps.setInt(2, t.getIdCuenta());
+			
+			ps.setInt(3, t.getIdTrabajo());
+			
+			ps.setString(4, t.getNotaTrabajo());
+			
+			ps.setString(5, t.getComentario());
+			
+			ps.setInt(6, t.getIdUsuario());
+			
 			
 			if(ps.executeUpdate() == 0) {
 				
@@ -150,7 +165,7 @@ public class Aul_TrabajosAlumnoDao implements IAul_TrabajosAlumno {
 			}
 			
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 			throw new NotDeleted("No se pudo eliminar su trabajo");
 			
 		} finally {

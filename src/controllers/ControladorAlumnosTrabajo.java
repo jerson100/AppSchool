@@ -62,42 +62,54 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 		
 		String idTrabajo = request.getParameter("idTrabajo");
 		
-		if(sesion != null && idTrabajo != null) {
+		if(sesion != null) {
 			
-			List<Aul_TrabajosAlumno> list = null;
-			
-			response.setContentType("Application/json;charset=UTF-8");
-			response.setCharacterEncoding("UTF-8");
-			
-			try {
+			if(idTrabajo != null) {
 				
-				list = dao.all(Integer.parseInt(idTrabajo));
+				List<Aul_TrabajosAlumno> list = null;
 				
-				estado = true;
+				response.setContentType("Application/json;charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
 				
-				mensaje = "OK!";
+				try {
+					
+					list = dao.all(Integer.parseInt(idTrabajo));
+					
+					estado = true;
+					
+					mensaje = "OK!";
+					
+				}catch (NotAll e) {
+					
+					e.printStackTrace();
+					
+					mensaje = e.getMessage();
+					
+				}
 				
-			}catch (NotAll e) {
+				map.put("estado", estado);
+				map.put("mensaje", mensaje);
+				map.put("list",list);
 				
-				e.printStackTrace();
+				try(Writer w = response.getWriter()){
+					
+					w.write(JSON.toJson(map));
+					
+				}
+							
+			}else {
 				
-				mensaje = e.getMessage();
+				response.sendError(404);
 				
 			}
 			
-			map.put("estado", estado);
-			map.put("mensaje", mensaje);
-			map.put("list",list);
-			
-			try(Writer w = response.getWriter()){
-				
-				w.write(JSON.toJson(map));
-				
-			}
 			
 		}else {
-			response.sendError(404);
+			
+			response.sendError(401);
+			
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -111,28 +123,23 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 		
 		if(us != null) {
 			
-			if(us.getIdPerfil() == AppColegio.TIPO_ALUMNO) {
-				
-				if(action != null) {
+			if(action != null) {
 					
-					switch(action) {
-						case "subirArchivo":
-							subirArchivo(us, request, response);
-							break;
-						default:
-							response.sendError(404);
-					}
-					
-				}else {
-					
-					response.sendError(404);
-					
+				switch(action) {
+					case "subirArchivo":
+						subirArchivo(us, request, response);
+						break;
+					case "actualizarNota":
+						actualizarNota(us,request,response);
+						break;
+					default:
+						response.sendError(404);
 				}
-				
+					
 			}else {
-				
-				response.sendError(403);
-				
+					
+				response.sendError(404);
+					
 			}
 						
 		}else {
@@ -142,94 +149,163 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 		}
 	}
 
-	private void subirArchivo(Sesion sesion,HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String mensaje = "";
-		boolean estado = false;
+	private void actualizarNota(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		try {
 			
-			response.setContentType("Application/json;charset=UTF-8");
-			
-			Part file = request.getPart("file");
-			int idTraAlu = request.getParameter("idTraAlu") == null ? 0 : Integer.parseInt(request.getParameter("idTraAlu")),
-				idTrabajo= Integer.parseInt(request.getParameter("idTrabajo"));		
-			
-			String nombreArchivoAnterior = request.getParameter("nombreArchivoAnterior"),
-			       extensionArchivo = JeVlidate.obtenerExtension(nombreArchivoAnterior),
-				   rutaArchivo = request.getParameter("rutaArchivo"),
-				   nuevoNombreArchivo = request.getParameter("nuevoNombreArchivo");
-			
-			Aul_TrabajosAlumno obj = new Aul_TrabajosAlumno();
-			
-			boolean estadoU = false;
-			
-			if(!file.getSubmittedFileName().isEmpty()) {
+			if(sesion.getIdPerfil() == AppColegio.TIPO_ADMINISTRADOR ||
+			   sesion.getIdPerfil() == AppColegio.TIPO_DOCENTE	) {
+					
+				request.setCharacterEncoding("UTF-8");
+				
+				response.setContentType("Application/json;charset=UTF-8");
+				
+				int idTraAlu = Integer.parseInt(request.getParameter("idTraAlu"));
+				
+				int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
+				
+				int idTrabajo = Integer.parseInt(request.getParameter("idTrabajo"));
+				
+				String notaTrabajo = request.getParameter("notaTrabajo");
+				
+				String comentario = request.getParameter("comentario");
+				
+				String mensaje = "";
+				
+				boolean estado = false;
+				
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				
+				Aul_TrabajosAlumno al = new Aul_TrabajosAlumno();
+				
+				al.setIdCuenta(idCuenta);
+				al.setIdTraAlu(idTraAlu);
+				al.setIdTrabajo(idTrabajo);
+				al.setNotaTrabajo(notaTrabajo);
+				al.setComentario(comentario);
+				al.setIdUsuario(sesion.getIdUsuario());
+				
 				try {
-						
-					String newPath = JeVlidate.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
-						
-					//insertamos el nuevo
-					Storage.addAndUpdateBlob(request, "ALUMNOS", newPath, file.getContentType(), "2020", file.getInputStream(), file.getSize());
-						
-					if(!rutaArchivo.isEmpty()) {
-						try {
-							//eliminamos el anterior
-							Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
-						}catch(Exception e) {}
-					}
-					nombreArchivoAnterior = file.getSubmittedFileName();
-					extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
-					rutaArchivo = "2020/ALUMNOS/"+newPath;
-					estadoU = true;
+					dao.update(al);	
+					estado = true;
+					mensaje = "Actualización Exitosa";
 				}catch(Exception e) {
-					mensaje = "No se pudo agregar el nuevo archivo";
+					e.printStackTrace();
+					mensaje = "No se pudo llevar a cabo la actualización";
 				}
-			}else if(!nombreArchivoAnterior.equals(nuevoNombreArchivo)) {
-				//eliminamos el anterior
-				try {
-					Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
-					nombreArchivoAnterior = "";
-					extensionArchivo = "";
-					rutaArchivo = "";
-					estadoU = true;
-				}catch(Exception e) {
-					mensaje = "No se pudo actualizar";
+				
+				map.put("mensaje", mensaje);
+				map.put("estado",estado);
+					
+				try(Writer w = response.getWriter()){
+					w.write(JSON.toJson(map));
 				}
 			}else {
-				estadoU = false;
-				estado = true;
-				mensaje = "Trabajo actualizado satisfactoriamente";
+				response.sendError(403);
 			}
-								
-			if(estadoU) {
-				try {
-					obj.setIdTraAlu(idTraAlu);
-					obj.setIdCuenta(sesion.getIdCuenta());
-					obj.setIdTrabajo(idTrabajo);
-					obj.setRutaArchivo(rutaArchivo);
-					obj.setExtensionArchivo(extensionArchivo);
-					obj.setNombreArchivo(nombreArchivoAnterior);
-					obj.setIdUsuario(sesion.getIdUsuario());
-					dao.create(obj);
-					mensaje = "Trabajo actualizado satisfactoriamente";
-					estado = true;
-				} catch (NotCreated e) {
-					e.printStackTrace();
-				} 	
-			}	
-
-			map.put("mensaje", mensaje);
-			map.put("estado",estado);
-				
-			try(Writer w = response.getWriter()){
-				w.write(JSON.toJson(map));
-			}
-				
+			
 		}catch(Exception e) {
 			response.sendError(404);
 			e.printStackTrace();
 		}
+	}
+
+	private void subirArchivo(Sesion sesion,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		if(sesion.getIdPerfil() == AppColegio.TIPO_ALUMNO) {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			String mensaje = "";
+			boolean estado = false;
+
+			try {
+				
+				response.setContentType("Application/json;charset=UTF-8");
+				
+				Part file = request.getPart("file");
+				int idTraAlu = request.getParameter("idTraAlu") == null ? 0 : Integer.parseInt(request.getParameter("idTraAlu")),
+					idTrabajo= Integer.parseInt(request.getParameter("idTrabajo"));		
+				
+				String nombreArchivoAnterior = request.getParameter("nombreArchivoAnterior"),
+				       extensionArchivo = JeVlidate.obtenerExtension(nombreArchivoAnterior),
+					   rutaArchivo = request.getParameter("rutaArchivo"),
+					   nuevoNombreArchivo = request.getParameter("nuevoNombreArchivo");
+				
+				Aul_TrabajosAlumno obj = new Aul_TrabajosAlumno();
+				
+				boolean estadoU = false;
+				
+				if(!file.getSubmittedFileName().isEmpty()) {
+					try {
+							
+						String newPath = JeVlidate.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
+							
+						//insertamos el nuevo
+						Storage.addAndUpdateBlob(request, "ALUMNOS", newPath, file.getContentType(), "2020", file.getInputStream(), file.getSize());
+							
+						if(!rutaArchivo.isEmpty()) {
+							try {
+								//eliminamos el anterior
+								Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
+							}catch(Exception e) {}
+						}
+						nombreArchivoAnterior = file.getSubmittedFileName();
+						extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
+						rutaArchivo = "2020/ALUMNOS/"+newPath;
+						estadoU = true;
+					}catch(Exception e) {
+						mensaje = "No se pudo agregar el nuevo archivo";
+					}
+				}else if(!nombreArchivoAnterior.equals(nuevoNombreArchivo)) {
+					//eliminamos el anterior
+					try {
+						Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
+						nombreArchivoAnterior = "";
+						extensionArchivo = "";
+						rutaArchivo = "";
+						estadoU = true;
+					}catch(Exception e) {
+						mensaje = "No se pudo actualizar";
+					}
+				}else {
+					estadoU = false;
+					estado = true;
+					mensaje = "Trabajo actualizado satisfactoriamente";
+				}
+									
+				if(estadoU) {
+					try {
+						obj.setIdTraAlu(idTraAlu);
+						obj.setIdCuenta(sesion.getIdCuenta());
+						obj.setIdTrabajo(idTrabajo);
+						obj.setRutaArchivo(rutaArchivo);
+						obj.setExtensionArchivo(extensionArchivo);
+						obj.setNombreArchivo(nombreArchivoAnterior);
+						obj.setIdUsuario(sesion.getIdUsuario());
+						dao.create(obj);
+						mensaje = "Trabajo actualizado satisfactoriamente";
+						estado = true;
+					} catch (NotCreated e) {
+						e.printStackTrace();
+					} 	
+				}	
+
+				map.put("mensaje", mensaje);
+				map.put("estado",estado);
+					
+				try(Writer w = response.getWriter()){
+					w.write(JSON.toJson(map));
+				}
+					
+			}catch(Exception e) {
+				response.sendError(404);
+				e.printStackTrace();
+			}
+		}else {
+			response.sendError(403);
+		}
+		
+		
 	}
 
 	@Override
@@ -253,34 +329,42 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 					
 					String rutaArchivo = request.getParameter("rutaArchivo");
 					
+					String nota = request.getParameter("nota");
+					
 					String message = "";
 					
 					boolean estado = false;
-					
-					Aul_TrabajosAlumno co = new Aul_TrabajosAlumno();
-					
-					System.out.println(rutaArchivo);
-					
-					if(!rutaArchivo.isEmpty()) {
-						int index = rutaArchivo.indexOf("/");
-						String container = rutaArchivo.substring(0,index);
-						String path = rutaArchivo.substring(index + 1);
-						try {
-							if(co.isReplicar_todos()) {
+
+					if(nota != null && !nota.isEmpty()) {
+						
+						message = "No puede eliminar ya que el profesor ya asignó una nota";
+						
+						estado = false;
+						
+					}else {
+						
+						Aul_TrabajosAlumno co = new Aul_TrabajosAlumno();
+						
+						if(!rutaArchivo.isEmpty()) {
+							int index = rutaArchivo.indexOf("/");
+							String container = rutaArchivo.substring(0,index);
+							String path = rutaArchivo.substring(index + 1);
+							try {
 								Storage.deleteBlob(request, path, container);
-							}
-						}catch(Exception e) {}
-					}
-					
-					try {
-						co.setIdTraAlu(idTraAlu);
-						co.setIdUsuario(usuarioSesion.getIdUsuario());
-						dao.delete(co);
-						estado = true;
-						message = "Su trabajo se eliminó";
-					}catch (NotDeleted e) {
-						e.printStackTrace();
-						message = "No se pudo eliminar su trabajo";
+							}catch(Exception e) {}
+						}
+						
+						try {
+							co.setIdTraAlu(idTraAlu);
+							co.setIdUsuario(usuarioSesion.getIdUsuario());
+							dao.delete(co);
+							estado = true;
+							message = "Su trabajo se eliminó";
+						}catch (NotDeleted e) {
+							e.printStackTrace();
+							message = "No se pudo eliminar su trabajo";
+						}
+																		
 					}
 					
 					Map<String, Object> map = new HashMap<>();

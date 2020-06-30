@@ -175,12 +175,13 @@
 											<a href="#tableWork" class="tabs__link">Tareas y trabajos</a>
 										</li>
 									</ul>
+									<!--
 									<div class="tabs__search">
 										<input class="tabs__input-search" type="text" id="inputSearch">
 										<span id="teclaP"></span> <i
 											class="tabs__icon-search fa fa-search"></i>
 									</div>
-									<span class="tabs__separator"></span>
+									<span class="tabs__separator"></span>-->
 									<div class="tabs__section tabs__section--active" data-table="tableContent">
 										<table class="table-data__table"></table>
 									</div>
@@ -357,106 +358,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-	</div>
-	<!-- 
-	<div class="mod mod--active mod--filesStudent">
-		<div class="mod__inner mod__inner--pd-1">
-			<div class="files-student">
-				<i class="files-student__close mod__close mod__close--dark fas fa-close"></i>
-				<h2 class="files-student__title">
-					Estado de alumnos
-				</h2>
-				<div class="files-student__body">
-					<div class="data-table">
-						<div class="data-table__header">
-							<div class="data-table__row data-table__row-border">
-								<div class="data-table__col data-table__col--header data-table__col--numeration data-table__col--w50">
-									<span class="data-table__text">Nº</span>
-								</div>
-								<div class="data-table__col data-table__col--header">
-									<span class="data-table__text">Alumno</span>
-								</div>
-								<div class="data-table__col data-table__col--header data-table__col--hidden-m">
-									<span class="data-table__text">Última modificación</span>
-								</div>
-								<div class="data-table__col data-table__col--header data-table__col--w50">
-									<span class="data-table__text">Icono</span>
-								</div>
-								<div class="data-table__col data-table__col--header data-table__col--w50">
-									<span class="data-table__text">Nota</span>
-								</div>
-								<div class="data-table__col data-table__col--header">
-									<span class="data-table__text">Comentario</span>
-								</div>
-								<div class="data-table__col data-table__col--header data-table__col--w50 data-table__col--save">
-									<span class="data-table__text"></span>
-								</div>
-							</div>
-						</div>
-						<div class="data-table__body">
-							<c:forEach var="i" begin="1" end="10">
-								<div class="data-table__row data-table__row-body data-table__row-border">
-										<div class="data-table__col data-table__col--w50 data-table__col--numeration">
-											<span class="data-table__text">${i}</span>
-										</div>
-										<div class="data-table__col">
-											<span class="data-table__text">Juanito</span>
-										</div>
-										<div class="data-table__col data-table__col--hidden-m">
-											<span class="data-table__text">Mi tarea</span>
-										</div>
-										<div class="data-table__col data-table__col--w50">
-											<span class="data-table__text">
-												<i class="data-table__icon far fa-file-image"></i>
-											</span>
-										</div>								
-										<div class="data-table__col data-table__col--w50">
-											<input class="data-table__input" value="0">
-										</div>	
-										<div class="data-table__col data-table__col--w50 data-table__col--save">
-											<span class="data-table__text">
-												<i class="data-table__icon data-table__icon data-table__save fas fa-save"></i>
-											</span>
-										</div>	
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	 -->
-	<!--
-	<div class="mod mod--active mod--upload-student">
-		<div class="mod__inner mod__inner--pd-1">
-			<div class="upload-student">
-				<i class="upload-student__close mod__close mod__close--dark fas fa-close"></i>
-				<h2 class="upload-student__title">
-					Subir Archivo
-				</h2>
-				<div class="upload-student__body">
-					<form class="upload-student__form">
-						<div class="upload-student__group">
-							<div class="upload-btn">
-								<button class="upload-btn__button je-btn je-btn--fill" type="button">
-									<i class="upload-btn__icon fas fa-upload"></i>
-								</button>
-								<span class="upload-btn__button-name"></span>
-								<input class="upload-btn__input" style="display:none;" type="file" name="file">
-							</div>
-						</div>
-						<div class="upload-student__group upload-student__buttons">
-							<input type="submit" class="updload-student-save je-btn je-btn--smaller" value="Guardar">
-							<input type="button" class="je-btn je-btn--smaller" value="Eliminar">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
 	<%@include file="../includes/footer.jsp"%>
 	<script type="text/javascript">
 		window.jQuery

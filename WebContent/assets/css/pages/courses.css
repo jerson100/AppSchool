@@ -347,6 +347,34 @@ h2{
     animation: fromRightToLeft 500ms 1 linear;
 }
 
+.comment-teacher{
+	padding: 1rem;
+	border-radius: 5px;
+	background-color: #fff;
+	width: 90%;
+	max-width: 500px;
+	position: relative;
+}
+
+.comment-teacher__close{
+	right: 0 !important;
+	top:0 !important;
+	transform: translate(50%,-50%) !important;
+}
+
+.comment-teacher__title{
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0 0 1.5rem 0;
+	padding-top: 1rem;
+}
+
+.comment-teacher__text{
+	padding: 1.5rem;
+	margin-bottom: 0;
+}
+
+
 @media screen and (min-width: 700px){
 	
 	.left-wrapperr{

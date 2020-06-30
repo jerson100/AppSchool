@@ -95,6 +95,10 @@
 	border: none;
 }
 
+.data-table__row--upload{
+	background-color: rgba(155, 222, 148, 0.56);
+}
+
 @media screen and (min-width: 768px){
 	.data-table__col--hidden-m{
 		display: flex;
