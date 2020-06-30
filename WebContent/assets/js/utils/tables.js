@@ -258,8 +258,8 @@ class DataTable {
         this.actions.remove(obj,this);
     }
 
-    view() {
-        this.actions.view();
+    view(obj) {
+        this.actions.view(obj,this);
     }
     
     upload(obj){

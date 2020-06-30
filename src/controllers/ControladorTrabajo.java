@@ -2,8 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.net.URISyntaxException;
-import java.security.InvalidKeyException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
-import com.microsoft.azure.storage.StorageException;
 
 import constantes.AppColegio;
 import dao.Aul_TrabajoDao;
@@ -107,13 +104,13 @@ public class ControladorTrabajo extends HttpServlet {
 				
 					case "agregarTrabajo":
 						
-						agregarTrabajo(sesion, request,response);
+						agregarTrabajo(sesion, request, response);
 						
 						break;
 						
 					case "actualizarTrabajo":
 						
-						actualizarTrabajo(sesion, request,response);
+						actualizarTrabajo(sesion, request, response);
 						
 						break;
 						
@@ -136,7 +133,93 @@ public class ControladorTrabajo extends HttpServlet {
 		}
 		
 	}
+/*
+	private void actualizarFileAl(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String mensaje = "";
+		boolean estado = false;
+		
+		try {
+			
+			response.setContentType("Application/json;charset=UTF-8");
+			
+			Part file = request.getPart("file");
+			int idTraAlu = Integer.parseInt(request.getParameter("idTraAlu"));
+			String nombreArchivoAnterior = request.getParameter("nombreArchivoAnterior");
+			
+			String extensionArchivo = JeVlidate.obtenerExtension(nombreArchivoAnterior);
+			String rutaArchivo = request.getParameter("rutaArchivoAnterior"),
+				   nuevoNombreArchivo = request.getParameter("nuevoNombreArchivo");
+			
+			Aul_Trabajo obj = new Aul_Trabajo();
+			
+			boolean estadoU = false;
+			
+			if(!file.getSubmittedFileName().isEmpty()) {
+				try {
+						
+					String newPath = this.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
+						
+					//insertamos el nuevo
+					Storage.addAndUpdateBlob(request, "ALUMNOS", newPath, file.getContentType(), "2020", file.getInputStream(), file.getSize());
+						
+					if(!rutaArchivo.isEmpty()) {
+						try {
+							//eliminamos el anterior
+							Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
+						}catch(Exception e) {}
+					}
+					
+					nombreArchivoAnterior = file.getSubmittedFileName();
+					extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
+					rutaArchivo = "2020/ALUMNOS/"+newPath;
+					estadoU = true;
+				}catch(Exception e) {
+					mensaje = "No se pudo agregar el nuevo archivo";
+				}
+			}else if(!nombreArchivoAnterior.equals(nuevoNombreArchivo)) {
+				//eliminamos el anterior
+				try {
+					Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
+					nombreArchivoAnterior = "";
+					extensionArchivo = "";
+					rutaArchivo = "";
+					estadoU = true;
+				}catch(Exception e) {
+					mensaje = "No se pudo actualizar";
+				}
+			}else {
+				estadoU = false;
+				mensaje = "No se puede actualizar, ya que no seleccionó un nuevo archivo";
+			}	
+			
+			if(estadoU) {
+				obj.setIdTrabajo(idTraAlu);
+				obj.setIdSecCur(idSecCur);
+				obj.setRutaArchivo(rutaArchivo);
+				obj.setExtensionArchivo(extensionArchivo);
+				obj.setNombreArchivo(nombreArchivoAnterior);
+				obj.setIdUsuario(sesion.getIdUsuario()); 
+				try {
+					dao.create(obj);
+					mensaje = "Archivo subido satisfactoriamente";
+					estado = true;
+				} catch (NotCreated e) {
+					e.printStackTrace();
+					mensaje = "No se pudo subir el archivo";
+				} 
+			}	
 
+			map.put("mensaje", mensaje);
+			map.put("estado",estado);
+			try(Writer w = response.getWriter()){
+				w.write(JSON.toJson(map));
+			}
+		}catch(Exception e) {
+			response.sendError(404);
+		}
+	}
+*/
 	private void actualizarTrabajo(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String mensaje = "";
@@ -171,7 +254,7 @@ public class ControladorTrabajo extends HttpServlet {
 				if(!file.getSubmittedFileName().isEmpty()) {
 					try {
 						
-						String newPath = this.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
+						String newPath = JeVlidate.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
 						
 						//insertamos el nuevo
 						Storage.addAndUpdateBlob(request, "PROFESORES", newPath, file.getContentType(), "2020", file.getInputStream(), file.getSize());
@@ -286,7 +369,7 @@ public class ControladorTrabajo extends HttpServlet {
 					
 					extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
 					nombreArchivo = file.getSubmittedFileName();
-					nombreArchivoGenerado = generarNombreArchivo(nombreArchivo,new Date().getTime(),JeVlidate.generarNumeroAleatorio(50, 9999999),extensionArchivo);
+					nombreArchivoGenerado = JeVlidate.generarNombreArchivo(nombreArchivo,new Date().getTime(),JeVlidate.generarNumeroAleatorio(50, 9999999),extensionArchivo);
 					rutaArchivo = "2020/PROFESORES/"+nombreArchivoGenerado;
 					
 					Storage.addAndUpdateBlob(request, "PROFESORES", nombreArchivoGenerado, file.getContentType(), "2020", file.getInputStream(), file.getSize());
@@ -337,10 +420,6 @@ public class ControladorTrabajo extends HttpServlet {
 		
 	}
 	
-	private String generarNombreArchivo(String nombreArchivo, long time, int generarNumeroAleatorio, String extension) {
-		return Cifrado.cifrar(nombreArchivo+time+generarNumeroAleatorio) + extension;
-	}
-
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -381,8 +460,6 @@ public class ControladorTrabajo extends HttpServlet {
 					
 					co.setReplicar_todos(replicartodos!=null && replicartodos.equals("on"));
 					
-					boolean state = true;
-					
 					if(!rutaArchivo.isEmpty()) {
 						int index = rutaArchivo.indexOf("/");
 						String container = rutaArchivo.substring(0,index);
@@ -390,22 +467,18 @@ public class ControladorTrabajo extends HttpServlet {
 						try {
 							if(co.isReplicar_todos()) {
 								Storage.deleteBlob(request, path, container);
-								state = true;
 							}
-						}catch(Exception e) {
-							message  = "No se pudo eliminar";
-							state = false;
-						}
+						}catch(Exception e) {}
 					}
-					if(state) {
-						try {
-							dao.delete(co);
-							estado = true;
-							message = "Trabajo eliminado satisfactoriamente";
-						}catch (NotDeleted e) {
-							message = "No se pudo eliminar el trabajo";
-						}
+					
+					try {
+						dao.delete(co);
+						estado = true;
+						message = "Trabajo eliminado satisfactoriamente";
+					}catch (NotDeleted e) {
+						message = "No se pudo eliminar el trabajo";
 					}
+					
 					Map<String, Object> map = new HashMap<>();
 					map.put("mensaje", message);
 					map.put("estado", estado);

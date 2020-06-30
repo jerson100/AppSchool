@@ -19,7 +19,34 @@ public class Aul_Comun {
 	private String mensaje;
 	private boolean replicar_todos;
 	private boolean replicar_solo;
+	private String link;
+	private String color2;
+	private String icono2;
 	
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getColor2() {
+		return color2;
+	}
+
+	public void setColor2(String color2) {
+		this.color2 = color2;
+	}
+
+	public String getIcono2() {
+		return icono2;
+	}
+
+	public void setIcono2(String icono2) {
+		this.icono2 = icono2;
+	}
+
 	public int getIdSecCur() {
 		return idSecCur;
 	}

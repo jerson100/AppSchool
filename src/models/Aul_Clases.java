@@ -5,7 +5,6 @@ public class Aul_Clases extends Aul_Comun{
 	private int idClass;
 	private String codClase;
 	private String descClase;
-	private String link;
 	private String fechaClase;
 	private String horaClase;
 	private String fechaClaseS;
@@ -41,12 +40,7 @@ public class Aul_Clases extends Aul_Comun{
 	public void setDescClase(String descClase) {
 		this.descClase = descClase;
 	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
+	
 	public String getFechaClase() {
 		return fechaClase;
 	}

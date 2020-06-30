@@ -102,26 +102,25 @@ public class ControladorTipoArchivo extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String mensaje;
-		Part file = request.getPart("file");
-		
+		//Part file = request.getPart("file");
 		try {
+			String name = request.getParameter("name");
+			int size = Integer.parseInt(request.getParameter("size"));
 			
 			Glo_TipoArchivo tipoA = new Glo_TipoArchivo();
-			System.out.println(file.getName());
-			System.out.println(file.getSubmittedFileName());
-			System.out.println(file.getSize());
-			System.out.println(file.getContentType());
-			System.out.println("extensión: "+JeVlidate.obtenerExtension(file.getSubmittedFileName()));
+			System.out.println(name);
+			System.out.println(size);
+			System.out.println("extensión: "+JeVlidate.obtenerExtension(name));
 			
-			tipoA.setExtension(JeVlidate.obtenerExtension(file.getSubmittedFileName()));
-			tipoA.setTamagnoMax(file.getSize());
-			System.out.println(dao);
+			tipoA.setExtension(JeVlidate.obtenerExtension(name));
+			tipoA.setTamagnoMax(size);
+			
 			mensaje = dao.validarExtension(tipoA);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			mensaje  = "El extensión no es válida";
+			mensaje  = "No se pudo validar el archivo";
 			
 		}
 		

@@ -147,18 +147,18 @@
 								}else{
 									actionsButtonsModal('Work','agregarTrabajo', idSecCurPro);
 								}
-							}else if(e.target.matches(".tag__section--work .tag__file-button")){
+							}/*else if(e.target.matches(".tag__section--work .tag__file-button")){
 								e.target.nextElementSibling.nextElementSibling.click();
-							}
+							}*/
 						}else{
 							console.log("reset");
 						}
 					}else{
 						if(e.target.tagName === "I"){
-							if(e.target.classList.contains("fa-upload")){
+							/*if(e.target.classList.contains("fa-upload")){
 								e.preventDefault();
 								e.target.parentElement.nextElementSibling.nextElementSibling.click();
-							}else if(e.target.classList.contains("tag__file-delete")){
+							}else */if(e.target.classList.contains("tag__file-delete")){
 								e.preventDefault();
 								let parent = e.target.parentElement;
 								parent.querySelector(".tag__input").value = "";
@@ -173,7 +173,12 @@
 					}else if(e.target.tagName)*/
 				});
 				const $formWk = $modalOptions.querySelector(".tag__section--work form");
-				const namaeFileWork = $formWk.querySelector(".tag__file-name");
+				const inputButton = $formWk.querySelector(".tag__file-button");
+				const fileName = $formWk.querySelector(".tag__file-name");
+				const inputFile = fileName.nextElementSibling;
+				
+				ELEMENTS.INPUT_FILE.changeUpdloadFile(inputButton,inputFile,fileName);
+				/*
 				$formWk[2].addEventListener('change',async e=>{
 					//console.log("change detected");
 					if(e.target.files.length != 0){
@@ -184,6 +189,8 @@
 						namaeFileWork.textContent = '';
 					}
 				});
+				*/
+				
 				$formWk[6].addEventListener('change',e=>{
 					if(!e.target.checked){
 						e.target.nextElementSibling.value = "";
@@ -616,7 +623,6 @@
                     }
                 }
 			];
-			console.log("Alumno: "+tipoPerfil);
 			if(tipoPerfil == 1){
 				columnsWork.push({
                     name: 'Mi trabajo',
@@ -651,42 +657,202 @@
                         showModalUpdate('tableWork',data);
                     },
                     remove: function (data) {
-                    	console.log(data);
-                    	showModalDelete("¿Está seguro que desea eliminar el trabajo?",async (replicarTodos) =>{
-	                		let load = loader(), msg = "No se pudo eliminar la clase", response;
-	                		try{
-	                			response = await API.getData(`trabajo?idTrabajo=${data.idTrabajo}&rutaArchivo=${data.rutaArchivo}&replicartodos=${replicarTodos.checked ? "on" : "off"}`,{
-	        						method:'DELETE'
-	        					});
-	                			msg = response.mensaje;
-	                		}catch(e){
-	                			if(e.status === 403){
-	                				msg = "No tiene privilegios suficientes para realizar esta acción";
-	                			}else if(e.status === 401){
-	                				location.href = "login";
-	                			}else if(e.status === 404){
-	                				msg = "No se pudo llevar acabo la acción";
-	                			}
-	                		}finally{
-	                			load.remove();
-	                			await setDataTable('tableWork');
-	                			return msg;
-	                		}
-	                	});
+                    	if(tipoPerfil == 1){
+                    		if(data.idTraAlu === 0){
+                    			showModalMessage("No tiene trabajo que eliminar",5000);
+                    		}else{
+                    			showModalDelete("¿Está seguro que desea eliminar su archivo?",async (replicarTodos) =>{
+                        			let load = loader(), msg = "No se pudo eliminar la clase", response;
+                        			try{
+                        				response = await API.getData(`alumnosTrabajo?idTraAlu=${data.idTraAlu}&rutaArchivo=${data.rutaArchivo2}`,{
+                        					method:'DELETE'
+                        				});
+                        				msg = response.mensaje;
+                        			}catch(e){
+                        				if(e.status === 403){
+                        					msg = "No tiene privilegios suficientes para realizar esta acción";
+                        				}else if(e.status === 401){
+                        					location.href = "login";
+                        				}else if(e.status === 404){
+                        					msg = "No se pudo llevar acabo la acción";
+                        				}
+                        			}finally{
+                        				load.remove();
+                        				if(response.estado){
+                        					await setDataTable('tableWork');                    					
+                        				}
+                        				return msg;
+                        			}
+                        		},false,"Se eliminará el archivo cargado."); 
+                    		}  
+                    	}else{
+                    		showModalDelete("¿Está seguro que desea eliminar el trabajo?",async (replicarTodos) =>{
+                    			let load = loader(), msg = "No se pudo eliminar la clase", response;
+                    			try{
+                    				response = await API.getData(`trabajo?idTrabajo=${data.idTrabajo}&rutaArchivo=${data.rutaArchivo}&replicartodos=${replicarTodos.checked ? "on" : "off"}`,{
+                    					method:'DELETE'
+                    				});
+                    				msg = response.mensaje;
+                    			}catch(e){
+                    				if(e.status === 403){
+                    					msg = "No tiene privilegios suficientes para realizar esta acción";
+                    				}else if(e.status === 401){
+                    					location.href = "login";
+                    				}else if(e.status === 404){
+                    					msg = "No se pudo llevar acabo la acción";
+                    				}
+                    			}finally{
+                    				load.remove();
+                    				await setDataTable('tableWork');
+                    				return msg;
+                    			}
+                    		});                    		
+                    	}
                     },
                     upload: function(data){
-                    	console.log("----Upload----");
-                    	console.log(data.idTraAlu);
-                    	createModalUploadAlumn(data.idTraAlu);
+                    	createModalUploadAlumn(data);
                     },
                     view: function (data) {
-    
+                    	if(tipoPerfil != 1){
+                    		showModalListenerStudents(data);                    		
+                    	}
                     }
                 }
             });
 		};
 		
-		const createModalUploadAlumn = async (idTraAlu) => {
+		const showModalListenerStudents = async (data) => {
+			const formData = new FormData();
+			let response,load,list=[];
+			try{
+				load = loader();
+				response = await API.getData(`alumnosTrabajo?idTrabajo=${data.idTrabajo}`);
+				if(response.estado){
+					list = response.list;					
+				}
+			}catch(error){
+				if(error.status === 401 || error.status === 403){
+					location.href = "login";
+				}else{
+					console.log(error);
+				}
+			}finally{
+				load.remove();
+			}
+			
+			drawModalWorkStudents(list);
+			
+		};
+		
+		const drawModalWorkStudents = (list) => {
+			
+			const modal = createModalListStudent();
+			
+			console.log(list);
+			
+			document.body.appendChild(modal);
+			
+			const modalData = modal.querySelector(".data-table__body");
+			
+			const close = modal.querySelector(".files-student__close");
+			
+			const fragment = document.createDocumentFragment();
+			
+			let numeration = 0;
+			
+			list.forEach(item=>{
+				let rowItem = document.createElement("div");
+				rowItem.setAttribute("class","data-table__row data-table__row-body data-table__row-border")
+				rowItem.innerHTML = `
+						<div class="data-table__col data-table__col--w50 data-table__col--numeration">
+							<span class="data-table__text">${++numeration}</span>
+						</div>
+						<div class="data-table__col">
+							<span class="data-table__text">${item.alumno}</span>
+						</div>
+						<div class="data-table__col data-table__col--ultimaModificacion data-table__col--hidden-m">
+							<span class="data-table__text">${item.ultimaModificacion}</span>
+						</div>
+						<div class="data-table__col data-table__col--w50">
+							<span class="data-table__text">
+								<a class="data-table__link" href="${item.link}" target="_blank">
+									<i class="data-table__icon ${item.icono}" style="color:${item.color2}"></i>
+								</a>
+							</span>
+						</div>								
+						<div class="data-table__col data-table__col--w50">
+							<input class="data-table__input" value=${item.notaTrabajo}>
+						</div>	
+						<div class="data-table__col">
+							<input class="data-table__input" value="${item.comentario}">
+						</div>
+						<div class="data-table__col data-table__col--w50 data-table__col--save">
+							<span class="data-table__text">
+								<i class="data-table__icon data-table__icon data-table__save fas fa-save" data-idCuenta="${item.idCuenta}" data-idTraAlu="${item.idTraAlu}"></i>
+							</span>
+						</div>	
+				`;
+				fragment.appendChild(rowItem);
+			});
+			
+			modalData.appendChild(fragment);
+			
+			close.addEventListener('click',e=>{
+				modal.remove();
+			});
+			
+		};
+		
+		const createModalListStudent = () => {
+			const modalContainer = document.createElement("div");
+			modalContainer.innerHTML = `
+				<div class="mod mod--active mod--filesStudent">
+					<div class="mod__inner mod__inner--pd-1">
+						<div class="files-student">
+							<i class="files-student__close mod__close mod__close--dark fas fa-close"></i>
+							<h2 class="files-student__title">
+								Ficha de alumnos
+							</h2>
+							<div class="files-student__body">
+								<div class="data-table">
+									<div class="data-table__header">
+										<div class="data-table__row data-table__row-border">
+											<div class="data-table__col data-table__col--header data-table__col--numeration data-table__col--w50">
+												<span class="data-table__text">Nº</span>
+											</div>
+											<div class="data-table__col data-table__col--header">
+												<span class="data-table__text">Alumno</span>
+											</div>
+											<div class="data-table__col data-table__col--header data-table__col--ultimaModificacion data-table__col--hidden-m">
+												<span class="data-table__text">Fecha de registro</span>
+											</div>
+											<div class="data-table__col data-table__col--header data-table__col--w50">
+												<span class="data-table__text">Doc. Alumno</span>
+											</div>
+											<div class="data-table__col data-table__col--header data-table__col--w50">
+												<span class="data-table__text">Nota</span>
+											</div>
+											<div class="data-table__col data-table__col--header">
+												<span class="data-table__text">Comentario</span>
+											</div>
+											<div class="data-table__col data-table__col--header data-table__col--w50 data-table__col--save">
+												<span class="data-table__text"></span>
+											</div>
+										</div>
+									</div>
+									<div class="data-table__body">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			`;
+			return modalContainer;
+		};
+		
+		const createModalUploadAlumn = async (data) => {
 			const containerUploadAl = document.createElement("div");
 			containerUploadAl.innerHTML = `
 				<div class="mod mod--active mod--upload-student">
@@ -703,10 +869,15 @@
 											<button class="upload-btn__button je-btn je-btn--fill" type="button">
 												<i class="upload-btn__icon fas fa-upload"></i>
 											</button>
-											<span class="upload-btn__button-name"></span>
+											<span class="upload-btn__button-name">${data.nombreArchivo2}</span>
 											<input class="upload-btn__input" style="display:none;" type="file" name="file">
 										</div>
 									</div>
+									<input type="hidden" name="action" value="subirArchivo">
+									<input type="hidden" name="rutaArchivo" value="${data.rutaArchivo2}">
+									<input type="hidden" name="nombreArchivoAnterior" value="${data.nombreArchivo2}">
+									<input type="hidden" name="idTraAlu" value="${data.idTraAlu}">
+									<input type="hidden" name="idTrabajo" value="${data.idTrabajo}">
 									<div class="upload-student__group upload-student__buttons">
 										<input type="submit" class="updload-student-save je-btn je-btn--smaller" value="Guardar">
 										<input type="button" class="je-btn je-btn--smaller" value="Eliminar">
@@ -723,26 +894,41 @@
 					this.remove();
 				}
 			});
-			let load = loader();
-			let formData = new FormData();
-			formData.append('idTraAlu',idTraAlu);
-			formData.append('action','obtenerArchivo');
-			
-			try{
-				const response = await API.getData('trabajo',{
-					method: 'POST',
-					body: formData
-				});
-			}catch(error){
-				if(error == 401 || error === 403){
-					location.href = "";
-				}else{
-					console.log("Error");
+			const inputButton = containerUploadAl.querySelector(".upload-btn__button"),
+				  fileName = containerUploadAl.querySelector(".upload-btn__button").nextElementSibling,
+				  inputFile = fileName.nextElementSibling,
+				  inputForm = containerUploadAl.querySelector(".upload-student__form");
+		    let rutaArchivoAnterior,nombreArchivoAnterior;
+			ELEMENTS.INPUT_FILE.changeUpdloadFile(inputButton,inputFile,fileName);
+			let mensaje = "";
+			inputForm.addEventListener('submit',async ee=>{
+				ee.preventDefault();
+				let formDat = new FormData(inputForm);
+				let load = loader();
+				formDat.append("nuevoNombreArchivo",fileName.textContent);
+				try{
+					const response = await API.getData('alumnosTrabajo',{
+						method: 'POST',
+						body: formDat
+					})
+					mensaje = response.mensaje;
+					if(response.estado){
+						containerUploadAl.remove();
+						await setDataTable('tableWork');
+					}
+				}catch(Error){
+					if(e.status === 401){
+						location.href = "login";
+					}else if(e.status === 403){
+						mensaje = "Usted no tiene privilegios suficientes";
+					}else if(e.status === 404){
+						mensaje = "Ocurrió algo inesperado";
+					}
+				}finally{
+					load.remove();
+					showModalMessage(mensaje,3000);
 				}
-			}finally{
-				load.remove();
-			}
-			
+			});
 		};
 		
 		const validateUrl = (txt) => {
@@ -799,6 +985,7 @@
 					$form[3].value = data.fechaIni;
 					$form[5].value = data.fechaFin;
 					$form[6].checked = data.flagLimite;
+					$form[7].disabled = !data.flagLimite;
 					$form[7].value = data.diasLimite;
 					$form[8].checked = data.replicar_todos;
 					$form[9].value = data.idTrabajo;

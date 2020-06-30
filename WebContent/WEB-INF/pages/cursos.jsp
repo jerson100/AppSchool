@@ -378,13 +378,16 @@
 									<span class="data-table__text">Alumno</span>
 								</div>
 								<div class="data-table__col data-table__col--header data-table__col--hidden-m">
-									<span class="data-table__text">Archivo</span>
+									<span class="data-table__text">Última modificación</span>
 								</div>
 								<div class="data-table__col data-table__col--header data-table__col--w50">
 									<span class="data-table__text">Icono</span>
 								</div>
 								<div class="data-table__col data-table__col--header data-table__col--w50">
 									<span class="data-table__text">Nota</span>
+								</div>
+								<div class="data-table__col data-table__col--header">
+									<span class="data-table__text">Comentario</span>
 								</div>
 								<div class="data-table__col data-table__col--header data-table__col--w50 data-table__col--save">
 									<span class="data-table__text"></span>
@@ -424,7 +427,7 @@
 			</div>
 		</div>
 	</div>
-	-->
+	 -->
 	<!--
 	<div class="mod mod--active mod--upload-student">
 		<div class="mod__inner mod__inner--pd-1">
@@ -482,7 +485,6 @@
 	<script src="assets/js/utils/modal/modalMessage.js"></script>
 	<script src="assets/js/pages/cursos/gradoAnimacion.js"></script>
 	<script src="assets/js/generic/loader.js"></script>
-	<!-- <script src="assets/js/pages/cursos/cursos.js"></script>-->
 	<script src="assets/js/utils/element.js"></script>
 	<script src="assets/js/pages/cursos/courses.js"></script>
 	<script src="assets/js/utils/tables.js"></script>
@@ -490,25 +492,5 @@
 	<script src="assets/js/pages/cursos/tags.js"></script>
 	<script src="assets/js/utils/youtube.js"></script>
 	<script src="assets/js/utils/goUp.js"></script>
-	<script>
-		const changeUpdloadFile = (button, inputFile, txtContainer) => {
-			if(inputFile && txtContainer && button){
-				const $button = document.querySelector(button),
-					  $inputFile = document.querySelector(inputFile),
-					  $txtContainer = document.querySelector(txtContainer);
-				$button.addEventListener('click',e=>{
-					$inputFile.click();
-				});
-				$inputFile.addEventListener('change',(e)=>{
-					if($inputFile.files.length > 0){
-						$txtContainer.textContent = $inputFile.files[0].name;
-					}else{
-						$txtContainer.textContent = "";
-					}
-				});
-			}
-		};
-		changeUpdloadFile(".upload-btn__button",".upload-btn__input",".upload-btn__button-name");
-	</script>
 </body>
 </html>

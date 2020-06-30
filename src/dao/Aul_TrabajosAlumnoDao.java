@@ -12,15 +12,16 @@ import exceptions.NotCreated;
 import exceptions.NotDeleted;
 import exceptions.NotFound;
 import exceptions.NotUpdated;
-import interfaces.IAul_Trabajo;
+import interfaces.IAul_TrabajosAlumno;
 import models.Aul_Clases;
-import models.Aul_Trabajo;
+import models.Aul_TrabajosAlumno;
 import utilidades.Conexion;
 
-public class Aul_TrabajoDao implements IAul_Trabajo {
+public class Aul_TrabajosAlumnoDao implements IAul_TrabajosAlumno {
+
 
 	@Override
-	public void create(Aul_Trabajo t) throws NotCreated {
+	public void create(Aul_TrabajosAlumno t) throws NotCreated {
 		
 		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
 		
@@ -32,35 +33,21 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 		
 		try {
 			
-			ps = c.prepareStatement("{call dbo.sp_TRABAJOS_ins_upd(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			ps = c.prepareStatement("{call dbo.sp_TRABAJOSALUMNO_ins_upd(?,?,?,?,?,?,?)}");
 			
-			ps.setInt(1, t.getIdTrabajo());
+			ps.setInt(1, t.getIdTraAlu());
 			
-			ps.setInt(2, t.getIdSecCur());
+			ps.setInt(2, t.getIdCuenta());
 			
-			ps.setString(3, t.getCodTrabajo());
+			ps.setInt(3, t.getIdTrabajo());
 			
-			ps.setString(4, t.getDescTrabajo());
+			ps.setString(4, t.getRutaArchivo());
 			
-			ps.setString(5, t.getFechaIni()+":00");
+			ps.setString(5, t.getExtensionArchivo());
 			
-			ps.setString(6, t.getFechaFin()+":00");
+			ps.setString(6, t.getNombreArchivo());
 			
-			ps.setString(7, t.getRutaArchivo());
-			
-			ps.setString(8, t.getExtensionArchivo());
-			
-			ps.setString(9, t.getNombreArchivo());
-			
-			ps.setInt(10, t.isFlagLimite()?1:0);
-			
-			ps.setInt(11, t.getDiasLimite());
-			
-			ps.setInt(12, t.getIdUsuario());
-			
-			ps.setInt(13, t.isReplicar_todos()?1:0);
-			
-			ps.setInt(14, /*t.isReplicar_solo()?1:*/0);
+			ps.setInt(7, t.getIdUsuario());
 			
 			if(ps.executeUpdate() == 0) {
 				
@@ -82,13 +69,13 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 	}
 
 	@Override
-	public Aul_Trabajo read(int id) throws NotFound {
+	public Aul_TrabajosAlumno read(int id) throws NotFound {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Aul_Trabajo t) throws NotUpdated {
+	public void update(Aul_TrabajosAlumno t) throws NotUpdated {
 		
 		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
 		
@@ -100,41 +87,28 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 		
 		try {
 			
-			ps = c.prepareStatement("{call dbo.sp_TRABAJOS_ins_upd(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			ps = c.prepareStatement("{call dbo.sp_TRABAJOSALUMNO_ins_upd(?,?,?,?,?,?,?)}");
 			
-			ps.setInt(1, t.getIdTrabajo());
+			ps.setInt(1, t.getIdTraAlu());
 			
-			ps.setInt(2, t.getIdSecCur());
+			ps.setInt(2, t.getIdCuenta());
 			
-			ps.setString(3, t.getCodTrabajo());
+			ps.setInt(3, t.getIdTrabajo());
 			
-			ps.setString(4, t.getDescTrabajo());
+			ps.setString(4, t.getRutaArchivo());
 			
-			ps.setString(5, t.getFechaIni()+":00");
+			ps.setString(5, t.getExtensionArchivo());
 			
-			ps.setString(6, t.getFechaFin()+":00");
+			ps.setString(6, t.getNombreArchivo());
 			
-			ps.setString(7, t.getRutaArchivo());
-			
-			ps.setString(8, t.getExtensionArchivo());
-			
-			ps.setString(9, t.getNombreArchivo());
-			
-			ps.setInt(10, t.isFlagLimite()?1:0);
-			
-			ps.setInt(11, t.getDiasLimite());
-			
-			ps.setInt(12, t.getIdUsuario());
-			
-			ps.setInt(13, t.isReplicar_todos()?1:0);
-			
-			ps.setInt(14, /*t.isReplicar_solo()?1:*/0);
+			ps.setInt(7, t.getIdUsuario());
 			
 			if(ps.executeUpdate() == 0) {
 				
 				throw new NotUpdated("No se pudo actualizar el trabajo");
 				
 			}
+			
 				
 		} catch (SQLException e) {
 			
@@ -151,7 +125,7 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 	}
 
 	@Override
-	public void delete(Aul_Trabajo t) throws NotDeleted {
+	public void delete(Aul_TrabajosAlumno t) throws NotDeleted {
 		
 		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
 		
@@ -163,25 +137,21 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 		
 		try {
 			
-			ps= c.prepareStatement("{call dbo.sp_TRABAJOS_del(?,?,?,?)}");
+			ps= c.prepareStatement("{call dbo.sp_TRABAJOSALUMNO_del(?,?)}");
 			
-			ps.setInt(1, t.getIdTrabajo());
+			ps.setInt(1, t.getIdTraAlu());
 			
 			ps.setInt(2, t.getIdUsuario());
 			
-			ps.setInt(3, t.isReplicar_todos() ? 1 : 0);
-			
-			ps.setInt(4, /*t.isReplicar_solo() ? 1 : */0);
-		
 			if(ps.executeUpdate() == 0) {
 				
-				throw new NotDeleted("No se pudo eliminar el trabajo");
+				throw new NotDeleted("No se pudo eliminar su trabajo");
 				
 			}
 			
 		} catch (SQLException e) {
 			
-			throw new NotDeleted("No se pudo eliminar el trabajo");
+			throw new NotDeleted("No se pudo eliminar su trabajo");
 			
 		} finally {
 			
@@ -192,14 +162,14 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 	}
 
 	@Override
-	public List<Aul_Trabajo> all() throws NotAll {
+	public List<Aul_TrabajosAlumno> all() throws NotAll {
 
 		return null;
 
 	}
 
 	@Override
-	public List<Aul_Trabajo> all(int idSecCur) throws NotAll {
+	public List<Aul_TrabajosAlumno> all(int idTrabajo) throws NotAll {
 		
 		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
 
@@ -209,13 +179,13 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 
 		ResultSet rs = null;
 
-		List<Aul_Clases> list = null;
+		List<Aul_TrabajosAlumno> list = null;
 
 		try {
 
-			ps = c.prepareStatement("{call dbo.sp_CLASES_get(?)}");
+			ps = c.prepareStatement("{call dbo.sp_TRABAJOSALUMNO_by_IDSECCUR_get(?)}");
 
-			ps.setInt(1, idSecCur);
+			ps.setInt(1, idTrabajo);
 
 			rs = ps.executeQuery();
 
@@ -223,31 +193,33 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 
 				list = new ArrayList<>();
 
-				Aul_Clases aulC = new Aul_Clases();
+				Aul_TrabajosAlumno aulC = new Aul_TrabajosAlumno();
 
-				aulC.setIdClass(rs.getInt(1));
-				aulC.setCodClase(rs.getString(2));
-				aulC.setDescClase(rs.getString(3));
-				aulC.setLink(rs.getString(4));
-				aulC.setFechaClaseS(rs.getString(5));
-				aulC.setHoraClaseS(rs.getString(6));
-				aulC.setFechaClase(rs.getString(7));
-				aulC.setHoraClase(rs.getString(8));
-
+				aulC.setIdCuenta(rs.getInt(1));
+				aulC.setIdTraAlu(rs.getInt(2)); 
+				aulC.setAlumno(rs.getString(3));
+				aulC.setUltimaModificacion(rs.getString(4));
+				aulC.setLink(rs.getString(5));
+				aulC.setIcono(rs.getString(6));
+				aulC.setColor2(rs.getString(7));
+				aulC.setNotaTrabajo(rs.getString(8));
+				aulC.setComentario(rs.getString(9));
+				
 				list.add(aulC);
 
 				while (rs.next()) {
 
-					aulC = new Aul_Clases();
+					aulC = new Aul_TrabajosAlumno();
 
-					aulC.setIdClass(rs.getInt(1));
-					aulC.setCodClase(rs.getString(2));
-					aulC.setDescClase(rs.getString(3));
-					aulC.setLink(rs.getString(4));
-					aulC.setFechaClaseS(rs.getString(5));
-					aulC.setHoraClaseS(rs.getString(6));
-					aulC.setFechaClase(rs.getString(7));
-					aulC.setHoraClase(rs.getString(8));
+					aulC.setIdCuenta(rs.getInt(1));
+					aulC.setIdTraAlu(rs.getInt(2)); 
+					aulC.setAlumno(rs.getString(3));
+					aulC.setUltimaModificacion(rs.getString(4));
+					aulC.setLink(rs.getString(5));
+					aulC.setIcono(rs.getString(6));
+					aulC.setColor2(rs.getString(7));
+					aulC.setNotaTrabajo(rs.getString(8));
+					aulC.setComentario(rs.getString(9));
 					
 					list.add(aulC);
 
@@ -255,7 +227,7 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 
 			} else {
 
-				throw new NotAll("Este contenido no tiene clases asignadas");
+				throw new NotAll("Este trabajo no tiene alumnos asignados");
 
 			}
 
@@ -263,7 +235,7 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 
 			e.printStackTrace();
 
-			throw new NotAll("Este contenido no tiene clases asignadas");
+			throw new NotAll("Este trabajo no tiene alumnos asignados");
 
 		} finally {
 
@@ -271,11 +243,11 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 
 		}
 
-		return null;
+		return list;
 	}
 
-	@Override
-	public List<Aul_Trabajo> all(int idSecCur, int idCuenta) throws NotAll {
+	/*
+	public List<Aul_TrabajosAlumno> all(int idSecCur, int idCuenta) throws NotAll {
 		
 		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
 
@@ -326,9 +298,9 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 				aulC.setIcono2(rs.getString(20));
 				aulC.setColor2(rs.getString(21));
 				aulC.setComentario(rs.getString(22));
-				aulC.setRutaArchivo2(rs.getString(23));
-				System.out.println("ruta: "+rs.getString(23));
-				aulC.setNombreArchivo2(rs.getString(24));
+				aulC.setNombreArchivo2(rs.getString(23));
+				aulC.setRutaArchivo2(rs.getString(24));
+				System.out.println(rs.getString(23));
 				list.add(aulC);
 
 				while (rs.next()) {
@@ -358,8 +330,8 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 					aulC.setIcono2(rs.getString(20));
 					aulC.setColor2(rs.getString(21));
 					aulC.setComentario(rs.getString(22));
-					aulC.setRutaArchivo2(rs.getString(23));
-					aulC.setNombreArchivo2(rs.getString(24));
+					aulC.setNombreArchivo2(rs.getString(23));
+					aulC.setRutaArchivo2(rs.getString(24));
 					
 					list.add(aulC);
 
@@ -385,6 +357,6 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 
 		return list;
 		
-	}
+	}*/
 	
 }

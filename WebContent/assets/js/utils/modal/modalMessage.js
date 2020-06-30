@@ -37,8 +37,20 @@ const showModalMessage = (message,time, position = {x:'left',y:'top'},animate = 
 	
 };
 
-const showModalDelete = (title, callback) => {
-	
+const showModalDelete = (title, callback, check=true,body="") => {
+	let replicar  = "",checkC= "";
+	if(check){
+		checkC = `
+			<div class="container-checks">
+           		<div class="group-col">
+	           		<label>Replicar a todos</label>
+					<input name="replicartodos" type="checkbox" id="replicar_todos">
+	            </div>
+			</div>
+		`;
+	}else{
+		checkC = `<p>${body}</p>`;
+	}
 	const modal = new BigModal({
 		"header": `
 			<div class="flex spacebetween">
@@ -46,12 +58,7 @@ const showModalDelete = (title, callback) => {
 			</div>
 		`,
 		"body":`
-			<div class="container-checks">
-           		<div class="group-col">
-	           		<label>Replicar a todos</label>
-					<input name="replicartodos" type="checkbox" id="replicar_todos">
-	            </div>
-			</div>
+			${checkC}
 		`,
 		"footer": `
 			<div class="themes-buttons-container">

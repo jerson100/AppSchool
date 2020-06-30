@@ -19,22 +19,22 @@ public class Aul_Trabajo extends Aul_Comun{
 	private String img;
 	private String color;
 	private String notas;
-	private String link;
-	private String color2;
-	private String icono2;
+	private String nombreArchivo2;
+	private String rutaArchivo2;
 	
-	public String getColor2() {
-		return color2;
+	public String getNombreArchivo2() {
+		return nombreArchivo2;
 	}
-	public void setColor2(String color2) {
-		this.color2 = color2;
+	public void setNombreArchivo2(String nombreArchivo2) {
+		this.nombreArchivo2 = nombreArchivo2;
 	}
-	public String getIcono2() {
-		return icono2;
+	public String getRutaArchivo2() {
+		return rutaArchivo2;
 	}
-	public void setIcono2(String icono2) {
-		this.icono2 = icono2;
+	public void setRutaArchivo2(String rutaArchivo2) {
+		this.rutaArchivo2 = rutaArchivo2;
 	}
+
 	public String getLink2() {
 		return link2;
 	}
@@ -49,13 +49,7 @@ public class Aul_Trabajo extends Aul_Comun{
 	}
 	private String link2;
 	private String comentario;
-	
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
+
 	public int getFlagLimite1() {
 		return flagLimite1;
 	}

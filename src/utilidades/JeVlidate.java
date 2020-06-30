@@ -47,5 +47,8 @@ public abstract class JeVlidate {
 		return (int)(Math.random()*(fin - inicio + 1)) + inicio;
 	}
 
+	public static String generarNombreArchivo(String nombreArchivo, long time, int generarNumeroAleatorio, String extension) {
+		return Cifrado.cifrar(nombreArchivo+time+generarNumeroAleatorio) + extension;
+	}
 	
 }

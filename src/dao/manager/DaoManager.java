@@ -7,6 +7,7 @@ import dao.Aul_HorarioDao;
 import dao.Aul_SeccionDao;
 import dao.Aul_SeccionGradoNivelDao;
 import dao.Aul_TrabajoDao;
+import dao.Aul_TrabajosAlumnoDao;
 import dao.Glo_TipoArchivoDao;
 import dao.Glo_TipoSexoDao;
 import dao.SesionDao;
@@ -60,6 +61,10 @@ public class DaoManager {
 			case GLOTIPOARCHIVO:
 				
 				return new Glo_TipoArchivoDao();
+				
+			case AULTRABAJOSALUMNO:
+				
+				return new Aul_TrabajosAlumnoDao();
 				
 			default:
 				

@@ -1,8 +1,9 @@
 .upload-student{
 	background: #fff;
-	width: 400px;
-	position: relative;
-	padding: 2rem 1rem;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    padding: 2rem 1rem;
 }
 
 .upload-student__title{

@@ -5,7 +5,6 @@ public class Aul_Contenido extends Aul_Comun{
 	private int idContenido;
 	/*private int idSecCurPro;*/
 	private String descContenido;
-	private String link;
 	private String codContenido;
 	
 	public int getIdContenido() {
@@ -28,11 +27,5 @@ public class Aul_Contenido extends Aul_Comun{
 	}
 	public void setDescContenido(String descContenido) {
 		this.descContenido = descContenido;
-	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
 	}
 }

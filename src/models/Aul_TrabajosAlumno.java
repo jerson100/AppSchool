@@ -8,10 +8,38 @@ public class Aul_TrabajosAlumno extends Aul_Comun{
 	private String extensionArchivo;
 	private String nombreArchivo;
 	private String notaTrabajo;
+	private String alumno;
+	private String ultimaModificacion;
+	private String comentario;
 	
 	public int getIdCuenta() {
 		return idCuenta;
 	}
+	
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public String getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(String alumno) {
+		this.alumno = alumno;
+	}
+
+	public String getUltimaModificacion() {
+		return ultimaModificacion;
+	}
+
+	public void setUltimaModificacion(String ultimaModificacion) {
+		this.ultimaModificacion = ultimaModificacion;
+	}
+
 	public void setIdCuenta(int idCuenta) {
 		this.idCuenta = idCuenta;
 	}

@@ -14,6 +14,8 @@
 .files-student__title{
 	margin: 0;
 	margin-bottom: 1rem;
+	font-size: 1.3em;
+	font-weight: bold;
 }
 
 .data-table{
@@ -32,6 +34,10 @@
 	padding: .7em 0;
 }
 
+.data-table__col--ultimaModificacion {
+    flex: 0 0 140px !important;
+}
+
 .data-table__row{
 	display: flex;
 }
@@ -40,6 +46,7 @@
 	flex: 1 0 0;
 	display: flex;
     align-items: center;
+    padding-left: 1rem !important;
 }
 
 .data-table__col--hidden-m{
@@ -52,8 +59,8 @@
 }
 
 .data-table__col--w50{
-	flex: 0 0 50px;
-	max-width: 50px;	
+	flex: 0 0 60px;
+    max-width: 60px;
 }
 
 .data-table__col--save{
@@ -65,8 +72,7 @@
 }
 
 .data-table__icon{
-	color: danger;
-    font-size: 1.4em;
+    font-size: 21px;
     cursor: pointer;
 }
 
@@ -78,8 +84,11 @@
     color: var(--blue-school-alt);
 }
 .data-table__input{
-	width: 90%;
-	max-width: 50px;
+	width: 100%;
+}
+
+.data-table__text{
+	font-size: 12px;
 }
 
 .data-table__body .data-table__row:last-child{
@@ -88,7 +97,7 @@
 
 @media screen and (min-width: 768px){
 	.data-table__col--hidden-m{
-		display: block;
+		display: flex;
 	}
 }
 
