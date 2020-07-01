@@ -1,6 +1,6 @@
 .glide img{
 	width: 100%;
-	object-fit: cover;
+	object-fit: contain;
 	height: 250px;
 }
 
@@ -42,10 +42,14 @@
 	height: 101px;
 }
 
+.glide{
+	background-color: rgba(0,0,0,.2);
+}
+
 @media screen and (min-width:700px){
 	
 	.glide img{
-		height: 450px;
+		height: 400px;
 	}
 	
 	.details-container .container-button{

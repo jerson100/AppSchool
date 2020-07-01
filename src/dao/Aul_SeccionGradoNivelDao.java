@@ -93,8 +93,6 @@ public class Aul_SeccionGradoNivelDao implements IAul_SeccionGradoNivel{
 		
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			
 			throw new NotAll("Póngase en contacto con su administrador");
 			
 		} finally {
@@ -108,7 +106,6 @@ public class Aul_SeccionGradoNivelDao implements IAul_SeccionGradoNivel{
 
 	@Override
 	public List<Aul_SeccionGradoNivel> all(int id) throws NotAll {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

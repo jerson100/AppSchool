@@ -149,10 +149,15 @@ class DataTable {
         row.setAttribute("class", "table-data__row");
         
         if(this.DEFAULT.options && 
-           this.DEFAULT.options.row &&
-           this.DEFAULT.options.row.disabled &&
-           obj[this.DEFAULT.options.row.var] < 0){
-        	row.classList.add("table-data__row--disabled");
+           this.DEFAULT.options.row){
+	    	if(this.DEFAULT.options.row.disabled &&
+	    	   obj[this.DEFAULT.options.row.var] < 0){
+	    		   row.classList.add("table-data__row--disabled");
+	    	}
+	    	
+	    	if(this.DEFAULT.options.row.bgcolor && numeration % 2 == 0){
+	    		row.style.backgroundColor = this.DEFAULT.options.row.bgcolor;
+    	    }
         }
         
         row.innerHTML += `

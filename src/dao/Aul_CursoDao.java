@@ -171,7 +171,6 @@ public class Aul_CursoDao implements IAul_Curso{
 
 	@Override
 	public List<Aul_Curso> all(int id) throws NotAll {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

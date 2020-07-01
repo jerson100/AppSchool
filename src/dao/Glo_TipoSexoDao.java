@@ -13,7 +13,6 @@ import exceptions.NotDeleted;
 import exceptions.NotFound;
 import exceptions.NotUpdated;
 import interfaces.IGlo_TipoSexo;
-import models.Aul_Curso;
 import models.Glo_TipoSexo;
 import utilidades.Conexion;
 

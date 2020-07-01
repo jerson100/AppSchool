@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/layout/layout.css">
     <link rel="stylesheet" href="assets/css/base/base.css"> 
     <link rel="stylesheet" href="assets/css/theme/color.css">
+    <link rel="stylesheet" href="assets/css/components/scroll.css">
     <link rel="stylesheet" href="assets/css/components/button.css">
     <link rel="stylesheet" href="assets/css/components/loader.css">
     <link rel="stylesheet" href="assets/css/utils/animation.css">
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="assets/js/utils/modal/je-modal-style.css">
 	<title>Login</title>
 </head>
-	<body>
+	<body class="je-scroll">
 		<div class="main">
 			<div class="main__left">
 				<div class="login">
@@ -75,10 +76,11 @@
 			<div class="main__right">
 				<div class="video-response">
 					<video class="video-response__video" muted autoplay loop>
-			  			<source src="assets/video/video_login.mp4" type="video/mp4">
+						<source src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-login/login-video.mp4" type="video/mp4" media="screen and (min-width:1024px)">
+     					<source src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-login/login-video2.mp4" type="video/mp4">
 			  		</video>	
 				</div>
-				<h1 class="main__title">Aula Virtual</h1>
+				<h2 class="main__title">Aula Virtual</h2>
 			</div>	
 		</div>
     	 <script src="https://kit.fontawesome.com/56e0c4d4ed.js"

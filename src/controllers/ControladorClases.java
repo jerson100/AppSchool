@@ -20,11 +20,9 @@ import constantes.AppColegio;
 import dao.manager.DaoManager;
 import enumerados.EDaoManager;
 import exceptions.NotAll;
-import exceptions.NotCreated;
 import exceptions.NotDeleted;
 import interfaces.ICrud;
 import models.Aul_Clases;
-import models.Aul_Contenido;
 import models.Sesion;
 
 @MultipartConfig
@@ -91,8 +89,6 @@ public class ControladorClases extends HttpServlet {
 				}
 				
 			}catch(Exception ee) {
-				
-				ee.printStackTrace();
 				
 				msg = "No se pudo llevar a cabo la acción";
 				

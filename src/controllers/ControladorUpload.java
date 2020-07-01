@@ -40,26 +40,13 @@ public class ControladorUpload extends HttpServlet {
 			try {
 				Storage.download(response, request, path, container, title);
 			} catch (InvalidKeyException e) {
-				e.printStackTrace();
-				//response.sendError(404);
 			} catch (StorageException e) {
-				e.printStackTrace();
-				//response.sendError(404);
 			} catch (URISyntaxException e) {
-				e.printStackTrace();
-				//response.sendError(404);
 			} catch (IOException e) {
-				e.printStackTrace();
-				//response.sendError(404);
 			}
 		}else {
 			response.sendRedirect("");
 		}
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 	}
 

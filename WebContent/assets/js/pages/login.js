@@ -115,7 +115,6 @@
 		 	        showMessage(data.mensaje);
 	    		}
 	    	}catch(e){
-	    		console.log(e);
 	    	}finally{
 	    		load.remove();
 	    		$frmLogin[3].disabled = false;

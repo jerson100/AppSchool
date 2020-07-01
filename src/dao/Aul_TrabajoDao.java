@@ -70,8 +70,6 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			
 			throw new NotCreated("No se pudo crear el trabajo");
 			
 		} finally {
@@ -137,8 +135,6 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 			}
 				
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
 			
 			throw new NotUpdated("No se pudo actualizar el trabajo");
 			
@@ -260,9 +256,7 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 			}
 
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-
+			
 			throw new NotAll("Este contenido no tiene clases asignadas");
 
 		} finally {
@@ -372,9 +366,7 @@ public class Aul_TrabajoDao implements IAul_Trabajo {
 			}
 
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-
+			
 			throw new NotAll("Este contenido no tiene trabajos");
 
 		} finally {

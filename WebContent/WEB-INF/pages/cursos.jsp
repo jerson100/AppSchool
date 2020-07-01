@@ -35,7 +35,7 @@
 
 <link rel="stylesheet" href="assets/css/utils/animation.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses.css">
+<link rel="stylesheet" href="assets/css/pages/courses/courses.css">
 
 <link rel="stylesheet" href="assets/css/components/table.css">
 
@@ -254,7 +254,7 @@
 												class="tag__input" type="checkbox" name="replicartodos"
 												id="replicar">
 										</div>
-										<span class="tag__info">* Si se marca se replicarán en las demás secciones del mismo grado.</span>
+										<span class="tag__info">* Si marca replicar, afectará a las demás secciones del mismo grado</span>
 									    <input type="hidden" name="idContenido">
 									    <input type="hidden" name="action" value="agregarContenido">
 									    <input type="hidden" name="codContenido">
@@ -292,7 +292,7 @@
 											<label class="tag__label" for="replicartodos2">Replicar *:</label> 
 											<input class="tag__input" type="checkbox" name="replicartodos" id="replicartodos2">
 										</div>
-										<span class="tag__info">* Si se marca se replicarán en las demás secciones del mismo grado.</span>
+										<span class="tag__info">* Si marca replicar, afectará a las demás secciones del mismo grado.</span>
 										<div class="tag__buttons flex--center">
 											<button
 												class="tag__btn tag__btn--first je-btn je-btn--smaller"
@@ -339,7 +339,7 @@
 											<label class="tag__label" for="replicartodos3">Replicar *:</label> 
 											<input class="tag__input" type="checkbox" name="replicartodos" id="replicartodos3">
 										</div>
-									    <span class="tag__info">* Si se marca se replicarán en las demás secciones del mismo grado.</span>
+									    <span class="tag__info">* Si marca replicar, afectará a las demás secciones del mismo grado.</span>
 										<input type="hidden" name="idTrabajo" value="">
 										<input type="hidden" name="codTrabajo" value="">
 										<input type="hidden" name="rutaArchivo" value="">

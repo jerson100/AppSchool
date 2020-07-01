@@ -12,18 +12,18 @@
 .table-data__navigator{
 	padding: 1.4rem 0;
 }
-
+/*
 .table-data__row:nth-child(2n){
 	background-color: #358bbc1c;
 }
-
+*/
 .table-data__row--border{
 	border-bottom: solid 1px rgba(0,0,0,.1);
 	border-top: solid 1px rgba(0,0,0,.1);
 }
 
 .table-data__column{
-    padding: .8em;
+    padding: .5em;
     color: #393939;
     text-align: left;
         font-size: 13px;

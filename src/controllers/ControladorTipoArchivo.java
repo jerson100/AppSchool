@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-
 import com.google.gson.Gson;
 
 import constantes.AppColegio;
@@ -102,7 +100,7 @@ public class ControladorTipoArchivo extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String mensaje;
-		//Part file = request.getPart("file");
+		
 		try {
 			String name = request.getParameter("name");
 			int size = Integer.parseInt(request.getParameter("size"));
@@ -118,10 +116,7 @@ public class ControladorTipoArchivo extends HttpServlet {
 			mensaje = dao.validarExtension(tipoA);
 			
 		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
 			mensaje  = "No se pudo validar el archivo";
-			
 		}
 		
 		map.put("estado", mensaje.isEmpty());

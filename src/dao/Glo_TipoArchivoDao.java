@@ -77,7 +77,6 @@ public class Glo_TipoArchivoDao implements IGlo_TipoArchivo {
 				return rs.getString(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return "";
 	}

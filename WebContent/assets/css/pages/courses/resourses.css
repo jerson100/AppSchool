@@ -143,6 +143,8 @@
 	text-decoration: none;
 	margin-top: 23%;
     max-width: 76%;
+    user-select: none;
+    pointer-events: none;
 }
 
 .tag__return{

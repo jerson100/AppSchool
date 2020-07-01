@@ -66,17 +66,9 @@ public class ControlMisCursos extends HttpServlet {
 				response.sendRedirect("login");
 						
 			}else {
-				/*		
-				if(AppColegio.TIPO_ADMINISTRADOR == us.getIdPerfil()) {
-							
-					response.sendRedirect("login");
-							
-				}else {*/
+				
+				mostrarMisSecciones(us,request,response);
 					
-					mostrarMisSecciones(us,request,response);
-					
-				/*}*/
-						
 			}
 				
 		}else {
@@ -114,15 +106,6 @@ public class ControlMisCursos extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		response.setContentType("Application/json;charset=utf-8");
-		/*
-		String contenido = request.getParameter("contenido");
-		
-		String link = request.getParameter("link");
-		
-		int idCurso = Integer.parseInt("idCurso");
-		*/
-		
-		
 	}
 
 	private void getCursos(Sesion us,HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -218,57 +201,51 @@ public class ControlMisCursos extends HttpServlet {
 	private void mostrarMisSecciones(Sesion us,HttpServletRequest request, HttpServletResponse response) 
 																throws ServletException, IOException {
 		
-		String message = "";
-		
-		List<Aul_Curso> listaCursos = null;
-		
-		List<Aul_Seccion> listaSeccion = null;
-		
-		try {
+			String message = "";
 			
-			listaSeccion = aulSeccionDao.all(us.getIdCuenta());
+			List<Aul_Curso> listaCursos = null;
 			
-			message = "ok!";
+			List<Aul_Seccion> listaSeccion = null;
 			
-		} catch (NotAll e) {
+			try {
+				
+				listaSeccion = aulSeccionDao.all(us.getIdCuenta());
+				
+				message = "ok!";
+				
+			} catch (NotAll e) {
+				
+				message = e.getMessage();
+				
+			}
 			
-			message = e.getMessage();
+			try {
+				
+				listaCursos = ((Aul_CursoDao)aulCursoDao).all(us.getIdPerfil(), us.getIdCuenta(), 0);
+				
+			} catch (NotAll e) {
+				
+				message = e.getMessage();
+				
+			}
 			
-		}
-		
-		try {
+			request.setAttribute("listaSeccion", listaSeccion);
 			
-			listaCursos = ((Aul_CursoDao)aulCursoDao).all(us.getIdPerfil(), us.getIdCuenta(), 0);
+			request.setAttribute("listaCursos", listaCursos);
 			
-		} catch (NotAll e) {
+			request.setAttribute("mensaje", message);
 			
-			message = e.getMessage();
+			request.setAttribute("tipoPerfil", us.getIdPerfil());
 			
-		}
-		
-		request.setAttribute("listaSeccion", listaSeccion);
-		
-		request.setAttribute("listaCursos", listaCursos);
-		
-		request.setAttribute("mensaje", message);
-		
-		request.setAttribute("tipoPerfil", us.getIdPerfil());
-		
-		String grado = us.getGrado();
-		
-		String tutor = us.getTutor();
-		
-		request.setAttribute("grado", grado);
-		
-		request.setAttribute("tutor", tutor);
-		
-		request.getRequestDispatcher("WEB-INF/pages/cursos.jsp").forward(request, response);
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-											   throws ServletException, IOException {
-		
+			String grado = us.getGrado();
+			
+			String tutor = us.getTutor();
+			
+			request.setAttribute("grado", grado);
+			
+			request.setAttribute("tutor", tutor);
+			
+			request.getRequestDispatcher("WEB-INF/pages/cursos.jsp").forward(request, response);
 		
 		
 		

@@ -1,8 +1,10 @@
 .files-student{
-	width: 1024px;	
-	background: #fff;
-	padding: 1.5rem;
-	position: relative;
+	max-width: 1024px;
+    width: 90%;
+    background: #fff;
+    padding: 10px;
+    position: relative;
+    border-radius: 5px;
 }
 
 .files-student__close{
@@ -13,15 +15,21 @@
 
 .files-student__title{
 	margin: 0;
-	margin-bottom: 1rem;
-	font-size: 1.3em;
+	font-size: 15px;
+	padding-bottom: 5px;
+	border-bottom: solid 1px rgba(0,0,0,.3);
 	font-weight: bold;
+}
+
+.files-student__body{
+    overflow: auto;
 }
 
 .data-table{
 	max-height: 60vh;
     position: relative;
     overflow: auto;
+    min-width: 800px;
 }
 
 .data-table__header{
@@ -30,8 +38,8 @@
     top: 0;
 }
 
-.data-table__body .data-table__col{
-	padding: .7em 0;
+.data-table__col{
+	padding: .3em 0;
 }
 
 .data-table__col--ultimaModificacion {
@@ -54,13 +62,13 @@
 }
 
 .data-table__col--header{
-	padding: .8em 0;
+	padding: .5em 0;
 	font-weight: bold;
 }
 
 .data-table__col--w50{
 	flex: 0 0 60px;
-    max-width: 60px;
+    width: 60px;
 }
 
 .data-table__col--save{
@@ -85,6 +93,8 @@
 }
 .data-table__input{
 	width: 100%;
+	padding-left: 2px;
+	border: solid 1px rgba(0,0,0,.2);
 }
 
 .data-table__text{

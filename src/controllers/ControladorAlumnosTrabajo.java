@@ -25,7 +25,6 @@ import exceptions.NotAll;
 import exceptions.NotCreated;
 import exceptions.NotDeleted;
 import interfaces.ICrud;
-import models.Aul_Trabajo;
 import models.Aul_TrabajosAlumno;
 import models.Sesion;
 import utilidades.JeVlidate;
@@ -80,8 +79,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 					mensaje = "OK!";
 					
 				}catch (NotAll e) {
-					
-					e.printStackTrace();
 					
 					mensaje = e.getMessage();
 					
@@ -190,7 +187,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 					estado = true;
 					mensaje = "Actualización Exitosa";
 				}catch(Exception e) {
-					e.printStackTrace();
 					mensaje = "No se pudo llevar a cabo la actualización";
 				}
 				
@@ -206,7 +202,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 			
 		}catch(Exception e) {
 			response.sendError(404);
-			e.printStackTrace();
 		}
 	}
 
@@ -286,7 +281,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 						mensaje = "Trabajo actualizado satisfactoriamente";
 						estado = true;
 					} catch (NotCreated e) {
-						e.printStackTrace();
 					} 	
 				}	
 
@@ -299,7 +293,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 					
 			}catch(Exception e) {
 				response.sendError(404);
-				e.printStackTrace();
 			}
 		}else {
 			response.sendError(403);
@@ -361,7 +354,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 							estado = true;
 							message = "Su trabajo se eliminó";
 						}catch (NotDeleted e) {
-							e.printStackTrace();
 							message = "No se pudo eliminar su trabajo";
 						}
 																		
@@ -380,7 +372,6 @@ public class ControladorAlumnosTrabajo extends HttpServlet {
 				response.sendError(401);
 			}
 		}catch(Exception e) {
-			e.printStackTrace();
 			response.sendError(404);
 		}
 	}

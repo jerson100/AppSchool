@@ -115,8 +115,6 @@ public class ControllerLogin extends HttpServlet {
 			
 			req.getSession().removeAttribute("usuarioSesion");
 			
-			/*resp.setHeader("Cache-Control","no-store");*/
-			
 			status = true;
 			
 			resp.setStatus(200);

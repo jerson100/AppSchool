@@ -89,6 +89,9 @@
 			]);
 		};
 		
+		/*
+		 * Limpiamos las selecciones de los tags
+		 * */
 		const clearTagSection = () => {
 			let tags = Array.from($modalOptions.querySelector(".tag__section"));
 			tags.forEach(tag=>{
@@ -147,49 +150,31 @@
 								}else{
 									actionsButtonsModal('Work','agregarTrabajo', idSecCurPro);
 								}
-							}/*else if(e.target.matches(".tag__section--work .tag__file-button")){
-								e.target.nextElementSibling.nextElementSibling.click();
-							}*/
+							}
 						}else{
-							console.log("reset");
+							let filesNames = Array.from($modalOptions.querySelectorAll(".tag__file-name"));
+							$modalOptions.querySelector(".tag__input-number").disabled = true;
+							filesNames.forEach(it => {
+								it.textContent = "";
+							});
 						}
 					}else{
 						if(e.target.tagName === "I"){
-							/*if(e.target.classList.contains("fa-upload")){
-								e.preventDefault();
-								e.target.parentElement.nextElementSibling.nextElementSibling.click();
-							}else */if(e.target.classList.contains("tag__file-delete")){
+							if(e.target.classList.contains("tag__file-delete")){
 								e.preventDefault();
 								let parent = e.target.parentElement;
 								parent.querySelector(".tag__input").value = "";
 								parent.querySelector(".tag__file-name").textContent = "";
-								/*let $frmWork = parent.parentElement.parentElement;*/
-								/*$frmWork[12].value = "true";*/
-								
 							}
 						}
 					}
-					/*else if(e.target.tagName === "I" && e.target.classList.contains("fa-upload")){
-					}else if(e.target.tagName)*/
 				});
 				const $formWk = $modalOptions.querySelector(".tag__section--work form");
 				const inputButton = $formWk.querySelector(".tag__file-button");
 				const fileName = $formWk.querySelector(".tag__file-name");
 				const inputFile = fileName.nextElementSibling;
-				
+				//Agregamos el evento change para los files, analiza el tipo de extensión válido
 				ELEMENTS.INPUT_FILE.changeUpdloadFile(inputButton,inputFile,fileName);
-				/*
-				$formWk[2].addEventListener('change',async e=>{
-					//console.log("change detected");
-					if(e.target.files.length != 0){
-						namaeFileWork.textContent = e.target.files[0].name;
-						//Verificamos el tipo de extensión
-						await verificarExtension($formWk);		
-					}else{
-						namaeFileWork.textContent = '';
-					}
-				});
-				*/
 				
 				$formWk[6].addEventListener('change',e=>{
 					if(!e.target.checked){
@@ -200,7 +185,7 @@
 				
 			}
 		};
-		
+		/*
 		const viewModalLoaderVerifyExtension = () => {
 			const modalContainer = document.createElement("div");
 			modalContainer.setAttribute("class","mod mod--active mod--verifyExtension mod--bg-op2");
@@ -244,7 +229,6 @@
 				if(error.status === 401 || error.status === 403){
 					location.href = "login";
 				}else if(error.status === 404){
-					//console.log("Se produjo un error");
 					msg = "Ocurrió algo inesperado";
 				}
 			}finally{
@@ -254,7 +238,7 @@
 				//}
 			}
 		};
-		
+		*/
 		const actionsButtonsModal = async (name,action,idseccurpro=0) => {
 			const $form = dom.querySelector(`.tag__section--${name.toLowerCase()} form`),
 				  load = loader();
@@ -291,11 +275,9 @@
 				if(e.status == 401 || e.status === 403){
 					location.href = "login";
 				}else{
-					//console.log(e);
 					msg = "Ocurriò algo inesperado";
 				}
 			}finally{
-				console.log(msg);
 				if(validations){
 					$form.reset();
 					load.remove();
@@ -480,10 +462,18 @@
 			 })
 		}
 
+		/*
+		 * Método para GENERAR las 3 tablas 
+		 * */
 		const addTables = () => {
 			let tipoPerfil = localStorage.getItem("idPerfil");
 			tableContent = new DataTable({
 	            table: '[data-table="tableContent"] table',
+	            options: {
+                	row: {
+                		bgcolor: "#358bbc1c" 
+                	}         
+                },
 	            columns: [
 	                {
 	                    name: 'Contenido',
@@ -534,6 +524,11 @@
 			
 			tableClass= new DataTable({
                 table: '[data-table="tableClass"] table',
+                options: {
+                	row: {
+                		bgcolor: "#358bbc1c" 
+                	}         
+                },
                 columns: [
                     {
                         name: 'Título',
@@ -639,7 +634,6 @@
                 	type: 'text'
                 });
 			}
-			//console.log(columnsWork);
 			tableWork = new DataTable({
                 table: '[data-table="tableWork"] table',
                 options: {
@@ -654,14 +648,18 @@
                 actions: {
                     options: tipoPerfil == 1 ? 'view upload remove' : 'view edit remove',
                     edit: (data,objDataTable) => {
-                        showModalUpdate('tableWork',data);
+                    	if(data.flagLimite1 < 0){
+                			showModalMessage("No puede actualizar este trabajo.",5000);
+                		}else{
+                			showModalUpdate('tableWork',data);
+                		}
                     },
                     remove: function (data) {
                     	if(tipoPerfil == 1){
                     		if(data.idTraAlu === 0){
                     			showModalMessage("No tiene trabajo que eliminar",5000);
                     		}else{
-                    			showModalDelete("¿Está seguro que desea eliminar su archivo?",async (replicarTodos) =>{
+                    			showModalDelete("Eliminar archivo",async (replicarTodos) =>{
                         			let load = loader(), msg = "No se pudo eliminar la clase", response;
                         			try{
                         				response = await API.getData(`alumnosTrabajo?idTraAlu=${data.idTraAlu}&rutaArchivo=${data.rutaArchivo2}&nota=${data.notas}`,{
@@ -683,30 +681,34 @@
                         				}
                         				return msg;
                         			}
-                        		},false,"Se eliminará el archivo cargado."); 
+                        		},false,"¿Está seguro que desea eliminar su archivo?"); 
                     		}  
                     	}else{
-                    		showModalDelete("¿Está seguro que desea eliminar el trabajo?",async (replicarTodos) =>{
-                    			let load = loader(), msg = "No se pudo eliminar la clase", response;
-                    			try{
-                    				response = await API.getData(`trabajo?idTrabajo=${data.idTrabajo}&rutaArchivo=${data.rutaArchivo}&replicartodos=${replicarTodos.checked ? "on" : "off"}`,{
-                    					method:'DELETE'
-                    				});
-                    				msg = response.mensaje;
-                    			}catch(e){
-                    				if(e.status === 403){
-                    					msg = "No tiene privilegios suficientes para realizar esta acción";
-                    				}else if(e.status === 401){
-                    					location.href = "login";
-                    				}else if(e.status === 404){
-                    					msg = "No se pudo llevar acabo la acción";
+                    		if(data.flagLimite1 < 0){
+                    			showModalMessage("No puede eliminar este trabajo.",5000);
+                    		}else{
+                    			showModalDelete("¿Está seguro que desea eliminar el trabajo?",async (replicarTodos) =>{
+                    				let load = loader(), msg = "No se pudo eliminar la clase", response;
+                    				try{
+                    					response = await API.getData(`trabajo?idTrabajo=${data.idTrabajo}&rutaArchivo=${data.rutaArchivo}&replicartodos=${replicarTodos.checked ? "on" : "off"}`,{
+                    						method:'DELETE'
+                    					});
+                    					msg = response.mensaje;
+                    				}catch(e){
+                    					if(e.status === 403){
+                    						msg = "No tiene privilegios suficientes para realizar esta acción";
+                    					}else if(e.status === 401){
+                    						location.href = "login";
+                    					}else if(e.status === 404){
+                    						msg = "No se pudo llevar acabo la acción";
+                    					}
+                    				}finally{
+                    					load.remove();
+                    					await setDataTable('tableWork');
+                    					return msg;
                     				}
-                    			}finally{
-                    				load.remove();
-                    				await setDataTable('tableWork');
-                    				return msg;
-                    			}
-                    		});                    		
+                    			});                    		                    			
+                    		}
                     	}
                     },
                     upload: function(data){
@@ -723,6 +725,7 @@
             });
 		};
 		
+		/*Método para mostar el modal de comentario de los docentes*/
 		const showModalComent = (comentario) => {
 			const modal = document.createElement("div");
 			modal.setAttribute("class","mod mod--active");
@@ -744,14 +747,14 @@
 			});
 		};
 		
+		/*Nos permite mostrar el modal, en la cuál listamos todos
+		 * los estudiantes y así los docentes puedan subir sus notas.*/
 		const showModalListenerStudents = async (data) => {
-			
 			const list = await getListNoteStudent(data.idTrabajo);
-			
 			drawModalWorkStudents(list,data.idTrabajo);
-			
 		};
 		
+		/*obtenemos la lista de estudiantes con sus respectivas notas, comentarios, etc*/
 		const getListNoteStudent = async (idTrabajo) => {
 			const formData = new FormData();
 			let response,load,list=[];
@@ -773,22 +776,16 @@
 			return list;
 		};
 		
+		/*Pintamos el modal de los trabajos de los estudiantes..*/
 		const drawModalWorkStudents = (list,idTrabajo) => {
-			
 			const modal = createModalListStudent();
-			
 			document.body.appendChild(modal);
-			
 			const modalData = modal.querySelector(".data-table__body");
-			
 			const close = modal.querySelector(".files-student__close");
-			
 			updateRowStudentNote(modalData,list);
-			
 			close.addEventListener('click',e=>{
 				modal.remove();
 			});
-			
 			modalData.addEventListener('click',async e=>{
 				if(e.target.tagName === 'I' &&
 				   e.target.classList.contains('data-table__save')){
@@ -809,11 +806,11 @@
 			
 		};
 		
+		/*Método que permite actualizar Y pintar en pantalla, las filas de los estudiantes*/
 		const updateRowStudentNote = (container, list) => {
 			container.innerHTML = "";
      		let fragment = document.createDocumentFragment();
 			let numeration = 0;
-			
 			list.forEach(item=>{
 				let rowItem = document.createElement("div");
 				rowItem.setAttribute("class","data-table__row data-table__row-body data-table__row-border");
@@ -851,11 +848,10 @@
 				`;
 				fragment.appendChild(rowItem);
 			});
-			
 			container.appendChild(fragment);
-			
 		};
 		
+		/*Método que nos permite guardar la toda la row(data) del estudiante*/
 		const saveStudentNote = async (idCuenta,idTraAlu,idTrabajo,comentario,notaTrabajo) => {
 			let mensaje = "";
 			let estado = false;
@@ -886,6 +882,8 @@
 			}
 		};
 		
+		/*Creamos el modal de listado de alumnos, para que el docente suba las notas.
+		 *Aquí principalmente creamos el header.*/
 		const createModalListStudent = () => {
 			const modalContainer = document.createElement("div");
 			modalContainer.innerHTML = `
@@ -896,8 +894,8 @@
 							<h2 class="files-student__title">
 								Ficha de alumnos
 							</h2>
-							<div class="files-student__body">
-								<div class="data-table">
+							<div class="files-student__body je-scroll">
+								<div class="data-table je-scroll">
 									<div class="data-table__header">
 										<div class="data-table__row data-table__row-border">
 											<div class="data-table__col data-table__col--header data-table__col--numeration data-table__col--w50">
@@ -935,6 +933,7 @@
 			return modalContainer;
 		};
 		
+		/*Modal que permite al estudiante actualizar su archivo*/
 		const createModalUploadAlumn = async (data) => {
 			const containerUploadAl = document.createElement("div");
 			containerUploadAl.innerHTML = `
@@ -962,7 +961,7 @@
 									<input type="hidden" name="idTraAlu" value="${data.idTraAlu}">
 									<input type="hidden" name="idTrabajo" value="${data.idTrabajo}">
 									<div class="upload-student__group upload-student__buttons">
-										<input type="submit" class="updload-student-save je-btn je-btn--smaller" value="Guardar">
+										<input type="submit" class="updload-student-save je-btn je-btn--smaller" value="Cargar archivo">
 									</div>
 								</form>
 							</div>
@@ -1017,10 +1016,13 @@
 			});
 		};
 		
+		/*Para validar las url*/
 		const validateUrl = (txt) => {
 			return /^(?:https|http|ftp):(?:\\\\|\/\/).+$/.test(txt);
 		};
 		
+		/*Para cambiar el título del modal, esto depende de la opción seleccionada
+		 * sea agregar contenido, clases, trabajos.*/
 		const changeTitleModal = (title) => {
 			$modalHeader.innerHTML = '';
 			const elementTitle = document.createElement("p");
@@ -1037,6 +1039,10 @@
 			$modalHeader.appendChild(elementTitle);
 		};
 		
+		/*
+		 * Método que nos permite mostrar el modal, para que los docentes puedan,
+		 * actualizar sea el contenido, clase, trabajo.
+		 * */
 		const showModalUpdate = async (tableName,data) => {
 			$modalOptions.classList.add("mod--active");
 			changeTitleModal("Actualizando");
@@ -1054,7 +1060,6 @@
 					break;
 				case 'tableClass':
 				    $form = $modalOptions.querySelector(".tag__section--class .tag__form");
-					/*console.log(data);*/
 					$form[0].value = data.descClase;
 					$form[1].value = data.link;
 					$form[2].value = data.fechaClase;
@@ -1088,6 +1093,8 @@
 			}
 		};
 		
+		/*Método que nos permite limpiar la data, sea de las tablas, además de ocultar
+		 *el contenedor de tablas y limpiar el nombre del docente.*/
 		const lastClearData = () => {
 			if(tableContent){
 				tableContent.clear();
@@ -1101,9 +1108,7 @@
 		};
 		
 		/*
-		 * 
 		 * Validaciones en el lado del cliente de los formularios
-		 * 
 		 * */
 		const validateContent = (form) => {
 			let mensaje = "";
@@ -1163,18 +1168,12 @@
 			return mensaje;
 		};
 		
-		const init = () => {
-			addTables();
-			addListeners();
-			validateMinDateInputs();
-		}
-		
 		const validateMinDateInputs = () => {
 			const $inputsDateTime = Array.from($modalOptions.querySelectorAll("input[type=datetime-local]"));
 			const $inputDate = Array.from($modalOptions.querySelectorAll("input[type=date]")); 
 			const date = new Date(),
-			      agnoMonthDayWork = getDateFormat(date),
-			      agnoMonthDayClass = getDateFormat(date,false);
+			      agnoMonthDayWork = ELEMENTS.INPUT_DATE.getDateFormat(date),
+			      agnoMonthDayClass = ELEMENTS.INPUT_DATE.getDateFormat(date,false);
 			$inputsDateTime.forEach(input=>{
 				input.min = agnoMonthDayWork;
 			});
@@ -1183,15 +1182,11 @@
 			})
 		};
 		
-		const getDateFormat = (date, time = true) => {
-			let rspt = (date.getFullYear().toString() + '-' 
-			           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
-			           + ("0" + (date.getDate())).slice(-2));
-			if(time){
-				rspt += 'T' + date.toTimeString().slice(0,5);
-			}
-			return rspt;
-	    }
+		const init = () => {
+			addTables();
+			addListeners();
+			validateMinDateInputs();
+		}
 		
 		init();
 		

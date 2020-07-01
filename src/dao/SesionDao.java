@@ -97,8 +97,6 @@ public class SesionDao implements ISesion{
 		
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			
 			throw new NotFound("Error inesperado");
 			
 		} finally {

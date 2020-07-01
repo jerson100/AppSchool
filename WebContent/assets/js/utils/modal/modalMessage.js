@@ -43,18 +43,22 @@ const showModalDelete = (title, callback, check=true,body="") => {
 		checkC = `
 			<div class="container-checks">
            		<div class="group-col">
-	           		<label>Replicar a todos</label>
-					<input name="replicartodos" type="checkbox" id="replicar_todos">
+           			<div style="display:flex;align-items:center;margin-bottom: .5rem;">
+						<label style="margin: 0 .5rem 0 0;font-size:14px;">Replicar * </label>
+						<input style="margin: 0;width:20px;height:20px;" name="replicartodos" type="checkbox" id="replicar_todos">           				
+           			</div>
+					<span>* Si marca replicar, afectará a las demás secciones del mismo grado.</span>
 	            </div>
 			</div>
 		`;
 	}else{
-		checkC = `<p>${body}</p>`;
+		checkC = `<p class="padding-left:20px;padding-right: 20px;">${body}</p>`;
 	}
 	const modal = new BigModal({
 		"header": `
 			<div class="flex spacebetween">
-				<span style="padding: 1rem 0;font-size: 16px;">${title}</span>
+				<span style="font-size: 15px;margin: 0;font-weight:bold;padding-bottom:.5rem;
+				">${title}</span>
 			</div>
 		`,
 		"body":`
@@ -68,7 +72,7 @@ const showModalDelete = (title, callback, check=true,body="") => {
 		`,
 		"animation_open": "movetoY_open 1s 0s 1 ease",
 		"animation_close": "movetoY_close 1s 0s 1 ease both",
-		"max_width": "450px",
+		"max_width": "500px",
 		"time_close" : 500,
 		"automatic_close":false
 	});

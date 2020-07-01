@@ -61,8 +61,6 @@ public class Aul_ClasesDao implements IAul_Clases {
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			
 			throw new NotCreated("No se pudo crear la clase");
 			
 		} finally {
@@ -120,8 +118,6 @@ public class Aul_ClasesDao implements IAul_Clases {
 			}
 			
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
 			
 			throw new NotUpdated("No se pudo actualizar la clase");
 			
@@ -243,8 +239,6 @@ public class Aul_ClasesDao implements IAul_Clases {
 			}
 
 		} catch (SQLException e) {
-
-			e.printStackTrace();
 
 			throw new NotAll("Este contenido no tiene clases asignadas");
 

@@ -23,6 +23,8 @@
   	<link rel="stylesheet" href="assets/css/theme/color.css">
   
   	<link rel="stylesheet" href="assets/css/components/button.css">
+  	
+  	<link rel="stylesheet" href="assets/css/components/scroll.css">
 	
 	<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style.css">
 
@@ -36,7 +38,7 @@
 	
 	
 </head>
-<body class="no-skin">
+<body class="no-skin je-scroll">
 
 	<jsp:include page="../includes/header.jsp"></jsp:include>
 	
@@ -63,7 +65,7 @@
 
 					</div>
 					<div class="banner-container">
-						<div class="je-container">
+						<div style="max-width:1100px;margin: auto;">
 							<div class="banner-inner je-mb-1"">
 								<div class="je-item">
 									<h1 class="title-banner">Bienvenidos a la plataforma virtual</h1>
@@ -71,13 +73,31 @@
 									  	<div class="glide__track" data-glide-el="track">
 										    <ul class="glide__slides">
 										      	<li class="glide__slide">
-										      		<img src="assets/img/static/colegio01.jpg">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-1.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="assets/img/static/colegio01.jpg">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-2.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="assets/img/static/colegio01.jpg">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-3.jpg">
+										      	</li>
+										      	<li class="glide__slide">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-4.jpg">
+										      	</li>
+										      	<li class="glide__slide">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-5.jpg">
+										      	</li>
+										      	<li class="glide__slide">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-6.jpg">
+										      	</li>
+										      	<li class="glide__slide">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-7.jpg">
+										      	</li>
+										      	<li class="glide__slide">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-8.jpg">
+										      	</li>
+										      	<li class="glide__slide">
+										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-9.jpg">
 										      	</li>
 										    </ul>
 									  	</div>

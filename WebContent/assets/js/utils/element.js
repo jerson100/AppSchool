@@ -93,5 +93,17 @@ const ELEMENTS = {
 				document.body.appendChild(modalContainer);
 				return modalContainer;
 			}
+		},
+		INPUT_DATE:
+		{
+			getDateFormat: function(date, time = true){
+				let rspt = (date.getFullYear().toString() + '-' 
+				           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
+				           + ("0" + (date.getDate())).slice(-2));
+				if(time){
+					rspt += 'T' + date.toTimeString().slice(0,5);
+				}
+				return rspt;
+		    }
 		}
 }

@@ -114,9 +114,7 @@ public class Aul_ContenidoDao implements IAul_Contenido {
 			}
 			
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+	
 			throw new NotUpdated("Error inesperado");
 			
 		} finally {
@@ -228,8 +226,6 @@ public class Aul_ContenidoDao implements IAul_Contenido {
 			}
 		
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
 			
 			throw new NotAll("Póngase en contacto con su administrador");
 			

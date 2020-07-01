@@ -7,10 +7,11 @@
 		const tagForms = Array.from(tag.querySelectorAll("form"));
 		const tagsReturn = Array.from(document.querySelectorAll(".tag__return"));
 		const header = document.querySelector(".resource__header");
-		/*const weave = document.querySelector(".resource__wave-path");*/
 		const resource = document.querySelector(".resource");
 		const tagFile = document.querySelector(".tag__file-name");
 		const tagLimite = document.getElementById("diasLimite");
+		const dateTimeLocals = Array.from(tag.querySelectorAll("input[type='datetime-local'"));
+		const dateTime = Array.from(tag.querySelectorAll("input[type='date']"));
 		
 		list.addEventListener('click',ee=>{
 			if(ee.target.classList.contains("tag__item") ||
@@ -37,6 +38,7 @@
 			});
 			let tagReturnIcon = Array.from(tag.querySelectorAll(".tag__return--hidden"));
 			let iconClearNameFile = Array.from(tag.querySelectorAll(".tag__file-delete"));
+			  
 			tagReturnIcon.forEach(icon=>{
 				icon.classList.remove("tag__return--hidden");
 			});
@@ -45,6 +47,13 @@
 			});
 			tagFile.textContent = "";
 			tagLimite.disabled = true;
+			let date = new Date();
+			dateTimeLocals.forEach(dt=>{
+				dt.value = ELEMENTS.INPUT_DATE.getDateFormat(date)
+			});
+			dateTime.forEach(dt=>{
+				dt.value = ELEMENTS.INPUT_DATE.getDateFormat(date,false);
+			})
 		};
 		
 	});

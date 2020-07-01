@@ -27,7 +27,6 @@ import exceptions.NotDeleted;
 import interfaces.ICrud;
 import models.Aul_Trabajo;
 import models.Sesion;
-import utilidades.Cifrado;
 import utilidades.JeVlidate;
 import utilidades.Storage;
 
@@ -133,93 +132,7 @@ public class ControladorTrabajo extends HttpServlet {
 		}
 		
 	}
-/*
-	private void actualizarFileAl(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String mensaje = "";
-		boolean estado = false;
-		
-		try {
-			
-			response.setContentType("Application/json;charset=UTF-8");
-			
-			Part file = request.getPart("file");
-			int idTraAlu = Integer.parseInt(request.getParameter("idTraAlu"));
-			String nombreArchivoAnterior = request.getParameter("nombreArchivoAnterior");
-			
-			String extensionArchivo = JeVlidate.obtenerExtension(nombreArchivoAnterior);
-			String rutaArchivo = request.getParameter("rutaArchivoAnterior"),
-				   nuevoNombreArchivo = request.getParameter("nuevoNombreArchivo");
-			
-			Aul_Trabajo obj = new Aul_Trabajo();
-			
-			boolean estadoU = false;
-			
-			if(!file.getSubmittedFileName().isEmpty()) {
-				try {
-						
-					String newPath = this.generarNombreArchivo(file.getSubmittedFileName(), new Date().getTime(), JeVlidate.generarNumeroAleatorio(50, 99999999), JeVlidate.obtenerExtension(file.getSubmittedFileName()));
-						
-					//insertamos el nuevo
-					Storage.addAndUpdateBlob(request, "ALUMNOS", newPath, file.getContentType(), "2020", file.getInputStream(), file.getSize());
-						
-					if(!rutaArchivo.isEmpty()) {
-						try {
-							//eliminamos el anterior
-							Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
-						}catch(Exception e) {}
-					}
-					
-					nombreArchivoAnterior = file.getSubmittedFileName();
-					extensionArchivo = JeVlidate.obtenerExtension(file.getSubmittedFileName());
-					rutaArchivo = "2020/ALUMNOS/"+newPath;
-					estadoU = true;
-				}catch(Exception e) {
-					mensaje = "No se pudo agregar el nuevo archivo";
-				}
-			}else if(!nombreArchivoAnterior.equals(nuevoNombreArchivo)) {
-				//eliminamos el anterior
-				try {
-					Storage.deleteBlob(request, rutaArchivo.replaceAll("2020/", ""), "2020");
-					nombreArchivoAnterior = "";
-					extensionArchivo = "";
-					rutaArchivo = "";
-					estadoU = true;
-				}catch(Exception e) {
-					mensaje = "No se pudo actualizar";
-				}
-			}else {
-				estadoU = false;
-				mensaje = "No se puede actualizar, ya que no seleccionó un nuevo archivo";
-			}	
-			
-			if(estadoU) {
-				obj.setIdTrabajo(idTraAlu);
-				obj.setIdSecCur(idSecCur);
-				obj.setRutaArchivo(rutaArchivo);
-				obj.setExtensionArchivo(extensionArchivo);
-				obj.setNombreArchivo(nombreArchivoAnterior);
-				obj.setIdUsuario(sesion.getIdUsuario()); 
-				try {
-					dao.create(obj);
-					mensaje = "Archivo subido satisfactoriamente";
-					estado = true;
-				} catch (NotCreated e) {
-					e.printStackTrace();
-					mensaje = "No se pudo subir el archivo";
-				} 
-			}	
 
-			map.put("mensaje", mensaje);
-			map.put("estado",estado);
-			try(Writer w = response.getWriter()){
-				w.write(JSON.toJson(map));
-			}
-		}catch(Exception e) {
-			response.sendError(404);
-		}
-	}
-*/
 	private void actualizarTrabajo(Sesion sesion, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String mensaje = "";
@@ -250,7 +163,7 @@ public class ControladorTrabajo extends HttpServlet {
 			Aul_Trabajo obj = new Aul_Trabajo();
 			
 				boolean estadoU = false;
-				System.out.println(file.getSubmittedFileName().isEmpty());
+				
 				if(!file.getSubmittedFileName().isEmpty()) {
 					try {
 						
@@ -318,7 +231,6 @@ public class ControladorTrabajo extends HttpServlet {
 						mensaje = "Trabajo actualizado satisfactoriamente";
 						estado = true;
 					} catch (NotCreated e) {
-						e.printStackTrace();
 					} 
 					
 				}	
@@ -397,8 +309,6 @@ public class ControladorTrabajo extends HttpServlet {
 				
 			} catch (Exception e) {
 				
-				e.printStackTrace();
-				
 				mensaje = "No se pudo crear el trabajo";
 				
 				response.setStatus(404);
@@ -406,9 +316,7 @@ public class ControladorTrabajo extends HttpServlet {
 			}
 			
 		}catch(Exception e) {
-			
 			response.setStatus(404);
-			
 		}
 		
 		map.put("mensaje", mensaje);
@@ -492,7 +400,6 @@ public class ControladorTrabajo extends HttpServlet {
 				response.sendError(401);
 			}
 		}catch(Exception e) {
-			e.printStackTrace();
 			response.sendError(404);
 		}
 	}

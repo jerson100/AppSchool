@@ -103,8 +103,6 @@ public class Aul_SeccionDao implements IAul_Seccion{
 		
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			
 			throw new NotAll("Póngase en contacto con su administrador");
 			
 		} finally {

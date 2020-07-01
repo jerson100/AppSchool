@@ -76,12 +76,9 @@ public class ControladorHorario extends HttpServlet {
 					
 					estado = true;
 					
-					//System.out.println(map);
-					
 					request.setAttribute("horario", map);
 					
 				} catch (NotAll e) {
-					//System.out.println(e.getMessage());
 				}
 				
 				request.setAttribute("estado", estado);
@@ -101,10 +98,5 @@ public class ControladorHorario extends HttpServlet {
 		}
 		
 	}
-
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 }

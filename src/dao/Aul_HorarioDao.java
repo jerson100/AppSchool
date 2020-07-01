@@ -13,7 +13,6 @@ import exceptions.NotDeleted;
 import exceptions.NotFound;
 import exceptions.NotUpdated;
 import interfaces.IAul_Horario;
-import models.Aul_Curso;
 import models.Aul_Horario;
 import utilidades.Conexion;
 
