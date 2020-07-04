@@ -1,5 +1,5 @@
 .resource{
-	width: 100%;
+	width: 95%;
 	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;	
@@ -8,10 +8,11 @@
 	position: relative;
 	left: 0;
 	top:0;
-	--bg--dinamic: rgb(0, 136, 255)
+	--bg--dinamic: rgb(0, 136, 255);
 }
 
 .mod__resource--close{
+	z-index: 2;
 	top: 0 !important;
 	right: 0 !important;
 	transform: translate(50%,-50%);
@@ -27,6 +28,8 @@
 	/*border-bottom: solid 1px rgba(0,0,0,.2);*/
 	background-color: var(--bg--dinamic);
 	color:#fff;
+	position: relative;
+	z-index: 1;
 }
 
 .resource__title{
@@ -40,7 +43,9 @@
     background-position: right 105%;
     background-size: 150px;
     background-repeat: no-repeat;
-    position: relative;
+    /*position: relative;*/
+    max-height: 75vh;
+    overflow: auto;
 }
 
 .tag{
@@ -55,7 +60,7 @@
 	top:0;
 	height: 100%;
 	width: 50%;
-	z-index: 100;
+	z-index: 0;
 }
 
 .tag__wrapper{

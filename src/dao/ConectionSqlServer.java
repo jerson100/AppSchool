@@ -15,8 +15,8 @@ public class ConectionSqlServer {
     
     private ConectionSqlServer() throws Exception{
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
-        //this.connection = DriverManager.getConnection("jdbc:sqlserver://uribeschool.database.windows.net:1433;database=AULAVIRTUAL;user=uribeschool;password=PERU1602$d;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");        
-        this.connection = DriverManager.getConnection(PATH,USER,PASS);
+        this.connection = DriverManager.getConnection("jdbc:sqlserver://uribeschool.database.windows.net:1433;database=AULAVIRTUAL;user=uribeschool;password=PERU1602$d;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");        
+        //this.connection = DriverManager.getConnection(PATH,USER,PASS);
     }
 
 

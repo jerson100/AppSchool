@@ -10,74 +10,63 @@
 		$frmLogin[0].focus();
 		
 		$frmLogin.addEventListener("submit",async e=>{
-	    	
-	    	//solo por ahora
 	        e.preventDefault();
-	    	
-	        verifyEmpty();
-	        
 	        await login();
-	        
 	    });
 	    
 	    const verifyEmpty = () => {
-	    	
 	    	let status = true;
-	    	
 	    	if($frmLogin[0].value === ''){
-	    		
 	    		$frmLogin[0].parentElement
 	    				   .classList
 	    				   .add("input-icon--error");
-	    		
 	    		status = false;
-	    		
-	    	}
-	    	
-	    	if($frmLogin[2].value === ''){
-	    		
-	    		$frmLogin[2].parentElement
-				   .classList
-				   .add("input-icon--error");
-	    		
-	    		status = false;
-	    		
-	    	}
-	    	
-	    	$frmLogin[3].disabled = !status;
-	    	
-	    };
-	    
-	    const validateNumberAndLetter = (event) => {
-	    	//console.log(event)
-	    	if(event.target.value.length >= 20){
-	    		event.preventDefault();
-	    	}
-	    	/*if(/^[^0-9|a-z]$/gi.test(event.key) && ){
-	    		event.preventDefault();
-	    	}*/
-	    }
-	    
-	    const addListener = () => {
-	    	
-	    	$frmLogin[0].addEventListener('keyup',(ev)=>{
+	    	}else{
 	    		$frmLogin[0].parentElement
 				   .classList
 				   .remove("input-icon--error");
-	    		console.log(ev.target.value.length);
-	    		verifyEmpty();
-	    	});
+	    	}
 	    	
-	    	$frmLogin[2].addEventListener('keyup',(ev)=>{
+	    	if($frmLogin[2].value === ''){
+	    		$frmLogin[2].parentElement
+				   .classList
+				   .add("input-icon--error");
+	    		status = false;
+	    	}else{
 	    		$frmLogin[2].parentElement
 				   .classList
 				   .remove("input-icon--error");
-	    		verifyEmpty();
-	    	});
-	    	
+	    	}
+	    	$frmLogin[3].disabled = !status;
+	    };
+	    
+	    const validateNumberAndLetter = (event) => {
+	    	console.log(event);
+	    	if(event.target.value.length >= 20 &&
+	           event.keyCode != 8 && 
+	           event.keyCode != 37 &&
+	           event.keyCode != 39 &&
+	           event.keyCode != 46 &&
+	           event.keyCode != 17){
+	    		event.preventDefault();
+	    	}
+	    }
+	    
+	    const addListener = () => {
+	    	$frmLogin[0].addEventListener('keyup',verifyEmpty);
 	    	$frmLogin[0].addEventListener('keydown',validateNumberAndLetter);
+	    	$frmLogin[0].addEventListener('paste',(e)=>{
+	    		if($frmLogin[0].value.length + e.clipboardData.getData('text').length >= 20){
+	    			e.preventDefault();
+	    		}
+	    	});
+	    	$frmLogin[2].addEventListener('keyup',verifyEmpty);
 	    	$frmLogin[2].addEventListener('keydown',validateNumberAndLetter);
-	    	
+	    	$frmLogin[2].addEventListener('paste',(e)=>{
+	    		if($frmLogin[2].value.length + e.clipboardData.getData('text').length >= 20){
+	    			e.preventDefault();
+	    		}
+	    	});
 	    	$iconView.addEventListener('click',e=>{
 	    		$iconView.classList.toggle("fa-eye-slash");
 	    		$iconView.classList.toggle("fa-eye");
@@ -87,7 +76,6 @@
 	    			$inputPass.type="text";
 	    		}
 	    	});
-	    	
 	    };
 	    
 	    const showMessage = (text) => {
@@ -122,7 +110,7 @@
 	    };
 	   
 	    addListener();
-		
+	    
 	});
     
 })(window,document);
