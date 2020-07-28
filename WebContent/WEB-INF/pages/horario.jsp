@@ -18,15 +18,15 @@
 		<!-- ace styles -->
 		<link rel="stylesheet" href="assets/css/utils/template/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 	  
-	  	<link rel="stylesheet" href="assets/css/layout/layout.css">
+	  	<link rel="stylesheet" href="assets/css/layout/layout1.css">
 	  	
-	  	<link rel="stylesheet" href="assets/css/theme/color.css">
+	  	<link rel="stylesheet" href="assets/css/theme/color1.css">
 	  
-	  	<link rel="stylesheet" href="assets/css/components/button.css">
+	  	<link rel="stylesheet" href="assets/css/components/button1.css">
 		
-		<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style.css">
+		<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
 		
-		<link rel="stylesheet" href="assets/css/pages/horario.css">
+		<link rel="stylesheet" href="assets/css/pages/horario1.css">
 		
 	</head>
 	<body class="no-skin">
@@ -111,7 +111,7 @@
 			<script src="assets/js/utils/template/ace/ace.touch-drag.js"></script>
 			<script src="assets/js/utils/template/ace/ace.sidebar.js"></script>
 			<script src="https://kit.fontawesome.com/56e0c4d4ed.js" crossorigin="anonymous"></script>
-			<script src="assets/js/generic/close.js"></script>
-			<script src="assets/js/pages/horario.js"></script>
+			<script src="assets/js/generic/close1.js"></script>
+			<script src="assets/js/pages/horario1.js"></script>
 	</body>
 </html>

@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="assets/css/utils/template/font-awesome.css">
     <link rel="stylesheet" href="assets/css/utils/template/ace-fonts.css" />
     <link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/layout/layout.css">
-    <link rel="stylesheet" href="assets/css/base/base.css"> 
-    <link rel="stylesheet" href="assets/css/theme/color.css">
-    <link rel="stylesheet" href="assets/css/components/scroll.css">
-    <link rel="stylesheet" href="assets/css/components/button.css">
-    <link rel="stylesheet" href="assets/css/components/loader.css">
-    <link rel="stylesheet" href="assets/css/utils/animation.css">
-    <link rel="stylesheet" href="assets/css/pages/login.css">
-    <link rel="stylesheet" href="assets/js/utils/modal/je-modal-style.css">
+    <link rel="stylesheet" href="assets/css/layout/layout1.css">
+    <link rel="stylesheet" href="assets/css/base/base1.css"> 
+    <link rel="stylesheet" href="assets/css/theme/color1.css">
+    <link rel="stylesheet" href="assets/css/components/scroll1.css">
+    <link rel="stylesheet" href="assets/css/components/button1.css">
+    <link rel="stylesheet" href="assets/css/components/loader1.css">
+    <link rel="stylesheet" href="assets/css/utils/animation1.css">
+    <link rel="stylesheet" href="assets/css/pages/login1.css">
+    <link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
 	<title>Login</title>
 </head>
 	<body class="je-scroll">
@@ -75,9 +75,10 @@
 			</div>
 			<div class="main__right">
 				<div class="video-response">
-					<video class="video-response__video" muted autoplay loop>
-						<source src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-login/login-video.mp4" type="video/mp4" media="screen and (min-width:1024px)">
-     					<source src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-login/login-video2.mp4" type="video/mp4">
+					<!-- <iframe class="video-response__video" src="https://player.vimeo.com/video/435217197" width="640" height="338" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>!-->
+					<video  muted autoplay loop>
+						<source src="blob:https://vimeo.com/d8910925-2f82-4d92-84f0-0522f837e132" type="video/mp4" media="screen and (min-width:1024px)">
+     					<source src="blob:https://vimeo.com/d8910925-2f82-4d92-84f0-0522f837e132" type="video/mp4">
 			  		</video>	
 				</div>
 				<h2 class="main__title">Aula Virtual</h2>
@@ -85,10 +86,10 @@
 		</div>
     	 <script src="https://kit.fontawesome.com/56e0c4d4ed.js"
 		crossorigin="anonymous"></script>
-		<script src="assets/js/utils/modal/je-modal.js"></script>
-		<script src="assets/js/utils/modal/modalMessage.js"></script>
-		<script src="assets/js/utils/Api.js"></script>
-    	<script src="assets/js/generic/loader.js"></script>
-    	<script src="assets/js/pages/login.js"></script>
+		<script src="assets/js/utils/modal/je-modal1.js"></script>
+		<script src="assets/js/utils/modal/modalMessage1.js"></script>
+		<script src="assets/js/utils/Api1.js"></script>
+    	<script src="assets/js/generic/loader1.js"></script>
+    	<script src="assets/js/pages/login1.js"></script>
 	</body>
 </html>

@@ -25,37 +25,37 @@
 	<link rel="stylesheet" href="assets/css/base/base.css">
   -->
 
-<link rel="stylesheet" href="assets/css/layout/layout.css">
+<link rel="stylesheet" href="assets/css/layout/layout1.css">
 
-<link rel="stylesheet" href="assets/css/theme/color.css">
+<link rel="stylesheet" href="assets/css/theme/color1.css">
 
-<link rel="stylesheet" href="assets/css/components/button.css">
+<link rel="stylesheet" href="assets/css/components/button1.css">
 
-<link rel="stylesheet" href="assets/css/components/scroll.css">
+<link rel="stylesheet" href="assets/css/components/scroll1.css">
 
-<link rel="stylesheet" href="assets/css/utils/animation.css">
+<link rel="stylesheet" href="assets/css/utils/animation1.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/courses.css">
+<link rel="stylesheet" href="assets/css/pages/courses/courses1.css">
 
-<link rel="stylesheet" href="assets/css/components/table.css">
+<link rel="stylesheet" href="assets/css/components/table1.css">
 
-<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style.css">
+<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
 
-<link rel="stylesheet" href="assets/css/components/loader.css">
+<link rel="stylesheet" href="assets/css/components/loader1.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/resourses.css">
+<link rel="stylesheet" href="assets/css/pages/courses/resourses1.css">
 
-<link rel="stylesheet" href="assets/css/components/modal.css">
+<link rel="stylesheet" href="assets/css/components/modal1.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/tabs.css">
+<link rel="stylesheet" href="assets/css/pages/courses/tabs1.css">
 
-<link rel="stylesheet" href="assets/css/utils/tables.css">
+<link rel="stylesheet" href="assets/css/utils/tables1.css">
 
-<link rel="stylesheet" href="assets/css/components/goUp.css">
+<link rel="stylesheet" href="assets/css/components/goUp1.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/listFilesStudent.css">
+<link rel="stylesheet" href="assets/css/pages/courses/listFilesStudent1.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/uploadStudent.css">
+<link rel="stylesheet" href="assets/css/pages/courses/uploadStudent1.css">
 
 </head>
 <body class="no-skin je-scroll">
@@ -383,17 +383,17 @@
 	<script src="assets/js/utils/template/ace/ace.ajax-content.js"></script>
 	<script src="assets/js/utils/template/ace/ace.touch-drag.js"></script>
 	<script src="assets/js/utils/template/ace/ace.sidebar.js"></script>
-	<script src="assets/js/utils/Api.js"></script>
-	<script src="assets/js/utils/modal/je-modal.js"></script>
-	<script src="assets/js/utils/modal/modalMessage.js"></script>
-	<script src="assets/js/pages/cursos/gradoAnimacion.js"></script>
-	<script src="assets/js/generic/loader.js"></script>
-	<script src="assets/js/utils/element.js"></script>
-	<script src="assets/js/pages/cursos/courses.js"></script>
-	<script src="assets/js/utils/tables.js"></script>
-	<script src="assets/js/generic/close.js"></script>
-	<script src="assets/js/pages/cursos/tags.js"></script>
-	<script src="assets/js/utils/youtube.js"></script>
-	<script src="assets/js/utils/goUp.js"></script>
+	<script src="assets/js/utils/Api1.js"></script>
+	<script src="assets/js/utils/modal/je-modal1.js"></script>
+	<script src="assets/js/utils/modal/modalMessage1.js"></script>
+	<script src="assets/js/pages/cursos/gradoAnimacion1.js"></script>
+	<script src="assets/js/generic/loader1.js"></script>
+	<script src="assets/js/utils/element1.js"></script>
+	<script src="assets/js/pages/cursos/courses1.js"></script>
+	<script src="assets/js/utils/tables1.js"></script>
+	<script src="assets/js/generic/close1.js"></script>
+	<script src="assets/js/pages/cursos/tags1.js"></script>
+	<script src="assets/js/utils/youtube1.js"></script>
+	<script src="assets/js/utils/goUp1.js"></script>
 </body>
 </html>

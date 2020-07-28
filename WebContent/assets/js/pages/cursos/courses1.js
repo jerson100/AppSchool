@@ -789,18 +789,23 @@
 			modalData.addEventListener('click',async e=>{
 				if(e.target.tagName === 'I' &&
 				   e.target.classList.contains('data-table__save')){
-					let load = loader();
 					const row = e.target.parentElement.parentElement.parentElement;
 					const notaT = row.querySelector(".data-table__input--work").value;
 					const comentario = row.querySelector(".data-table__input--comentario").value;
-					const response = await saveStudentNote(e.target.dataset.idcuenta,e.target.dataset.idtraalu,idTrabajo,comentario,notaT);
-					load.remove();
-					if(response.estado){
-						//actualizamos los datos
-						const list2 = await getListNoteStudent(idTrabajo);;
-						updateRowStudentNote(modalData,list2);
-					}
-					showModalMessage(response.mensaje,3000);
+                    if(notaT===''){
+                    	showModalMessage("Ingrese la nota para poder guardar",3000);
+                    }else{
+                    	let load = loader();
+                        const response = await saveStudentNote(e.target.dataset.idcuenta,e.target.dataset.idtraalu,idTrabajo,comentario,notaT);
+						load.remove();
+						if(response.estado){
+							//actualizamos los datos
+							const list2 = await getListNoteStudent(idTrabajo);;
+							updateRowStudentNote(modalData,list2);
+						}               	
+						showModalMessage(response.mensaje,3000);
+                    }
+							
 				}
 			});
 			

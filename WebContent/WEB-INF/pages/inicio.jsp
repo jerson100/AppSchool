@@ -18,22 +18,22 @@
 	<!-- ace styles -->
 	<link rel="stylesheet" href="assets/css/utils/template/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
   
-  	<link rel="stylesheet" href="assets/css/layout/layout.css">
+  	<link rel="stylesheet" href="assets/css/layout/layout1.css">
   	
-  	<link rel="stylesheet" href="assets/css/theme/color.css">
+  	<link rel="stylesheet" href="assets/css/theme/color1.css">
   
-  	<link rel="stylesheet" href="assets/css/components/button.css">
+  	<link rel="stylesheet" href="assets/css/components/button1.css">
   	
-  	<link rel="stylesheet" href="assets/css/components/scroll.css">
+  	<link rel="stylesheet" href="assets/css/components/scroll1.css">
 	
-	<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style.css">
+	<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
 
 	<script src="assets/js/utils/template/ace-extra.js"></script>
 	
 	<link rel="stylesheet" href="assets/css/utils/librerias/glide/glide.core.min.css">
 	<link rel="stylesheet" href="assets/css/utils/librerias/glide/glide.theme.min.css">
 	
-	<link rel="stylesheet" href="assets/css/pages/inicio.css">
+	<link rel="stylesheet" href="assets/css/pages/inicio1.css">
 	
 	
 	
@@ -144,7 +144,6 @@
 	<script src="assets/js/utils/template/ace/ace.ajax-content.js"></script>
 	<script src="assets/js/utils/template/ace/ace.touch-drag.js"></script>
 	<script src="assets/js/utils/template/ace/ace.sidebar.js"></script>
-	<script src="assets/js/utils/ajax.js"></script>
 	<script src="assets/js/utils/librerias/glide.js"></script>
 	<script>
 	new Glide('.glide', {
@@ -155,6 +154,6 @@
 		}).mount();
 	</script>
 	<script src="https://kit.fontawesome.com/56e0c4d4ed.js" crossorigin="anonymous"></script>
-	<script src="assets/js/generic/close.js"></script>
+	<script src="assets/js/generic/close1.js"></script>
 </body>
 </html>
