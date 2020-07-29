@@ -73,31 +73,32 @@
 									  	<div class="glide__track" data-glide-el="track">
 										    <ul class="glide__slides">
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-1.jpg">
+										      		<img src="assets/img/pag-inicio/foto-1.jpg">
+										      		<!--<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-1.jpg">-->
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-2.jpg">
+										      		<img src="assets/img/pag-inicio/foto-2.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-3.jpg">
+										      		<img src="assets/img/pag-inicio/foto-3.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-4.jpg">
+										      		<img src="assets/img/pag-inicio/foto-4.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-5.jpg">
+										      		<img src="assets/img/pag-inicio/foto-5.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-6.jpg">
+										      		<img src="assets/img/pag-inicio/foto-6.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-7.jpg">
+										      		<img src="assets/img/pag-inicio/foto-7.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-8.jpg">
+										      		<img src="assets/img/pag-inicio/foto-8.jpg">
 										      	</li>
 										      	<li class="glide__slide">
-										      		<img src="https://uribestorage.blob.core.windows.net/recursos/aula-virtual/pag-principal/foto-9.jpg">
+										      		<img src="assets/img/pag-inicio/foto-9.jpg">
 										      	</li>
 										    </ul>
 									  	</div>
