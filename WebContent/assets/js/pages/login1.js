@@ -41,7 +41,6 @@
 	    };
 	    
 	    const validateNumberAndLetter = (event) => {
-	    	console.log(event);
 	    	if(event.target.value.length >= 20 &&
 	           event.keyCode != 8 && 
 	           event.keyCode != 37 &&
