@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Cursos</title>
+<title>Mis Cursos</title>
 <meta name="description" content="Mis cursos" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -25,37 +25,37 @@
 	<link rel="stylesheet" href="assets/css/base/base.css">
   -->
 
-<link rel="stylesheet" href="assets/css/layout/layout1.css">
+<link rel="stylesheet" href="assets/css/layout/layout2.css">
 
-<link rel="stylesheet" href="assets/css/theme/color1.css">
+<link rel="stylesheet" href="assets/css/theme/color2.css">
 
-<link rel="stylesheet" href="assets/css/components/button1.css">
+<link rel="stylesheet" href="assets/css/components/button2.css">
 
-<link rel="stylesheet" href="assets/css/components/scroll1.css">
+<link rel="stylesheet" href="assets/css/components/scroll2.css">
 
-<link rel="stylesheet" href="assets/css/utils/animation1.css">
+<link rel="stylesheet" href="assets/css/utils/animation2.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/courses1.css">
+<link rel="stylesheet" href="assets/css/pages/courses/courses2.css">
 
-<link rel="stylesheet" href="assets/css/components/table1.css">
+<link rel="stylesheet" href="assets/css/components/table2.css">
 
-<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
+<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style2.css">
 
-<link rel="stylesheet" href="assets/css/components/loader1.css">
+<link rel="stylesheet" href="assets/css/components/loader2.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/resourses1.css">
+<link rel="stylesheet" href="assets/css/pages/courses/resourses2.css">
 
-<link rel="stylesheet" href="assets/css/components/modal1.css">
+<link rel="stylesheet" href="assets/css/components/modal2.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/tabs1.css">
+<link rel="stylesheet" href="assets/css/pages/courses/tabs2.css">
 
-<link rel="stylesheet" href="assets/css/utils/tables1.css">
+<link rel="stylesheet" href="assets/css/utils/tables2.css">
 
-<link rel="stylesheet" href="assets/css/components/goUp1.css">
+<link rel="stylesheet" href="assets/css/components/goUp2.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/listFilesStudent1.css">
+<link rel="stylesheet" href="assets/css/pages/courses/listFilesStudent2.css">
 
-<link rel="stylesheet" href="assets/css/pages/courses/uploadStudent1.css">
+<link rel="stylesheet" href="assets/css/pages/courses/uploadStudent2.css">
 
 </head>
 <body class="no-skin je-scroll">
@@ -383,17 +383,17 @@
 	<script src="assets/js/utils/template/ace/ace.ajax-content.js"></script>
 	<script src="assets/js/utils/template/ace/ace.touch-drag.js"></script>
 	<script src="assets/js/utils/template/ace/ace.sidebar.js"></script>
-	<script src="assets/js/utils/Api1.js"></script>
-	<script src="assets/js/utils/modal/je-modal1.js"></script>
-	<script src="assets/js/utils/modal/modalMessage1.js"></script>
-	<script src="assets/js/pages/cursos/gradoAnimacion1.js"></script>
-	<script src="assets/js/generic/loader1.js"></script>
-	<script src="assets/js/utils/element1.js"></script>
-	<script src="assets/js/pages/cursos/courses1.js"></script>
-	<script src="assets/js/utils/tables1.js"></script>
-	<script src="assets/js/generic/close1.js"></script>
-	<script src="assets/js/pages/cursos/tags1.js"></script>
-	<script src="assets/js/utils/youtube1.js"></script>
-	<script src="assets/js/utils/goUp1.js"></script>
+	<script src="assets/js/utils/Api2.js"></script>
+	<script src="assets/js/utils/modal/je-modal2.js"></script>
+	<script src="assets/js/utils/modal/modalMessage2.js"></script>
+	<script src="assets/js/pages/cursos/gradoAnimacion2.js"></script>
+	<script src="assets/js/generic/loader2.js"></script>
+	<script src="assets/js/utils/element2.js"></script>
+	<script src="assets/js/pages/cursos/courses2.js"></script>
+	<script src="assets/js/utils/tables2.js"></script>
+	<script src="assets/js/generic/close2.js"></script>
+	<script src="assets/js/pages/cursos/tags2.js"></script>
+	<script src="assets/js/utils/youtube2.js"></script>
+	<script src="assets/js/utils/goUp2.js"></script>
 </body>
 </html>

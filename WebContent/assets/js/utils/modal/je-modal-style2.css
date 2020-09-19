@@ -28,7 +28,7 @@
 }
 
 .je-modal-container_message .je-modal_inner-wrapper {
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1);
+  box-shadow: 0 0 2px 1px rgba(0,0,0,.05);
 }
 
 .je-modal-container .je-modal_inner {
@@ -83,8 +83,8 @@
   align-items: center;
   font-size: 20px;
   position: absolute;
-  top: -1rem;
-  right: 1rem;
+  top: 0rem;
+  right: 0rem;
   cursor: pointer;
   color: white;
   background-color: rgba(0, 0, 0, .6);

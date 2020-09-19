@@ -33,7 +33,7 @@ public class ControladorUpload extends HttpServlet {
 		if(us != null) {
 			String name = request.getParameter("name");
 			String title = request.getParameter("title");
-			System.out.println(name);
+			//System.out.println(name);
 			int index = name.indexOf("/");		
 			String container = name.substring(0,index);
 			String path = name.substring(index+1);

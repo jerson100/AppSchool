@@ -2,25 +2,26 @@
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login">
-    <link rel="shortcut icon" href="assets/img/static/logoColegio.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/utils/template/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/utils/template/ace-fonts.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/layout/layout1.css">
-    <link rel="stylesheet" href="assets/css/base/base1.css"> 
-    <link rel="stylesheet" href="assets/css/theme/color1.css">
-    <link rel="stylesheet" href="assets/css/components/scroll1.css">
-    <link rel="stylesheet" href="assets/css/components/button1.css">
-    <link rel="stylesheet" href="assets/css/components/loader1.css">
-    <link rel="stylesheet" href="assets/css/utils/animation1.css">
-    <link rel="stylesheet" href="assets/css/pages/login1.css">
-    <link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
-	<title>Login</title>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Login para acceder a la plataforma de la escuela Uribe's School">
+	    <link rel="shortcut icon" href="assets/img/static/logoColegio.jpg" type="image/x-icon">
+	    <link rel="stylesheet" href="assets/css/utils/template/font-awesome.css">
+	    <link rel="stylesheet" href="assets/css/utils/template/ace-fonts.css" />
+	    <link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap" rel="stylesheet">
+	    <link rel="stylesheet" href="assets/css/layout/layout2.css">
+	    <link rel="stylesheet" href="assets/css/base/base2.css"> 
+	    <link rel="stylesheet" href="assets/css/theme/color2.css">
+	    <link rel="stylesheet" href="assets/css/components/scroll2.css">
+	    <link rel="stylesheet" href="assets/css/components/button2.css">
+	    <link rel="stylesheet" href="assets/css/components/loader2.css">
+	    <link rel="stylesheet" href="assets/css/components/login-slider2.css">
+	    <link rel="stylesheet" href="assets/css/utils/animation2.css">
+	    <link rel="stylesheet" href="assets/css/pages/login2.css">
+	    <link rel="stylesheet" href="assets/js/utils/modal/je-modal-style2.css">
+		<title>Login</title>
+	</head>
 	<body class="je-scroll">
 		<div class="main">
 			<div class="main__left">
@@ -38,7 +39,7 @@
 				                <div class="form__group">
 				                    <div class="input-icon">
 				                    	<i class="input-icon__icon ace-icon fa fa-user"></i>
-				                        <input type="text" name="username" class="input-icon__input" placeholder="Usuario" required>
+				                        <input type="text" name="username" class="input-icon__input" placeholder="Usuario">
 				                        <div class="icon-error">
 				                        	<i class="icon-error__icon fas fa-exclamation-circle"></i>
 				                        	<div class="icon-error__info">
@@ -51,7 +52,7 @@
 				                <div class="form__group form__group--mb-4">
 				                    <div class="input-icon">
 				                    	<i class="input-icon__icon ace-icon fas fa-lock"></i>
-				                        <input type="password" name="password" class="input-icon__input" required placeholder="Contraseña">
+				                        <input type="password" name="password" class="input-icon__input" placeholder="Contraseña">
 				                        <div class="input-icon__view">
 				                        	<i class="input-icon__icon fas fa-eye-slash"></i>
 				                        	<!--<i class="input-icon__icon fas fa-eye"></i>-->	
@@ -74,22 +75,36 @@
 			    </div>
 			</div>
 			<div class="main__right">
-				<div class="video-response">
+				<!-- <div class="video-response">-->
 					<!-- <iframe class="video-response__video" src="https://player.vimeo.com/video/435217197" width="640" height="338" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>!-->
-					<video  muted autoplay loop>
+					<!--<video  muted autoplay loop>
 						<source src="blob:https://vimeo.com/d8910925-2f82-4d92-84f0-0522f837e132" type="video/mp4" media="screen and (min-width:1024px)">
      					<source src="blob:https://vimeo.com/d8910925-2f82-4d92-84f0-0522f837e132" type="video/mp4">
 			  		</video>	
+				</div>-->
+				<div class="login-slider">
+					<ul class="login-slider__list">
+						<li class="login-slider__item login-slider__item--1"></li>
+						<li class="login-slider__item login-slider__item--2"></li>
+						<li class="login-slider__item login-slider__item--3"></li>
+						<li class="login-slider__item login-slider__item--4"></li>
+						<li class="login-slider__item login-slider__item--5"></li>
+						<li class="login-slider__item login-slider__item--6"></li>
+						<li class="login-slider__item login-slider__item--7"></li>
+						<li class="login-slider__item login-slider__item--8"></li>
+						<li class="login-slider__item login-slider__item--9"></li>
+					</ul>
 				</div>
 				<h2 class="main__title">Aula Virtual</h2>
 			</div>	
 		</div>
     	 <script src="https://kit.fontawesome.com/56e0c4d4ed.js"
 		crossorigin="anonymous"></script>
-		<script src="assets/js/utils/modal/je-modal1.js"></script>
-		<script src="assets/js/utils/modal/modalMessage1.js"></script>
-		<script src="assets/js/utils/Api1.js"></script>
-    	<script src="assets/js/generic/loader1.js"></script>
-    	<script src="assets/js/pages/login1.js"></script>
+		<script src="assets/js/utils/modal/je-modal2.js"></script>
+		<script src="assets/js/utils/modal/modalMessage2.js"></script>
+		<script src="assets/js/utils/Api2.js"></script>
+    	<script src="assets/js/generic/loader2.js"></script>
+    	<script src="assets/js/utils/login-slider2.js"></script>
+    	<script src="assets/js/pages/login2.js"></script>
 	</body>
 </html>

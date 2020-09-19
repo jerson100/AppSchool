@@ -13,7 +13,6 @@ import exceptions.NotFound;
 import exceptions.NotUpdated;
 import interfaces.ISesion;
 import models.Sesion;
-import utilidades.Conexion;
 
 public class SesionDao implements ISesion{
 	
@@ -53,57 +52,54 @@ public class SesionDao implements ISesion{
 
 	@Override
 	public Sesion acceder(String usuario, String contrasena) throws NotFound {
-	
-		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
-		
-		Connection c = conexion.getConnection();
-		
-		PreparedStatement ps = null;
-		
-		ResultSet rs = null;
 		
 		Sesion sesion = null;
 		
 		try {
 		
-			ps= c.prepareStatement("{call dbo.sp_SESION_get(?,?)}");
+			try (Connection db = new ConexionSqlServer().getConexion()) {
+
+				try (PreparedStatement ps = db.prepareStatement("{call dbo.sp_SESION_get(?,?)}")) {
 			
-			ps.setString(1, usuario);
-			
-			ps.setString(2, contrasena);
-		
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				
-				sesion = new Sesion();
-				sesion.setIdUsuario(rs.getInt(1));
-				sesion.setUsuario(rs.getString(2));
-				sesion.setNombres(rs.getString(3));
-				sesion.setApPaterno(rs.getString(4));
-				sesion.setApMaterno(rs.getString(5));
-				sesion.setIdCuenta(rs.getInt(6));
-				sesion.setIdTipoCuenta(rs.getInt(7));
-				sesion.setTipoCuenta(rs.getString(8));
-				sesion.setIdPerfil(rs.getInt(9));
-				sesion.setPerfil(rs.getString(10));
-				sesion.setGrado(rs.getString(11));
-				sesion.setTutor(rs.getString(12));
-			}else {
-			
-				throw new NotFound("El usuario o la contraseña son incorrectos");
+					ps.setString(1, usuario);
+					
+					ps.setString(2, contrasena);
+					
+					try (ResultSet rs = ps.executeQuery()){
+						
+						if(rs.next()) {
+							
+							sesion = new Sesion();
+							sesion.setIdUsuario(rs.getInt(1));
+							sesion.setUsuario(rs.getString(2));
+							sesion.setNombres(rs.getString(3));
+							sesion.setApPaterno(rs.getString(4));
+							sesion.setApMaterno(rs.getString(5));
+							sesion.setIdCuenta(rs.getInt(6));
+							sesion.setIdTipoCuenta(rs.getInt(7));
+							sesion.setTipoCuenta(rs.getString(8));
+							sesion.setIdPerfil(rs.getInt(9));
+							sesion.setPerfil(rs.getString(10));
+							sesion.setGrado(rs.getString(11));
+							sesion.setTutor(rs.getString(12));
+							
+						}else {
+						
+							throw new NotFound("El usuario o la contraseña son incorrectos");
+							
+						}
+						
+					}
+					
+				}
 				
 			}
-		
+			
 		} catch (SQLException e) {
 			
 			throw new NotFound("Error inesperado");
 			
-		} finally {
-			
-			Conexion.cerrarConexion(conexion,ps,rs);
-			
-		}
+		} 
 		
 		return sesion;
 		

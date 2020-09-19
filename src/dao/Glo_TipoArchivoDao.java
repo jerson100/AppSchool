@@ -55,30 +55,35 @@ public class Glo_TipoArchivoDao implements IGlo_TipoArchivo {
 	@Override
 	public String validarExtension(Glo_TipoArchivo tipoArchivo) {
 		
-		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
-
-		Connection c = conexion.getConnection();
-
-		PreparedStatement ps = null;
-
-		ResultSet rs = null;
-		
 		try {
 			
-			ps = c.prepareStatement("{call dbo.sp_TIPOARCHIVO_by_extension_get(?,?)}");
-	
-			ps.setString(1, tipoArchivo.getExtension());
-	
-			ps.setLong(2, tipoArchivo.getTamagnoMax());
+			try (Connection db = new ConexionSqlServer().getConexion()) {
+
+				try (PreparedStatement ps = db.prepareStatement("{call dbo.sp_TIPOARCHIVO_by_extension_get(?,?)}")) {
 			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				return rs.getString(1);
+					ps.setString(1, tipoArchivo.getExtension());
+					
+					ps.setLong(2, tipoArchivo.getTamagnoMax());
+					
+					try (ResultSet rs = ps.executeQuery()){
+						
+						if(rs.next()) {
+							
+							return rs.getString(1);
+							
+						}
+						
+					}
+					
+				}
+				
 			}
+			
 		} catch (SQLException e) {
 		}
+		
 		return "";
+		
 	}
 
 }

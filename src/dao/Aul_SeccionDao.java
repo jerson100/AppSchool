@@ -14,7 +14,6 @@ import exceptions.NotFound;
 import exceptions.NotUpdated;
 import interfaces.IAul_Seccion;
 import models.Aul_Seccion;
-import utilidades.Conexion;
 
 public class Aul_SeccionDao implements IAul_Seccion{
 
@@ -51,65 +50,61 @@ public class Aul_SeccionDao implements IAul_Seccion{
 	@Override
 	public List<Aul_Seccion> all(int idCuenta) throws NotAll {
 		
-		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
-		
-		Connection c = conexion.getConnection();
-		
-		PreparedStatement ps = null;
-		
-		ResultSet rs = null;
-		
 		List<Aul_Seccion> list = null;
 		
 		try {
 		
-			ps= c.prepareStatement("{call dbo.sp_SECCION_by_PROFESOR_get(?)}");
-			
-			ps.setInt(1, idCuenta);
-		
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				
-				list = new ArrayList<>();
-				
-				Aul_Seccion aulC = null;
-				
-				aulC = new Aul_Seccion();
-				
-				aulC.setIdSecGraNiv(rs.getInt(1));
-				aulC.setGrado(rs.getString(2));
-				aulC.setNivel(rs.getString(3));
-				
-				list.add(aulC);
-				
-				while(rs.next()) {
+			try (Connection db = new ConexionSqlServer().getConexion()) {
+
+				try (PreparedStatement ps = db.prepareStatement("{call dbo.sp_SECCION_by_PROFESOR_get(?)}")) {
 					
-					aulC = new Aul_Seccion();
+					ps.setInt(1, idCuenta);
 					
-					aulC.setIdSecGraNiv(rs.getInt(1));
-					aulC.setGrado(rs.getString(2));
-					aulC.setNivel(rs.getString(3));
-					
-					list.add(aulC);
+					try (ResultSet rs = ps.executeQuery()){
+				
+						if(rs.next()) {
+							
+							list = new ArrayList<>();
+							
+							Aul_Seccion aulC = null;
+							
+							aulC = new Aul_Seccion();
+							
+							aulC.setIdSecGraNiv(rs.getInt(1));
+							aulC.setGrado(rs.getString(2));
+							aulC.setNivel(rs.getString(3));
+							
+							list.add(aulC);
+							
+							while(rs.next()) {
+								
+								aulC = new Aul_Seccion();
+								
+								aulC.setIdSecGraNiv(rs.getInt(1));
+								aulC.setGrado(rs.getString(2));
+								aulC.setNivel(rs.getString(3));
+								
+								list.add(aulC);
+								
+							}
+							
+						}else {
+						
+							throw new NotAll("Ud. no Niveles a cargo");
+							
+						}
+						
+					}
 					
 				}
 				
-			}else {
-			
-				throw new NotAll("Ud. no Niveles a cargo");
-				
 			}
-		
+			
 		} catch (SQLException e) {
 			
 			throw new NotAll("Póngase en contacto con su administrador");
 			
-		} finally {
-			
-			Conexion.cerrarConexion(conexion,ps,rs);
-			
-		}
+		} 
 		
 		return list;
 		

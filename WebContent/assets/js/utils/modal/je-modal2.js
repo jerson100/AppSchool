@@ -113,7 +113,7 @@ var MessageModal = /** @class */ (function (_super) {
             if (this.position.y === 'top') {
                 element.style.top = "1rem";
             } else {
-                element.style.bottom = "1rem";
+                element.style.bottom = "0rem";
                 element.style.top = "initial";
                 /*element.style.top = "auto";*/
             }

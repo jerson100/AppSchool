@@ -4,6 +4,7 @@ const showModalMessage = (message,time, position = {x:'left',y:'top'},animate = 
 	if(modalPrev){
 		modalPrev.remove();
 	}
+	
 	let modal = new MessageModal(
 		    {
 		        body : `
@@ -17,7 +18,7 @@ const showModalMessage = (message,time, position = {x:'left',y:'top'},animate = 
 						    align-items: center;
 						    justify-content: center;"></i>
 						    <div style="flex: 1 1 0;display: flex;align-items: center;">
-								<p style="padding: 1rem;margin:0">${message}</p>
+								<p style="font-size: 13px;padding: 14px;line-height: 1.4;margin: 0;">${message}</p>
 						    </div>       
 		        	</div>
 		        `,
@@ -90,6 +91,7 @@ const showModalDelete = (title, callback, check=true,body="") => {
 		modal.closeAnimation();
 		showModalMessage(message,5000);
 	});
+	
 	btnCancel.addEventListener('click',function(e){
 		modal.closeAnimation();
 	});

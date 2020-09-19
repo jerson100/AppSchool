@@ -18,22 +18,22 @@
 	<!-- ace styles -->
 	<link rel="stylesheet" href="assets/css/utils/template/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
   
-  	<link rel="stylesheet" href="assets/css/layout/layout1.css">
+  	<link rel="stylesheet" href="assets/css/layout/layout2.css">
   	
-  	<link rel="stylesheet" href="assets/css/theme/color1.css">
+  	<link rel="stylesheet" href="assets/css/theme/color2.css">
   
-  	<link rel="stylesheet" href="assets/css/components/button1.css">
+  	<link rel="stylesheet" href="assets/css/components/button2.css">
   	
-  	<link rel="stylesheet" href="assets/css/components/scroll1.css">
+  	<link rel="stylesheet" href="assets/css/components/scroll2.css">
 	
-	<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style1.css">
+	<link rel="stylesheet" href="assets/js/utils/modal/je-modal-style2.css">
 
 	<script src="assets/js/utils/template/ace-extra.js"></script>
 	
 	<link rel="stylesheet" href="assets/css/utils/librerias/glide/glide.core.min.css">
 	<link rel="stylesheet" href="assets/css/utils/librerias/glide/glide.theme.min.css">
 	
-	<link rel="stylesheet" href="assets/css/pages/inicio1.css">
+	<link rel="stylesheet" href="assets/css/pages/inicio2.css">
 	
 	
 	
@@ -155,6 +155,6 @@
 		}).mount();
 	</script>
 	<script src="https://kit.fontawesome.com/56e0c4d4ed.js" crossorigin="anonymous"></script>
-	<script src="assets/js/generic/close1.js"></script>
+	<script src="assets/js/generic/close2.js"></script>
 </body>
 </html>

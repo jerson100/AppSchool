@@ -434,8 +434,10 @@
   	.main__right{
   		flex: 1 0 0;
   		display: block;
+  		background: rgb(16 62 88);
+  		box-shadow: inset -10px 0 80px 20px rgba(0,0,0,.5);
   	}
-  	
+  	/*
   	.main__right::before{
   		content: '';
   		position: absolute;
@@ -444,7 +446,7 @@
   		background-color: rgba(0,0,0,.5);
   		left: 0;
   		top: 0;
-  	}
+  	}*/
   	
   	.login{
   		width: 100%;

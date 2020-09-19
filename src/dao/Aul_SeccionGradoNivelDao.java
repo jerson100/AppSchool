@@ -14,7 +14,6 @@ import exceptions.NotFound;
 import exceptions.NotUpdated;
 import interfaces.IAul_SeccionGradoNivel;
 import models.Aul_SeccionGradoNivel;
-import utilidades.Conexion;
 
 public class Aul_SeccionGradoNivelDao implements IAul_SeccionGradoNivel{
 
@@ -45,63 +44,60 @@ public class Aul_SeccionGradoNivelDao implements IAul_SeccionGradoNivel{
 	@Override
 	public List<Aul_SeccionGradoNivel> all() throws NotAll {
 		
-		ConectionSqlServer conexion = ConectionSqlServer.getInstance();
-		
-		Connection c = conexion.getConnection();
-		
-		PreparedStatement ps = null;
-		
-		ResultSet rs = null;
-		
 		List<Aul_SeccionGradoNivel> list = null;
 		
 		try {
 		
-			ps= c.prepareStatement("{call dbo.sp_SECCIONGRADONIVEL_get()}");
+			try (Connection db = new ConexionSqlServer().getConexion()) {
+
+				try (PreparedStatement ps = db.prepareStatement("{call dbo.sp_SECCIONGRADONIVEL_get()}")) {
 			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				
-				list = new ArrayList<>();
-				
-				Aul_SeccionGradoNivel aulC = null;
-				
-				aulC = new Aul_SeccionGradoNivel();
-				
-				aulC.setIdSecGraNiv(rs.getInt(1));
-				aulC.setMensaje(rs.getString(2));
-				
-				list.add(aulC);
-				
-				while(rs.next()) {
-					
-					aulC = new Aul_SeccionGradoNivel();
-					
-					aulC.setIdSecGraNiv(rs.getInt(1));
-					aulC.setMensaje(rs.getString(2));
-					
-					list.add(aulC);
+					try (ResultSet rs = ps.executeQuery()){
+						
+						if(rs.next()) {
+							
+							list = new ArrayList<>();
+							
+							Aul_SeccionGradoNivel aulC = null;
+							
+							aulC = new Aul_SeccionGradoNivel();
+							
+							aulC.setIdSecGraNiv(rs.getInt(1));
+							aulC.setMensaje(rs.getString(2));
+							
+							list.add(aulC);
+							
+							while(rs.next()) {
+								
+								aulC = new Aul_SeccionGradoNivel();
+								
+								aulC.setIdSecGraNiv(rs.getInt(1));
+								aulC.setMensaje(rs.getString(2));
+								
+								list.add(aulC);
+								
+							}
+							
+						}else {
+						
+							throw new NotAll("No se encontraron secciones - grado - nivel");
+							
+						}
+						
+					}
 					
 				}
 				
-			}else {
-			
-				throw new NotAll("No se encontraron secciones - grado - nivel");
-				
 			}
-		
+			
 		} catch (SQLException e) {
 			
 			throw new NotAll("Póngase en contacto con su administrador");
 			
-		} finally {
-			
-			Conexion.cerrarConexion(conexion,ps,rs);
-			
-		}
+		} 
 		
 		return list;
+		
 	}
 
 	@Override
