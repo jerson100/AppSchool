@@ -81,7 +81,7 @@
 		       $iconView = $frmLogin.querySelector(".input-icon__view .input-icon__icon"),
 		       $inputPass = $frmLogin.querySelector("input[type='password'");
 	
-		 $frmLogin[0].focus();
+		// $frmLogin[0].focus();
 		
 		 $frmLogin.addEventListener("submit",async e=>{
 	       e.preventDefault();
