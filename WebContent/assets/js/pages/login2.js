@@ -116,7 +116,18 @@
 		  
 		  addListener();
 		  
-		  sliderLogin('.login-slider__list', 5000);
+		  //sliderLogin('.login-slider__list', 5000);
+		  SliderLogin({container:'.main__right',
+			  		images:
+				  ["assets/img/pag-inicio/foto-1.jpg",
+				   "assets/img/pag-inicio/foto-2.jpg",
+				   "assets/img/pag-inicio/foto-3.jpg",
+				   "assets/img/pag-inicio/foto-4.jpg",
+				   "assets/img/pag-inicio/foto-5.jpg",
+				   "assets/img/pag-inicio/foto-6.jpg",
+				   "assets/img/pag-inicio/foto-7.jpg",
+				   "assets/img/pag-inicio/foto-8.jpg"],
+				   time: 10000});
 		  
 		  verifyEmpty($frmLogin);
 	};

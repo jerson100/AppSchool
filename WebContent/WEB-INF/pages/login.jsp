@@ -82,7 +82,7 @@
      					<source src="blob:https://vimeo.com/d8910925-2f82-4d92-84f0-0522f837e132" type="video/mp4">
 			  		</video>	
 				</div>-->
-				<div class="login-slider">
+				<!--<div class="login-slider">
 					<ul class="login-slider__list">
 						<li class="login-slider__item login-slider__item--1"></li>
 						<li class="login-slider__item login-slider__item--2"></li>
@@ -94,7 +94,7 @@
 						<li class="login-slider__item login-slider__item--8"></li>
 						<li class="login-slider__item login-slider__item--9"></li>
 					</ul>
-				</div>
+				</div>-->
 				<h2 class="main__title">Aula Virtual</h2>
 			</div>	
 		</div>

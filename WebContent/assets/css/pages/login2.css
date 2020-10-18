@@ -410,9 +410,10 @@
   		display: flex;
     	align-items: center;
     	position: relative;
-    	z-index: 1;
     	/*box-shadow: 10px 0 85px 8px rgba(0,0,0,.5);*/
     	box-shadow: -10px 0 83px 194px rgba(0,0,0,.5);
+    	position: relative;
+    	z-index: 2;
   	}
   	
   	.main__left::before{
@@ -432,6 +433,8 @@
   	}
   	
   	.main__right{
+  		position: relative;
+    	z-index: 1;
   		flex: 1 0 0;
   		display: block;
   		background: rgb(16 62 88);
@@ -500,6 +503,7 @@
 	    font-size: 50px;
 	    text-shadow: 0 0 4px var(--red-school-alt);
 	    font-weight: bold;
+	    z-index: 2;
   	}
   		
   }
