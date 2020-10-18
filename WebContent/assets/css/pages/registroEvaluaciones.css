@@ -1,0 +1,106 @@
+/*table, td, tr, th{
+	border: solid 1px black;
+}*/
+
+.hidden{
+	display: none;
+}
+
+.registro-evaluaciones{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1440px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.registro-evaluaciones__title{
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.registro-evaluaciones__form{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+.registro-evaluaciones__group{
+	padding: 1rem;
+}
+
+.registro-evaluaciones__group >  label{
+	margin-right: .5rem;
+}
+
+.registro-evaluaciones__school{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.registro-evaluaciones__logo{
+	width: 50px;
+	margin-right: 1rem
+}
+
+.grid{
+	margin-left: auto;
+	margin-right: auto;
+	overflow: auto;
+}
+
+.grid__table{
+	width: 100%;
+	min-width: 500px;
+	border-color: rgba(0,0,0,.15);
+}
+
+.grid__table--small{
+	min-width: 768px;
+}
+
+.grid__table--large{
+	min-width: 1300px;
+}
+
+.grid__col{
+		text-align: center;
+		padding: .8rem .5rem;
+}
+
+.grid__thead .grid__col{
+	font-weight: bold;
+}
+
+.grid__col--color-blue{
+	background-color: rgb(198, 217, 241);
+}
+
+.grid__col--note{
+	width:  30px;
+	height: 30px;
+}
+
+
+
+/*
+	tag-one-window
+*/
+
+.tag-one-window{
+}
+
+.tag-one-window__list{
+	display: flex;
+	list-style: none;
+	margin: 0 0 2rem 0;
+	padding: 0;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.tag-one-window__item{
+	margin: 1rem;
+	user-select: none;
+}

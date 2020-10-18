@@ -6,6 +6,17 @@
 	z-index: 1;
 }
 
+.login-slider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #00000094;
+    z-index: 2;
+}
+
 .login-slider__list{
 	white-space: nowrap;
 	height: inherit;
@@ -35,6 +46,10 @@
 	background-size: auto;
 	background-position: center center;
 	background-repeat: no-repeat;
+}
+
+.login-slider__item--active{
+	animation: movSuave 500ms 1s 2 alternate ease;
 }
 
 /*

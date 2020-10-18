@@ -14,5 +14,8 @@ const API = {
 		}else{
 			return await response.json();
 		}
+	},
+	getCursos: async function(idSecGraNiv){
+		return await this.getData(`cursos?idSecGraNiv=${idSecGraNiv}&action=getCursos`)
 	}
 };

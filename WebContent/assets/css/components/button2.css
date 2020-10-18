@@ -7,10 +7,8 @@
     color: var(--body-bg);
     font-size: 16px;
     padding: .5em 1em;
-    /*width: 100%;*/
     display: inline-block;
     cursor: pointer;
-    /*user-select: none;*/
     text-align: center;
     line-height: inherit;
     text-decoration: none;
@@ -24,7 +22,7 @@
 }
 
 .je-btn:active{
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 .dark-red{

@@ -16,12 +16,7 @@
 	transition: transform 500ms, opacity 0s 500ms, visibility 0s 500ms, background-color 500ms;
 	cursor: pointer;
 }
-/*
-.goUp--active:active{
-	transform: scale(1.2);
-	transition: transform 500ms, opacity 0s, visibility 0s, background-color 500ms;
-}
-*/
+
 .goUp__icon{
 	color: #fff;
 	font-size: 20px;

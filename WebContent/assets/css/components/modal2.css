@@ -5,7 +5,6 @@
 	background-color: rgba(0,0,0,.5);
 	width: 100vw;
 	height: 100vh;
-	/*border: solid 1px red;*/
 	opacity: 0;
 	visibility: hidden;
 	display: flex;
@@ -25,8 +24,6 @@
 .mod__inner{
 	padding-left: .5rem;
 	padding-right: .5rem;
-	/*border: solid 1px red;*/
-	/*position: relative;*/
 	display: flex;
 	justify-content: center;
 	width: 100%;
@@ -119,15 +116,9 @@
 }
 
 @media screen and (max-width: 850px) and (orientation: landscape) {
-	
 	.youtube__wrapper {
 	    padding-bottom: 38%;
     }
-	
-	.youtube{
-		/*max-width: 55%;*/
-	}
-	
 }
 
 @media screen and (min-width: 1000px){
@@ -135,5 +126,3 @@
 		top: 0;
 	}
 }
-
-

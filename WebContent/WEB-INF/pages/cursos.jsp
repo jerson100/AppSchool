@@ -80,17 +80,9 @@
 					} catch (e) {
 					}
 				</script>
-				<ul class="breadcrumb">
-					<li><i class="ace-icon fa fa-home home-icon"></i></li>
-					<li><a href="cursos" style="font-size: 17px;">Mis cursos</a></li>
-				</ul>
-				<div class="nav-search"
-					style="margin: 7.5px 0px 0 22px; top: 0; width: 500px;">
-					<span id="GradoDeAlumno" class="animateText active"><c:out
-							value="${requestScope.grado}"></c:out></span> <span
-						class="teacher animateText" id="tutorDeAlumno"><c:out
-							value="${requestScope.tutor}"></c:out></span>
-				</div>
+				<jsp:include page="../includes/breadcrumb.jsp">
+					<jsp:param value="title" name="Mis Cursos"/>
+				</jsp:include>
 			</div>
 
 			<div class="je-container wrapper-main" style="max-width: 100%;">
@@ -175,13 +167,6 @@
 											<a href="#tableWork" class="tabs__link">Tareas y trabajos</a>
 										</li>
 									</ul>
-									<!--
-									<div class="tabs__search">
-										<input class="tabs__input-search" type="text" id="inputSearch">
-										<span id="teclaP"></span> <i
-											class="tabs__icon-search fa fa-search"></i>
-									</div>
-									<span class="tabs__separator"></span>-->
 									<div class="tabs__section tabs__section--active" data-table="tableContent">
 										<table class="table-data__table"></table>
 									</div>
