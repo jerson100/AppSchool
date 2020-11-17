@@ -54,6 +54,11 @@
 	width: 100%;
 	min-width: 500px;
 	border-color: rgba(0,0,0,.15);
+	transition: background-color 500ms ease;
+}
+
+.grid__table--hover tbody > tr:hover{
+	background-color: #0000000a;
 }
 
 .grid__table--small{

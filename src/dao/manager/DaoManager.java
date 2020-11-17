@@ -1,9 +1,12 @@
 package dao.manager;
 
+import dao.Aul_CicloDao;
 import dao.Aul_ClasesDao;
 import dao.Aul_ContenidoDao;
 import dao.Aul_CursoDao;
 import dao.Aul_HorarioDao;
+import dao.Aul_PeriodoNotasDao;
+import dao.Aul_RegistroNotasDao;
 import dao.Aul_SeccionDao;
 import dao.Aul_SeccionGradoNivelDao;
 import dao.Aul_TrabajoDao;
@@ -65,6 +68,18 @@ public class DaoManager {
 			case AULTRABAJOSALUMNO:
 				
 				return new Aul_TrabajosAlumnoDao();
+				
+			case AULCICLO:
+				
+				return new Aul_CicloDao();
+				
+			case AULREGISTRONOTAS:
+				
+				return new Aul_RegistroNotasDao();
+				
+			case AULPERIODONOTAS:
+				
+				return new Aul_PeriodoNotasDao();
 				
 			default:
 				

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.manager.DaoManager;
 import enumerados.EDaoManager;
 import interfaces.ICrud;
+import models.Aul_Ciclo;
 import models.Aul_Seccion;
 import models.Sesion;
 
@@ -22,11 +23,13 @@ public class ControladorEvaluacionesParciales extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private ICrud<Aul_Seccion> dao;
+	private ICrud<Aul_Ciclo> daoCiclo;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init() throws ServletException {
 		dao = DaoManager.getDaoManager(EDaoManager.AULSECCION);
+		daoCiclo = DaoManager.getDaoManager(EDaoManager.AULCICLO);
 	}
     
     public ControladorEvaluacionesParciales() {
@@ -35,7 +38,6 @@ public class ControladorEvaluacionesParciales extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Aul_Seccion> secciones = null;
 		
 		HttpSession session = request.getSession();
 		
@@ -45,17 +47,24 @@ public class ControladorEvaluacionesParciales extends HttpServlet {
 		
 		if(us_session != null) { 
 			
+			List<Aul_Seccion> secciones = null;
+			List<Aul_Ciclo> ciclos = null;
+			
 			try {
 				
 				secciones = dao.all(us_session.getIdCuenta());
-				System.out.println(secciones);
-			} catch (Exception e) {
 				
+				ciclos = daoCiclo.all();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 				secciones = new ArrayList<Aul_Seccion>();
 				
 			}
 			
 			request.setAttribute("secciones", secciones);
+			
+			request.setAttribute("ciclos", ciclos);
 			
 			request.getRequestDispatcher("../WEB-INF/pages/zonaDocente/registrarEvaluaciones.jsp").forward(request, response);
 			
