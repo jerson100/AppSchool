@@ -98,6 +98,7 @@
 
 .tag-one-window__list{
 	display: flex;
+	justify-content: center;
 	list-style: none;
 	margin: 0 0 2rem 0;
 	padding: 0;
@@ -108,4 +109,9 @@
 .tag-one-window__item{
 	margin: 1rem;
 	user-select: none;
+	flex-shrink: 0;
+}
+
+.tag-one-window__item--current{
+	
 }

@@ -26,8 +26,13 @@
 }
 
 .dark-red{
-    --color-bg-btn: var(--third-color);
-    --color-bg-btn-alt: var(--third-color-alt);
+   --color-bg-btn: var(--third-color);
+   --color-bg-btn-alt: var(--third-color-alt);
+}
+
+.dark-negative{
+	--color-bg-btn: var(--color-negative);
+	--color-bg-btn-alt: var(--third-color-alt);
 }
 
 .dark-orange{

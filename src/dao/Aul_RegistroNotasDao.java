@@ -73,9 +73,11 @@ public class Aul_RegistroNotasDao implements IAul_RegistrarNotas{
 				con.commit();
 			}catch(SQLException e) {
 				con.rollback();//restart
+				e.printStackTrace();
 				throw new NotCreated("No se pudo crear las notas.");
 			}		
 		}catch (SQLException e) {
+			e.printStackTrace();
 			throw new SQLException(e);
 		}
 	}
@@ -86,8 +88,8 @@ public class Aul_RegistroNotasDao implements IAul_RegistrarNotas{
 		try {
 			try(Connection con = new  ConexionSqlServer().getConexion()){
 				try(PreparedStatement pr  = con.prepareStatement("{call dbo.sp_REGISTRONOTAS_by_IDSECCUR_and_NOTAS_get(?,?)}")){
-					pr.setInt(1, 5);
-					pr.setInt(2, 30);
+					pr.setInt(1, idSecCurPro);
+					pr.setInt(2, idPeriodoNotas);
 					try(ResultSet rs= pr.executeQuery()){
 						while(rs.next()) {
 							Aul_RegistroNotas aul = new Aul_RegistroNotas();
@@ -112,8 +114,8 @@ public class Aul_RegistroNotasDao implements IAul_RegistrarNotas{
 		try {
 			try(Connection con = new  ConexionSqlServer().getConexion()){
 				try(PreparedStatement pr  = con.prepareStatement("{call dbo.sp_REGISTRONOTAS_by_IDCICLO_2_get(?,?)}")){
-					pr.setInt(1, 1);
-					pr.setInt(2, 5);
+					pr.setInt(1, idCiclo);
+					pr.setInt(2, SecCurPro);
 					try(ResultSet rs= pr.executeQuery()){
 							while(rs.next()) {
 								Aul_RegistroNotas aul = new Aul_RegistroNotas();

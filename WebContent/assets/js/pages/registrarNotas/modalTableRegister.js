@@ -1,6 +1,6 @@
 const temple = () => {
 	 return `
-		<div class="je-modal__document je-modal__document--small">
+		<div class="je-modal__document je-modal__document--small je-modal__document--vertical">
 			<div class="je-modal__content">
 				<div class="je-modal__header">
 					<p class="je-modal__title">Agregar notas</p>
@@ -48,7 +48,7 @@ const drawRow = (alumnos) => {
 				${al.alumno}
 			</td>
 			<td class="grid__col grid__col--color-blue" width="60">
-				<input class="input" data-idRegistroNota=${al.idRegistroNota ? al.idRegistroNota : "-"} type="text" style="width: 55px;text-align:center;" value=${al.nota ? al.nota:""}>
+				<input class="input" data-idCuenta=${al.idCuenta} data-idRegistroNota=${al.idRegistroNota ? al.idRegistroNota : "null"} type="text" style="width: 55px;text-align:center;" value=${al.nota ? al.nota:""}>
 			</td>
 		`;
 		
@@ -60,7 +60,7 @@ const drawRow = (alumnos) => {
 	
 };
 
-const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas) => {
+const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo, table) => {
 	
 	const prevContainerModal = document.querySelector(".je-modal__document");
 	
@@ -80,29 +80,28 @@ const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas) => {
 	const $guardarNota = document.getElementById("guardarNota");
 	const $close = document.getElementById("close");
 	
-	$guardarNota.addEventListener("click",e=>{
+	$guardarNota.addEventListener("click",async e=>{
 		const inputs = Array.from(containerModal.querySelectorAll("[data-idRegistroNota]"));
-		const values = inputs.map(i=> ({
-				idRegistroNota: i.dataset.idRegistroNota || null,
-				idSecCur:idSecCurPro,
-				idCuenta:0,
-				alumno:"",
-				periodo:"",
-				nota: i.value,
-				descNotas:"",
-				idPeriodoNotas:"",
-			})
+		const values = inputs.map(i=>{
+			return ({
+				idRegistroNota: i.dataset.idregistronota !== "null" ? parseInt(i.dataset.idregistronota) : null,
+						idSecCur: parseInt(idSecCurPro),
+						idCuenta: parseInt(i.dataset.idcuenta),
+						nota: i.value,
+						idPeriodoNotas
+					});
+		} 
 		);
-		console.log(values);
 		const load = loader();
 		try{
-			const {message} = API.ALUMNO.NOTAS.post({
+			const {message} = await API.ALUMNO.NOTAS.post({
 				method: "POST",
 				"content-type":"application/json",
 				body: JSON.stringify(values)
 			});
 			console.log(message);
 			containerModal.remove();
+			table.updateData();
 		}catch(e){
 			console.log(e);
 		}finally{

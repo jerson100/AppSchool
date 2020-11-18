@@ -23,6 +23,7 @@ import constantes.AppColegio;
 import dao.Aul_RegistroNotasDao;
 import dao.manager.DaoManager;
 import enumerados.EDaoManager;
+import exceptions.NotCreated;
 import interfaces.ICrud;
 import models.Aul_RegistroNotas;
 import models.Sesion;
@@ -87,7 +88,7 @@ public class ControladorRegisterNotes extends HttpServlet {
 			try {
 				Map<String, List<Aul_RegistroNotas>> list = registroDao.all(idCiclo, idSecCur);
 				result.put("data", list);
-				System.out.println(list);
+				//System.out.println(list);
 			} catch (SQLException e) {
 				// e.printStackTrace();
 				response.setStatus(500);
@@ -127,6 +128,7 @@ public class ControladorRegisterNotes extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		Sesion us = (Sesion) request.getSession().getAttribute("usuarioSesion");
 		
 		if(us != null) {
@@ -135,17 +137,34 @@ public class ControladorRegisterNotes extends HttpServlet {
 				String json = "";
 				if (br != null) json = br.readLine();
 				Aul_RegistroNotas[] obj = JSON.fromJson(json, Aul_RegistroNotas[].class);
-				response.setStatus(201);				
+				/*for(Aul_RegistroNotas a : obj) {
+					System.out.println(a);
+				}*/
+				HashMap<String, Object> resp = new HashMap<String, Object>();
+				try {
+					((Aul_RegistroNotasDao)dao).create(obj);
+					response.setStatus(200);
+					resp.put("message","Se registró satisfactoriamente");
+					try(Writer w = response.getWriter()){
+						w.write(JSON.toJson(resp));
+					}
+				} catch (NotCreated e) {
+					resp.put("message","No se pudo agregar las notas, inténtelo nuevamente");
+					response.setStatus(400);
+					try(Writer w = response.getWriter()){
+						w.write(JSON.toJson(resp));
+					}
+				} catch (SQLException e) {
+					response.setStatus(500);
+				}
 			}else {
 				response.setStatus(403);
 			}
 		}else {
 			response.setStatus(401);
 		}
-		/*for(Aul_RegistroNotas a : obj) {
-			System.out.println(a);
-		}
-		System.out.println(obj);*/
+		
+		/*System.out.println(obj);*/
 		//JsonObject wholedata = new JsonObject(json);
 	}
 

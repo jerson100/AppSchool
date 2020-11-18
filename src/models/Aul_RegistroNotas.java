@@ -11,6 +11,7 @@ public class Aul_RegistroNotas {
 	private String descNotas;
 	private String idPeriodoNotas;
 	
+	
 	public String getIdPeriodoNotas() {
 		return idPeriodoNotas;
 	}

@@ -1,11 +1,9 @@
 class TableRegister {
-	constructor(container, dataAlumnos, dataPeriodo, dataHeaders={courses, grades, ciclo}, type="alumno"){
+	constructor(container, dataHeaders={courses, grades, ciclo, idSecCurPro}, type="alumno"){
 		this.$container = container;
-		this.dataAlumnos = dataAlumnos;
-		this.dataPeriodo = dataPeriodo;
 		this.headers =  dataHeaders;
-		this.createTable();
 		this.type = type;
+		this.updateData();
 	}
 	
 	createTable () {
@@ -20,6 +18,29 @@ class TableRegister {
 		this.handleClick();
 	}
 	
+	async updateData(){
+		let load = loader();
+		this.$container.innerHTML = "";
+		try{
+			const [{data:dataAlumnos},{data:dataPeriodos}] = await Promise.all([
+				API.ALUMNO.NOTAS.get({
+					idCiclo: this.headers.ciclo.id,
+					idSecCurPro: this.headers.idSecCurPro,
+					action: "listarMapNotes"
+				}),
+				API.PERIODO.get(this.headers.ciclo.id, this.headers.idSecCurPro)
+			]);
+			this.dataAlumnos = dataAlumnos || [];
+			this.dataPeriodo =  dataPeriodos || [];
+			this.createTable();
+		}catch(e){
+			console.log(e);
+			this.$container.innerHTML = "<p style='text-align:center'>Puede que no exista registros.</p>";
+		}finally{
+			load.remove();
+		}
+	}
+	
 	handleClick(){
 		this.table.addEventListener('click',async e=>{
 			if(e.target.tagName === "BUTTON" && e.target.classList.contains("je-btn")){
@@ -32,7 +53,7 @@ class TableRegister {
 						idSecCurPro: this.headers.courses.idSecCurPro,
 						action: "listar"
 					});
-					showModalTableRegister(data, this.headers.courses.idSecCurPro, idPeriodoNotas, idciclo);
+					showModalTableRegister(data, this.headers.courses.idSecCurPro, idPeriodoNotas, idciclo, this);
 				}catch(e){
 					console.log(e);
 				}finally{

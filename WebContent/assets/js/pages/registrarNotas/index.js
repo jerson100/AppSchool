@@ -20,32 +20,17 @@
 		$tagOneList.addEventListener("click",async e=>{
 			const {target} = e;
 			if(target.tagName==="LI"){
-				ELEMENTS.removeClass(Array.from($tagOneList.children),["tag-one-window__item--current"]);
-				target.classList.add("tag-one-window__item--current");
+				ELEMENTS.removeClass(Array.from($tagOneList.children),["tag-one-window__item--current","dark-negative"]);
+				target.classList.add("tag-one-window__item--current","dark-negative");
 				$tagData.classList.remove("hidden");
-				$tableRegisterContainer.innerHTML =  "";
-				let load = loader();
-				try{
-					const [{data:dataAlumnos},{data:dataPeriodos}] = await Promise.all([
-						API.ALUMNO.NOTAS.get({
-							idCiclo: target.dataset.id,
-							idSecCurPro: selections["courses"].idSecCurPro,
-							action: "listarMapNotes"
-						}),
-						API.PERIODO.get(target.dataset.id,selections["courses"].idSecCurPro)
-					]);
-					new TableRegister($tableRegisterContainer,dataAlumnos, dataPeriodos,
-						{
-							courses:selections["courses"], 
-							grades:selections["grades"],
-							ciclo:{value: target.textContent,id:target.dataset.id}
-						}
-					);
-				}catch(e){
-					console.log(e);
-				}finally{
-					load.remove();
-				}
+				new TableRegister($tableRegisterContainer,
+					{
+						courses:selections["courses"], 
+						grades:selections["grades"],
+						ciclo:{value: target.textContent,id:target.dataset.id},
+						idSecCurPro: selections["courses"].idSecCurPro
+					}
+				);
 			}
 		});
 		
@@ -77,6 +62,7 @@
 				$tagOneList.classList.remove("hidden");
 			}
 			$tagData.classList.add("hidden");
+			ELEMENTS.removeClass(Array.from($tagOneList.children),["tag-one-window__item--current","dark-negative"]);
 		};
 		
 		const handleChangeCourse = () => {

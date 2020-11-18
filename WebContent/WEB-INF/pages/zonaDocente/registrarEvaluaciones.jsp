@@ -95,81 +95,13 @@
 							</c:if>
 							</ul>
 							<div class="tag-one-window__data hidden">
-								<div class="grid je-scroll" id="tableRegister" style="max-height: calc(56vh);">
-									<table class="grid__table grid__table--large" id="table-register" border>
-										<thead class="grid__thead">
-											<tr class="grid__col">
-												<th> 
-													<div class="registro-evaluaciones__school">
-														<img src="assets/img/static/logoColegio.jpg" class="registro-evaluaciones__logo">
-														<span class="registro-evaluaciones__school-name">Escuela Privada Uribe School</span>
-													</div>
-												</th>
-												<th>
-													<table class="grid__table" border>
-														<tr class="grid__row">
-															<th class="grid__col" colspan="5">
-																Registro auxiliar de evaluación - Segundo Trimestre - 2020 (Grado /Año - Sección - Inicial)
-															</th>
-														</tr>
-														<tr class="grid__row">
-															<th class="grid__col" colspan="2">Profesor: Juan Manuel de l torre</td>
-															<th class="grid__col" colspan="3">Curso: Matemática</td>
-														</tr>
-														<tr>
-															<th class="grid__col grid__col--color-blue" colspan="2">Julio</th>
-															<th class="grid__col grid__col--color-blue" colspan="2">Agosto</th>
-															<th class="grid__col grid__col--color-blue">PR F</th>
-														</tr>
-													</table>
-												</th>
-											</tr>
-									</table>
-								</div>
-							</div>	
+								<div class="grid je-scroll" id="tableRegister" style="max-height: calc(56vh);"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--
-		 <div class="je-modal je-scroll">
-			<div class="je-modal__document je-modal__document--small">
-				<div class="je-modal__content">
-					<div class="je-modal__header">
-						<p class="je-modal__title">Agregar notas</p>
-					</div>
-					<div class="je-modal__body">
-						<div class="grid je-scroll">
-							<table class="grid__table" border>
-								<thead class="grid__thead">
-									<tr class="grid__row">
-										<th class="grid__col" width="40">Nº</th>
-										<th class="grid__col" >Alumno</th>
-										<th class="grid__col grid__col--color-blue" width="60">Nota</th>
-									</tr>
-								</thead>
-								<tbody class="grid__tbody">
-									<c:forEach var="i" begin="1" end="20">
-										<tr class="grid__row">
-											<td class="grid__col" width="40">
-												1
-											</td>
-											<td class="grid__col">
-												Ramírez Ortiz, Jerson Omar.
-											</td>
-											<td class="grid__col grid__col--color-blue" width="60">
-												<input class="input" type="text" style="width: 40px">
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>-->
 		<%@include file="../../includes/footer.jsp"%>
 		<script type="text/javascript">
 			window.jQuery
