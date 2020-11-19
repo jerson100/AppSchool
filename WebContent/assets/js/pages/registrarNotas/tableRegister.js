@@ -53,7 +53,7 @@ class TableRegister {
 						idSecCurPro: this.headers.courses.idSecCurPro,
 						action: "listar"
 					});
-					showModalTableRegister(data, this.headers.courses.idSecCurPro, idPeriodoNotas, idciclo, this);
+					showModalTableRegister(data, this.headers.courses.idSecCurPro, idPeriodoNotas, idciclo, this, `Agregar Notas - ${e.target.textContent}`);
 				}catch(e){
 					console.log(e);
 				}finally{
@@ -104,7 +104,7 @@ class TableRegister {
 		});
 	
 		fragmentPeriodos.appendChild(this.createCol("th",[{attr:"class",val:"grid__col grid__col--color-blue"},{attr:"width",val:"40"},{attr:"colspan",val:"1"},{attr:"rowspan",val:"2"}],`
-			PR F
+			PROM. FINAL
 		`));
 		
 		periodosTr.appendChild(fragmentPeriodos);
@@ -120,13 +120,13 @@ class TableRegister {
 			`
 		));
 		
-		schoolTr.appendChild(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"colspan",val:countAllColumns  + 1},{attr:"rowspan",val: 1}],
+		schoolTr.appendChild(this.createCol("th",[{attr:"class",val:"grid__col grid__col--center"},{attr:"colspan",val:countAllColumns  + 1},{attr:"rowspan",val: 1}],
 			`
 				Registro auxiliar de evaluación - ${this.headers.ciclo.value} - 2020 ${this.headers.grades.value} - ${this.headers.courses.descCurso})
 			`
 		));
 		
-		teacherTr.appendChild(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"colspan",val:countAllColumns + 1},{attr:"rowspan",val: 1}],
+		teacherTr.appendChild(this.createCol("th",[{attr:"class",val:"grid__col grid__col--center"},{attr:"colspan",val:countAllColumns + 1},{attr:"rowspan",val: 1}],
 			`
 				Profesor: ${this.headers.courses.profesor} - Curso: ${this.headers.courses.descCurso}
 			`
@@ -165,10 +165,8 @@ class TableRegister {
 			fragmentCol.append(this.createCol("td",[{attr:"class",val:"grid__col"},{attr:"width",val:"200"},{attr:"colspan",val:"3"}], n));
 			
 			notes.forEach(nn => {
-				fragmentCol.append(this.createCol("td",[{attr:"class",val:`grid__col  ${nn.descNotas === "PROM." ? " grid__col--color-blue":""}`},{attr:"width",val:"40"},{attr:"colspan",val:"1"}],nn.nota || "..."));
+				fragmentCol.append(this.createCol("td",[{attr:"class",val:`grid__col grid__col--right ${nn.descNotas === "PROM." ? " grid__col--color-blue":""}`},{attr:"width",val:"40"},{attr:"colspan",val:"1"}],nn.nota || "-"));
 			});
-			
-			fragmentCol.append(this.createCol("td",[{attr:"class",val:"grid__col grid__col--color-blue"},{attr:"width",val:"40"},{attr:"colspan",val:"1"}],"..."));
 			
 			tr.appendChild(fragmentCol);
 			fragment.append(tr);

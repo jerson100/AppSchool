@@ -55,18 +55,19 @@ public class Aul_RegistroNotasDao implements IAul_RegistrarNotas{
 	}
 	
 	@Override
-	public void create(Aul_RegistroNotas[] notas) throws NotCreated, SQLException{
+	public void create(Aul_RegistroNotas[] notas, int idUsuario) throws NotCreated, SQLException{
 		try(Connection  con = new ConexionSqlServer().getConexion()){
 			try {
 				con.setAutoCommit(false);
 				for(Aul_RegistroNotas aul : notas) {
 					//notas == null
-					try(PreparedStatement pr = con.prepareStatement("{call dbo.sp_REGISTRONOTAS_ins_upd(?,?,?,?,?)}")){
+					try(PreparedStatement pr = con.prepareStatement("{call dbo.sp_REGISTRONOTAS_ins_upd(?,?,?,?,?,?)}")){
 						pr.setInt(1, aul.getIdRegistroNota());
 						pr.setInt(2, aul.getIdCuenta());
 						pr.setInt(3, aul.getIdSecCur());
 						pr.setString(4, aul.getIdPeriodoNotas());
 						pr.setString(5, aul.getNota());
+						pr.setInt(6, idUsuario);
 						pr.executeUpdate();
 					}
 				}

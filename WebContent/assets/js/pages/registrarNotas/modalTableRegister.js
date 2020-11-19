@@ -1,11 +1,11 @@
-const temple = () => {
+const temple = (title="Agregar notas") => {
 	 return `
-		<div class="je-modal__document je-modal__document--small je-modal__document--vertical">
-			<div class="je-modal__content">
-				<div class="je-modal__header">
-					<p class="je-modal__title">Agregar notas</p>
+		<div class="j-modal__document j-modal__document--small j-modal__document--vertical">
+			<div class="j-modal__content">
+				<div class="j-modal__header">
+					<p class="j-modal__title">${title}</p>
 				</div>
-				<div class="je-modal__body">
+				<div class="j-modal__body">
 					<div class="grid je-scroll">
 						<table class="grid__table grid__table--hover" border>
 							<thead class="grid__thead">
@@ -19,9 +19,11 @@ const temple = () => {
 						</table>
 					</div>
 				</div>
-				<div class="je-modal__footer">
-					<button class="je-btn je-btn--smaller" id="guardarNota">Guardar Nota</button>
-					<button class="je-btn je-btn--smaller" id="close">Cancelar</button>
+				<div class="j-modal__footer">
+					<div style="text-align:center">
+				    	<button class="je-btn je-btn--smaller" id="guardarNota">Guardar Nota</button>
+						<button class="je-btn je-btn--smaller" id="close">Cancelar</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -60,17 +62,17 @@ const drawRow = (alumnos) => {
 	
 };
 
-const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo, table) => {
+const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo, table, title) => {
 	
-	const prevContainerModal = document.querySelector(".je-modal__document");
+	const prevContainerModal = document.querySelector(".j-modal__document");
 	
 	if(prevContainerModal){
 		prevContainerModal.remove();
 	}
 	
 	const containerModal = document.createElement("div");
-	containerModal.classList.add("je-modal","je-scroll");
-	containerModal.innerHTML = temple();
+	containerModal.classList.add("j-modal","je-scroll");
+	containerModal.innerHTML = temple(title);
 	
 	const gridtbody = containerModal.querySelector(".grid__tbody");
 	gridtbody.appendChild(drawRow(alumnos));
@@ -82,30 +84,40 @@ const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo
 	
 	$guardarNota.addEventListener("click",async e=>{
 		const inputs = Array.from(containerModal.querySelectorAll("[data-idRegistroNota]"));
-		const values = inputs.map(i=>{
-			return ({
-				idRegistroNota: i.dataset.idregistronota !== "null" ? parseInt(i.dataset.idregistronota) : null,
-						idSecCur: parseInt(idSecCurPro),
-						idCuenta: parseInt(i.dataset.idcuenta),
-						nota: i.value,
-						idPeriodoNotas
-					});
-		} 
-		);
-		const load = loader();
-		try{
-			const {message} = await API.ALUMNO.NOTAS.post({
-				method: "POST",
-				"content-type":"application/json",
-				body: JSON.stringify(values)
-			});
-			console.log(message);
-			containerModal.remove();
-			table.updateData();
-		}catch(e){
-			console.log(e);
-		}finally{
-			load.remove();
+		const values = [];
+		let msg = "";
+		for(let i = 0; i < inputs.length; i++){
+			values.push(
+				{
+					idRegistroNota: inputs[i].dataset.idregistronota !== "null" ? parseInt(inputs[i].dataset.idregistronota) : null,
+					idSecCur: parseInt(idSecCurPro),
+					idCuenta: parseInt(inputs[i].dataset.idcuenta),
+					nota: inputs[i].value,
+					idPeriodoNotas
+				}
+			);
+			if(!validarNota(inputs[i].value)){
+				msg = inputs[i].dataset.idcuenta;
+				break;
+			}
+		}
+		if(msg===""){
+			const load = loader();
+			try{
+				const {message} = await API.ALUMNO.NOTAS.post({
+					method: "POST",
+					"content-type":"application/json",
+					body: JSON.stringify(values)
+				});
+				containerModal.remove();
+				table.updateData();
+			}catch(e){
+				console.log(e);
+			}finally{
+				load.remove();
+			}
+		}else{
+			showModalMessage(msg,10000);
 		}
 	});
 	
@@ -113,4 +125,8 @@ const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo
 		containerModal.remove();
 	});
 	
+};
+
+const validarNota = (nota) => {
+	return nota === "" || /^((\d|([0-2]0|([0-1]\d)))|(20[\.]00)|(((\d|([0-1]0|([0-1]\d))))[\.]\d{1,2}))$/.test(nota);
 };

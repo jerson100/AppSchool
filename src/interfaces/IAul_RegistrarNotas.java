@@ -14,6 +14,6 @@ public interface IAul_RegistrarNotas extends ICrud<Aul_RegistroNotas>{
 
 	List<Aul_RegistroNotas> allList(int idCiclo, int SecCurPro) throws NotAll, SQLException;
 
-	void create(Aul_RegistroNotas[] notas) throws NotCreated, SQLException;
+	void create(Aul_RegistroNotas[] notas, int idUsuario) throws NotCreated, SQLException;
 
 }

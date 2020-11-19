@@ -142,7 +142,7 @@ public class ControladorRegisterNotes extends HttpServlet {
 				}*/
 				HashMap<String, Object> resp = new HashMap<String, Object>();
 				try {
-					((Aul_RegistroNotasDao)dao).create(obj);
+					((Aul_RegistroNotasDao)dao).create(obj, us.getIdUsuario());
 					response.setStatus(200);
 					resp.put("message","Se registró satisfactoriamente");
 					try(Writer w = response.getWriter()){
