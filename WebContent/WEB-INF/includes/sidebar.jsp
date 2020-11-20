@@ -40,6 +40,24 @@
 								<b class="arrow"></b>
 							</li>
 						</c:if>
+						<c:if test="${sessionScope.usuarioSesion.idPerfil == 1}">
+							<li class="open ${param.foco == '5' ? 'active':''}">
+								<a href="zonaEstudiante/misNotas" style="display:flex;align-items:center;">
+									<i class="menu-icon far fa-clipboard" style="font-weight:700"></i>
+									<span class="menu-text"> Mis Notas </span>
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</c:if>
+						<c:if test="${sessionScope.usuarioSesion.idPerfil == 2 or sessionScope.usuarioSesion.idPerfil == 3}">
+							<li class="open ${param.foco == '6' ? 'active':''}">
+								<a href="zonaDocente/registrarNotas" style="display:flex;align-items:center;">
+									<i class="menu-icon far fa-clipboard" style="font-weight:700"></i>
+									<span class="menu-text"> Registro de evaluaciones</span>
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</c:if>
 				</ul><!-- /.nav-list -->
 
 				<!-- #section:basics/sidebar.layout.minimize -->

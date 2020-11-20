@@ -110,6 +110,43 @@ public class Aul_RegistroNotasDao implements IAul_RegistrarNotas{
 	}
 	
 	@Override
+	public Map<String, List<Aul_RegistroNotas>>  allNotasStudent(int idCiclo, int idCuenta) throws NotAll, SQLException {
+		Map<String, List<Aul_RegistroNotas>> map  = new LinkedHashMap<String, List<Aul_RegistroNotas>>();
+		try {
+			try(Connection con = new  ConexionSqlServer().getConexion()){
+				try(PreparedStatement pr  = con.prepareStatement("{call dbo.sp_REGISTRONOTAS_by_IDCICLO_3_get(?,?)}")){
+					pr.setInt(1, idCiclo);
+					pr.setInt(2, idCuenta);
+					try(ResultSet rs= pr.executeQuery()){
+							while(rs.next()) {
+								Aul_RegistroNotas aul = new Aul_RegistroNotas();
+								aul.setIdSecCur(rs.getInt(1));
+								aul.setIdCuenta(rs.getInt(2));
+								aul.setAlumno(rs.getString(3));
+								aul.setPeriodo(rs.getString(4));
+								aul.setDescNotas(rs.getString(5));
+								aul.setNota(rs.getString(6));
+								
+								if(!map.containsKey(aul.getAlumno())) {
+									List<Aul_RegistroNotas> notes = new ArrayList<Aul_RegistroNotas>();
+									notes.add(aul);
+									map.put(aul.getAlumno(), notes);
+								}else {
+									map.get(aul.getAlumno()).add(aul);
+								}
+							
+						}
+					}
+				}
+			}			
+		}catch (SQLException e) {
+			throw new SQLException(e);
+		}
+		return map;
+	}
+
+	
+	@Override
 	public Map<String, List<Aul_RegistroNotas>>  all(int idCiclo, int SecCurPro) throws NotAll, SQLException {
 		Map<String, List<Aul_RegistroNotas>> map  = new LinkedHashMap<String, List<Aul_RegistroNotas>>();
 		try {

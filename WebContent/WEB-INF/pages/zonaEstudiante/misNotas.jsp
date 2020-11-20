@@ -6,9 +6,9 @@
 	<head lang="es">
 		<meta charset="utf-8">
 		<base href="/AppColegio2020/" target="_blank">
-		<meta name="description" content="Mis cursos" />
+		<meta name="description" content="Mis notas" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-		<title>Evaluaciones Parciales</title>
+		<title>Mis notas</title>
 		<link rel="shortcut icon" href="assets/img/static/logoColegio.jpg"
 			type="image/x-icon">
 		<link rel="stylesheet" href="assets/css/utils/template/bootstrap.css" />
@@ -34,7 +34,7 @@
 		<link rel="stylesheet" href="assets/css/components/loader2.css">
 		<link rel="stylesheet" href="assets/css/pages/courses/resourses2.css">
 		<link rel="stylesheet" href="assets/css/components/modal2.css">
-		<link rel="stylesheet" href="assets/css/utils/tables2.css">
+		<!--<link rel="stylesheet" href="assets/css/utils/tables2.css">-->
 		<link rel="stylesheet" href="assets/css/components/goUp2.css">
 		<link rel="stylesheet" href="assets/css/pages/registroEvaluaciones.css">
 		
@@ -51,7 +51,7 @@
 				}
 			</script>
 			<jsp:include page="../../includes/sidebar.jsp">
-				<jsp:param value="6" name="foco" />
+				<jsp:param value="5" name="foco" />
 			</jsp:include>
 			<div class="main-content">
 				<div class="breadcrumbs" id="breadcrumbs">
@@ -62,31 +62,36 @@
 						}
 					</script>
 					<jsp:include page="../../includes/breadcrumb.jsp">
-						<jsp:param value="Registrar Notas" name="title"/>
+						<jsp:param value="Mis notas" name="title"/>
 					</jsp:include>
 				</div>
 				<div class="registro-evaluaciones">
-					<h1 class="registro-evaluaciones__title">Registro de notas</h1>
-					<form class="registro-evaluaciones__form" id="registro-evaluaciones__form">
+					<h1 class="registro-evaluaciones__title">Mis notas</h1>
+					<!-- <form class="registro-evaluaciones__form" id="registro-evaluaciones__form">
 						<div class="registro-evaluaciones__group">
 							<label>Grado</label>
-							<select name="grades" id="grades">
+							<select name="grades" id="grades" disabled=true>
 								<option value="none">Seleccione un grado...</option>
-								<c:forEach items="${requestScope.secciones}" var="seccion">
-									<option value="${seccion.idSecGraNiv}">${seccion.grado} ${seccion.nivel}</option>
-								</c:forEach>
+								<option value="1" selected>${seccion.grado}>"Option"</option>
 							</select>
 						</div>
 						<div class="registro-evaluaciones__group">
 							<label>Curso</label>
 							<select name="courses" id="courses">
 								<option value="none">Seleccione un curso...</option>
+								<c:forEach items="${requestScope.cursos}" var="curse">
+									<option 
+										data-profesor="${curse.profesor}"
+										data-descCurso="${curse.descCurso}"
+										data-idSecCurPro="${curse.idSecCurPro}"
+										value="${curse.idSecCurPro}">${curse.descCurso}</option>
+								</c:forEach>
 							</select>
 						</div>
-					</form>
+					</form>-->
 					<div class="registro-evaluaciones__tags">
 						<div class="tag-one-window">
-							<ul class="tag-one-window__list hidden" id="bimestres">
+							<ul class="tag-one-window__list" id="bimestres">
 							<c:if test="${requestScope.ciclos != null}">
 								<c:forEach var="item" items="${requestScope.ciclos}">
 									<li class="tag-one-window__item je-btn je-btn--smaller" data-id="${item.idCiclo}">
@@ -137,6 +142,6 @@
 		<script src="assets/js/utils/goUp2.js"></script>
 		<script src="assets/js/pages/registrarNotas/modalTableRegister.js"></script>
 		<script src="assets/js/pages/registrarNotas/tableRegister.js"></script>
-		<script src="assets/js/pages/registrarNotas/index.js"></script>
+		<script src="assets/js/pages/misNotas/index.js"></script>
 	</body>
 </html>

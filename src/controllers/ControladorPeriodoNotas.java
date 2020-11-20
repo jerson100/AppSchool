@@ -52,7 +52,7 @@ public class ControladorPeriodoNotas extends HttpServlet {
 		Map<String, Object> result = new HashMap<String, Object>();
 		if(us != null) {
 			if(us.getIdPerfil() == AppColegio.TIPO_ADMINISTRADOR || 
-					   us.getIdPerfil() == AppColegio.TIPO_DOCENTE) {
+					   us.getIdPerfil() == AppColegio.TIPO_DOCENTE || us.getIdPerfil() == AppColegio.TIPO_ALUMNO) {
 				try {
 					int idCiclo = Integer.parseInt(request.getParameter("idCiclo"));
 					int idSecCur = Integer.parseInt(request.getParameter("idSecCurPro"));

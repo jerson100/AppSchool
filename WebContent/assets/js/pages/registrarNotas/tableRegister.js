@@ -1,5 +1,6 @@
 class TableRegister {
-	constructor(container, dataHeaders={courses, grades, ciclo, idSecCurPro}, type="alumno"){
+	constructor(container, dataHeaders={courses, grades, ciclo, idSecCurPro}, type="docente"){
+		console.log(dataHeaders);
 		this.$container = container;
 		this.headers =  dataHeaders;
 		this.type = type;
@@ -84,7 +85,7 @@ class TableRegister {
 		const fragmentColumnsPeridos = document.createDocumentFragment();
 		
 		fragmentColumnsPeridos.appendChild(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"width",val:"40"},{attr:"colspan",val:"1"}],`Nº`));
-		fragmentColumnsPeridos.appendChild(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"width",val:"400"},{attr:"colspan",val:"3"}],`Apellidos y nombres`));
+		fragmentColumnsPeridos.appendChild(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"width",val:"400"},{attr:"colspan",val:"3"}],`${this.type==="alumno"?"Cursos":"Apellidos y Nombres"}`));
 		
 		periodoskeys.forEach((k)=>{
 			const per = this.dataPeriodo[k];
@@ -95,11 +96,19 @@ class TableRegister {
 				`
 			));					
 			per.forEach((p, index) => {
-				fragmentColumnsPeridos.append(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"width",val:"65"},{attr:"rowspan",val:"1"}],
-					`
-						${index != per.length -1  ? `<button class="je-btn je-btn--short" data-idPeriodoNotas=${p.idPeriodoNotas}  data-idCiclo=${p.periodo.ciclo.idCiclo}>${p.notas.descNotas}</button>`:p.notas.descNotas}
-					`
-				));
+				if(this.type === "alumno"){
+					fragmentColumnsPeridos.append(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"width",val:"65"},{attr:"rowspan",val:"1"}],
+							`
+								${p.notas.descNotas}
+							`
+					));	
+				}else{
+					fragmentColumnsPeridos.append(this.createCol("th",[{attr:"class",val:"grid__col"},{attr:"width",val:"65"},{attr:"rowspan",val:"1"}],
+							`
+							${index != per.length -1  ? `<button class="je-btn je-btn--short" data-idPeriodoNotas=${p.idPeriodoNotas}  data-idCiclo=${p.periodo.ciclo.idCiclo}>${p.notas.descNotas}</button>`:p.notas.descNotas}
+							`
+					));					
+				}
 			});
 		});
 	
@@ -122,13 +131,13 @@ class TableRegister {
 		
 		schoolTr.appendChild(this.createCol("th",[{attr:"class",val:"grid__col grid__col--center"},{attr:"colspan",val:countAllColumns  + 1},{attr:"rowspan",val: 1}],
 			`
-				Registro auxiliar de evaluación - ${this.headers.ciclo.value} - 2020 ${this.headers.grades.value} - ${this.headers.courses.descCurso})
+				Registro auxiliar de evaluación - ${this.headers.ciclo.value} - 2020 ${this.type==="alumno"?"":`${this.headers.grades.value} - ${this.headers.courses.descCurso}`}
 			`
 		));
 		
 		teacherTr.appendChild(this.createCol("th",[{attr:"class",val:"grid__col grid__col--center"},{attr:"colspan",val:countAllColumns + 1},{attr:"rowspan",val: 1}],
 			`
-				Profesor: ${this.headers.courses.profesor} - Curso: ${this.headers.courses.descCurso}
+				${this.type==="alumno"?" - ":`Profesor: ${this.headers.courses.profesor} - Curso: ${this.headers.courses.descCurso}`}
 			`
 		));
 		

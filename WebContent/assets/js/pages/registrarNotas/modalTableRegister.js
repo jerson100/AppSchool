@@ -6,7 +6,7 @@ const temple = (title="Agregar notas") => {
 					<p class="j-modal__title">${title}</p>
 				</div>
 				<div class="j-modal__body">
-					<div class="grid je-scroll">
+					<div class="grid je-scroll" style="max-height: 70vh;">
 						<table class="grid__table grid__table--hover" border>
 							<thead class="grid__thead">
 								<tr class="grid__row">
@@ -97,7 +97,7 @@ const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo
 				}
 			);
 			if(!validarNota(inputs[i].value)){
-				msg = inputs[i].dataset.idcuenta;
+				msg = `La nota ingresada para el alumno ${alumnos[i].alumno} no es válida`;
 				break;
 			}
 		}
@@ -109,15 +109,16 @@ const showModalTableRegister = (alumnos=[], idSecCurPro, idPeriodoNotas, idCiclo
 					"content-type":"application/json",
 					body: JSON.stringify(values)
 				});
+				showModalMessage("Agregado satisfactoriamente.", 5000);
 				containerModal.remove();
 				table.updateData();
 			}catch(e){
-				console.log(e);
+				showModalMessage("Ocurrió un error en el servidor", 5000);
 			}finally{
 				load.remove();
 			}
 		}else{
-			showModalMessage(msg,10000);
+			showModalMessage(msg,5000, false);
 		}
 	});
 	

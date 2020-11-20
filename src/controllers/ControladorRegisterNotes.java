@@ -49,23 +49,23 @@ public class ControladorRegisterNotes extends HttpServlet {
 		Map<String, Object> result = new HashMap<String, Object>();
 		if (action != null) {
 			if (us != null) {
-				if (us.getIdPerfil() == AppColegio.TIPO_ADMINISTRADOR || us.getIdPerfil() == AppColegio.TIPO_DOCENTE) {
+				//if (us.getIdPerfil() == AppColegio.TIPO_ADMINISTRADOR || us.getIdPerfil() == AppColegio.TIPO_DOCENTE) {
 					switch (action) {
 					case "listar":
 						listar(request, response);
 						return;
 					case "listarMapNotes":
-						listarMapNotes(request, response);
+						listarMapNotes(us, request, response);
 						return;
 					default:
 						response.setStatus(403);
 						result.put("msg", "Usted no puede ver este recurso");
 						return;
 					}
-				} else {
+				/*} else {
 					response.setStatus(403);
 					result.put("msg", "Usted no puede ver este recurso");
-				}
+				}*/
 			} else {
 				response.setStatus(401);
 				result.put("msg", "Inicie sesión");
@@ -79,14 +79,19 @@ public class ControladorRegisterNotes extends HttpServlet {
 		}
 	}
 
-	private void listarMapNotes(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void listarMapNotes(Sesion us, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			int idCiclo = Integer.parseInt(request.getParameter("idCiclo"));
 			int idSecCur = Integer.parseInt(request.getParameter("idSecCurPro"));
 			Aul_RegistroNotasDao registroDao = (Aul_RegistroNotasDao) dao;
 			try {
-				Map<String, List<Aul_RegistroNotas>> list = registroDao.all(idCiclo, idSecCur);
+				Map<String, List<Aul_RegistroNotas>> list =  
+						us.getIdPerfil() == AppColegio.TIPO_ALUMNO 
+						? 
+							registroDao.allNotasStudent(idCiclo, us.getIdCuenta())
+						: 
+							registroDao.all(idCiclo, idSecCur);
 				result.put("data", list);
 				//System.out.println(list);
 			} catch (SQLException e) {

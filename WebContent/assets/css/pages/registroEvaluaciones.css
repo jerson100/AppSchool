@@ -21,8 +21,10 @@
 
 .registro-evaluaciones__form{
 	display: flex;
-	justify-content: center;
-	margin-bottom: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
 .registro-evaluaciones__group{
@@ -139,4 +141,10 @@
 
 .tag-one-window__item--current{
 	
+}
+
+@media screen and (min-width: 1024px){
+	.registro-evaluaciones__form{
+	    flex-direction: row;
+    }
 }

@@ -1,5 +1,5 @@
-const showModalMessage = (message,time, position = {x:'left',y:'top'},animate = {open:'animate_default_open 2s 1 ease',close:'animate_default_close 2s 1 ease'}) => {
-	
+const showModalMessage = (message, time, automatic_close=true, position = {x:'left',y:'top'},animate = {open:'animate_default_open 2s 1 ease',close:'animate_default_close 2s 1 ease'}) => {
+	 
 	let modalPrev = document.querySelector(".je-modal-container_message");
 	if(modalPrev){
 		modalPrev.remove();
@@ -22,7 +22,7 @@ const showModalMessage = (message,time, position = {x:'left',y:'top'},animate = 
 						    </div>       
 		        	</div>
 		        `,
-		        automatic_close: true,
+		        automatic_close: automatic_close,
 		        time_close: time,
 		        timeout_modal: time,
 		        position: {

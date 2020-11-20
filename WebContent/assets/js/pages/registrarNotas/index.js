@@ -41,8 +41,10 @@
 					selections[name]= {
 						id: value,
 						value: evt.target.children[evt.target.selectedIndex].innerHTML
-					},
-					await handleChangeGrado();
+					};
+					if(value!=="none"){
+						await handleChangeGrado();						
+					}
 					break;
 				case "courses":
 					selections[name]= courses.find(c => c.idSecCurPro == value);
@@ -99,4 +101,3 @@
 	});	
 	
 })(document, window);
-
