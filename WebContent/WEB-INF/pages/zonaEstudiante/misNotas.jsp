@@ -5,7 +5,7 @@
 <html>
 	<head lang="es">
 		<meta charset="utf-8">
-		<base href="/AppColegio2020/" target="_blank">
+		<base href="../">
 		<meta name="description" content="Mis notas" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<title>Mis notas</title>
@@ -63,6 +63,7 @@
 					</script>
 					<jsp:include page="../../includes/breadcrumb.jsp">
 						<jsp:param value="Mis notas" name="title"/>
+						<jsp:param value="zonaEstudiante/misNotas" name="href"/>
 					</jsp:include>
 				</div>
 				<div class="registro-evaluaciones">

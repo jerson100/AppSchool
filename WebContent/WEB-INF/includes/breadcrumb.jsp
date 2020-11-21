@@ -27,7 +27,7 @@
 		<i class="ace-icon fa fa-home home-icon"></i>
 	</li>
 	<li>
-		<a href="cursos" style="font-size: 17px;">${param.title}</a>
+		<a href="${param.href}" style="font-size: 17px;">${param.title}</a>
 	</li>
 </ul>
 <div class="nav-search" style="margin: 7.5px 0px 0 22px; top: 0; width: 500px;">

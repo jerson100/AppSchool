@@ -81,7 +81,8 @@
 					}
 				</script>
 				<jsp:include page="../includes/breadcrumb.jsp">
-					<jsp:param value="title" name="Mis Cursos"/>
+					<jsp:param name="title" value="Mis Cursos"/>
+					<jsp:param value="cursos" name="href"/>
 				</jsp:include>
 			</div>
 
