@@ -1,12 +1,11 @@
 /*table, td, tr, th{
 	border: solid 1px black;
 }*/
-
-.hidden{
+.hidden {
 	display: none;
 }
 
-.registro-evaluaciones{
+.registro-evaluaciones {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 1440px;
@@ -14,116 +13,113 @@
 	padding-right: 1rem;
 }
 
-.registro-evaluaciones__title{
+.registro-evaluaciones__title {
 	text-align: center;
 	margin-bottom: 4rem;
 }
 
-.registro-evaluaciones__form{
+.registro-evaluaciones__form {
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 2rem;
 }
 
-.registro-evaluaciones__group{
+.registro-evaluaciones__group {
 	padding: 1rem;
 }
 
-.registro-evaluaciones__group >  label{
+.registro-evaluaciones__group>label {
 	margin-right: .5rem;
 }
 
-.registro-evaluaciones__school{
+.registro-evaluaciones__school {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.registro-evaluaciones__logo{
+.registro-evaluaciones__logo {
 	width: 50px;
 	margin-right: 1rem
 }
 
-.grid{
+.grid {
 	margin-left: auto;
 	margin-right: auto;
 	overflow: auto;
 }
 
-.grid__table{
+.grid__table {
 	font-size: 13px;
 	width: 100%;
 	min-width: 500px;
-	border-color: rgba(0,0,0,.15);
+	border-color: rgba(0, 0, 0, .15);
 	transition: background-color 500ms ease;
 }
 
-.grid__table--hover tbody > tr:hover{
+.grid__table--hover tbody>tr:hover {
 	background-color: #0000000a;
 }
 
-.grid__table--small{
+.grid__table--small {
 	min-width: 768px;
 }
 
-.grid__table--large{
+.grid__table--large {
 	min-width: 1300px;
 }
 
-.grid__col{
+.grid__col {
 	text-align: center;
-    padding: .8rem .5rem;
-    padding: .3em 0;
-    text-align: left;
-    padding-left: 1rem;
-    padding-right: 1rem;
+	padding: .8rem .5rem;
+	padding: .3em 0;
+	text-align: left;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
-.grid__thead .grid__col{
-	text-align: center;
-}
-
-.grid__col--center{
+.grid__thead .grid__col {
 	text-align: center;
 }
 
-.grid__col--right{
+.grid__col--center {
+	text-align: center;
+}
+
+.grid__col--right {
 	text-align: right;
 }
 
-.grid__col input{
+.grid__col input {
 	width: 100%;
-    padding-left: 2px;
-    border: solid 1px rgba(0,0,0,.2);
-    padding: 0;
-    
+	padding-left: 2px;
+	border: solid 1px rgba(0, 0, 0, .2);
+	padding: 0;
 }
 
-.grid__thead .grid__col{
+.grid__thead .grid__col {
 	font-weight: bold;
 }
 
-.grid__col--color-blue{
+.grid__col--color-blue {
 	background-color: rgb(198, 217, 241);
 }
 
-.grid__col--note{
-	width:  30px;
+.grid__col--note {
+	width: 30px;
 	height: 30px;
 }
-
-
 
 /*
 	tag-one-window
 */
-
-.tag-one-window{
+.tag-one-window {
+	
 }
 
-.tag-one-window__list{
+.tag-one-window__list {
 	display: flex;
 	justify-content: center;
 	list-style: none;
@@ -133,18 +129,18 @@
 	overflow-y: hidden;
 }
 
-.tag-one-window__item{
+.tag-one-window__item {
 	margin: 1rem;
 	user-select: none;
 	flex-shrink: 0;
 }
 
-.tag-one-window__item--current{
+.tag-one-window__item--current {
 	
 }
 
-@media screen and (min-width: 1024px){
-	.registro-evaluaciones__form{
-	    flex-direction: row;
-    }
+@media screen and (min-width: 1024px) {
+	.registro-evaluaciones__form {
+		flex-direction: row;
+	}
 }

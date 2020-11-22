@@ -1,4 +1,4 @@
-input[type="radio"]{
+input[type="radio"] {
 	margin: 0;
 	flex: 0 1 10px !important;
 }
@@ -9,9 +9,7 @@ input[type="radio"]{
 	flex-direction: column;
 }
 
-.je-row-form .col-1,
-.je-row-form .col-2,
-.je-row-form .col-3{
+.je-row-form .col-1, .je-row-form .col-2, .je-row-form .col-3 {
 	width: 100%;
 }
 
@@ -53,19 +51,19 @@ input[type="radio"]{
 	align-items: flex-start;
 }
 
-.radio-container{
+.radio-container {
 	display: flex;
 	width: 100%;
 }
 
-.radio-container label{
+.radio-container label {
 	flex: 0 1 auto;
 }
 
-.radio-container .form-group{
+.radio-container .form-group {
 	justify-content: center;
-    align-items: center;
-    margin-right: .5rem;
+	align-items: center;
+	margin-right: .5rem;
 }
 
 .je-row-form .form-group:last-child {
@@ -77,7 +75,7 @@ form {
 	margin: auto;
 }
 
-select{
+select {
 	height: auto;
 }
 
@@ -89,27 +87,22 @@ select{
 		display: flex;
 		margin-bottom: 3rem;
 	}
-	
-	.je-row-form .form-group{
+	.je-row-form .form-group {
 		padding-right: 2rem;
 	}
-	
-	.je-row-form .col-1{
+	.je-row-form .col-1 {
 		width: 30%;
 	}
-	
-	.je-row-form .col-2{
+	.je-row-form .col-2 {
 		width: 35%;
 	}
-	
-	.je-row-form .col-3{
+	.je-row-form .col-3 {
 		width: 35%;
 	}
-	
-	.je-row-form .col-70{
+	.je-row-form .col-70 {
 		width: 70%;
 	}
-	.je-row-form .col-45{
+	.je-row-form .col-45 {
 		width: 45%;
 	}
 }

@@ -1,8 +1,8 @@
-.mod{
+.mod {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0,0,0,.5);
+	background-color: rgba(0, 0, 0, .5);
 	width: 100vw;
 	height: 100vh;
 	opacity: 0;
@@ -10,18 +10,18 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 100000;
-	--mod-color: #fff;
-	--mod-bg: rgba(0,0,0,.5);
+	z-index: 100000; 
+	--mod-color: #fff; 
+	--mod-bg: rgba(0, 0, 0, .5);
 }
 
-.mod--active{
+.mod--active {
 	transition: opacity 500ms, vibility 500ms;
 	opacity: 1;
 	visibility: visible;
 }
 
-.mod__inner{
+.mod__inner {
 	padding-left: .5rem;
 	padding-right: .5rem;
 	display: flex;
@@ -29,12 +29,12 @@
 	width: 100%;
 }
 
-.mod__inner--pd-1{
+.mod__inner--pd-1 {
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
 
-.mod__close{
+.mod__close {
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
@@ -48,24 +48,24 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
-	border: solid 1px rgba(0,0,0,.1);
+	border: solid 1px rgba(0, 0, 0, .1);
 }
 
-.mod__close--light{
-	--mod-color: rgba(0,0,0,.5);
-	--mod-bg : #fff;
+.mod__close--light { 
+	--mod-color: rgba(0, 0, 0, .5); 
+	--mod-bg: #fff;
 }
 
-.mod__close--dark{
-	--mod-color: #fff;
-	--mod-bg: rgba(0,0,0,.5);
+.mod__close--dark { 
+	--mod-color: #fff; 
+	--mod-bg: rgba(0, 0, 0, .5);
 }
 
-.mod--bg-op2{
-	background-color: rgba(0,0,0,.8);
+.mod--bg-op2 {
+	background-color: rgba(0, 0, 0, .8);
 }
 
-.youtube{
+.youtube {
 	width: 65%;
 	max-width: 1300px;
 	padding: 1rem;
@@ -75,13 +75,13 @@
 	position: relative;
 }
 
-.youtube .mod__close{
-	transform: translate(50%,-50%);
+.youtube .mod__close {
+	transform: translate(50%, -50%);
 	right: 0;
 	top: 1rem;
 }
 
-.youtube__title{
+.youtube__title {
 	font-size: .9em;
 	padding: .5rem 0;
 	font-weight: bold;
@@ -91,38 +91,36 @@
 }
 
 .youtube__wrapper {
-    height: 0;
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    position: relative;
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	position: relative;
 }
 
-.youtube__wrapper iframe,
-.youtube__wrapper object,
-.youtube__wrapper embed,
-.youtube__wrapper video {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
+.youtube__wrapper iframe, .youtube__wrapper object, .youtube__wrapper embed,
+	.youtube__wrapper video {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
 }
 
-@media screen and (min-width: 768px){
-	.youtube__title{
+@media screen and (min-width: 768px) {
+	.youtube__title {
 		font-size: 1.4em;
 	}
 }
 
 @media screen and (max-width: 850px) and (orientation: landscape) {
 	.youtube__wrapper {
-	    padding-bottom: 38%;
-    }
+		padding-bottom: 38%;
+	}
 }
 
-@media screen and (min-width: 1000px){
-	.youtube .mod__close{
+@media screen and (min-width: 1000px) {
+	.youtube .mod__close {
 		top: 0;
 	}
 }

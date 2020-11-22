@@ -1,0 +1,489 @@
+* { 
+	--width-course: calc(100%/ 3); 
+	--margin: 2rem;
+}
+
+h2 {
+	margin-bottom: 2.5rem;
+}
+
+.je-container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	max-width: 1024px;
+}
+
+.je-item {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.teacher-container {
+	margin: 6px 22px 0 12px;
+}
+
+/*
+	Grados
+*/
+.grado-container {
+	display: flex;
+	/*---*/
+	flex-wrap: wrap;
+	max-height: 164px;
+	border: solid 1px rgba(0, 0, 0, .05);
+	padding: 1rem;
+	overflow: auto;
+}
+
+.grado-container .grado-item {
+	border-radius: 5px;
+	border: solid 1px red;
+	padding: .5rem;
+	margin-right: 1rem;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	/**/
+	flex: 0 0 calc(50% - .5rem);
+	margin-bottom: 1rem;
+}
+
+.grado-item:nth-child(2n) {
+	margin-right: 0;
+}
+
+.grado-item span {
+	text-align: center;
+	/**/
+	font-size: 11px;
+}
+
+.grado-item.selected::after {
+	content: '';
+	position: absolute;
+	top: -9px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 8px;
+	border-style: solid;
+	border-color: red transparent transparent transparent;
+	animation: movTop 2s infinite alternate ease-in-out;
+}
+
+@keyframes movTop { 
+	0%,90%{
+		border-color: transparent transparent transparent transparent;
+		background: #ff000052;
+	}
+	
+	15%,75%{
+		border-color: red transparent transparent transparent;
+		background:initial;
+	}
+	
+	30%{
+		border-color: transparent red transparent transparent;	
+		background:initial;
+	}
+	
+	45%{
+		border-color:transparent transparent  red transparent;
+		background:initial;
+	}
+	
+	60%{
+		border-color:transparent transparent transparent red;
+		background:initial;
+	}
+
+}
+.grado-container .grado-item:last-child {
+	margin-right: 0;
+}
+
+.left-container {
+	margin-bottom: 2rem;
+}
+
+.title-grados {
+	text-align: center;
+}
+
+.title {
+	font-size: 18px;
+}
+/*
+
+	Fin grados
+	
+*/
+
+/*
+
+	Cursos
+	
+*/
+.courses-container {
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.courses-container .wrapper-course {
+	margin-bottom: var(--margin);
+	width: var(--width-course);
+}
+
+.courses-container .wrapper-course:nth-child(2n) {
+	margin-right: 0;
+}
+
+.item-course {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.item-course .icon-course {
+	width: 80px;
+	height: 80px;
+	border-radius: 5px;
+	background: #438eb9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: .8rem;
+	cursor: pointer;
+	transition: transform .3s ease;
+}
+
+.icon-course i {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.item-course .icon-course:hover {
+	transform: scale(1.1);
+}
+
+.item-course .icon-course.selected {
+	background-color: #d01e1e;
+	border: solid 3px #621919;
+}
+
+.icon-course i::before {
+	font-size: 50px;
+	color: #fff;
+}
+
+.item-course .text-course {
+	display: block;
+	text-align: center;
+}
+
+.text-course-name {
+	cursor: pointer;
+	text-align: center;
+}
+
+.teacher {
+	display: none;
+}
+
+/*
+	TABLES
+*/
+.tables-container {
+	display: none;
+}
+
+.table-container--visible {
+	display: block;
+}
+
+/*
+
+	MODAL-ADD
+
+*/
+.je-modal-container .theme-form-container {
+	overflow: auto;
+	max-height: 40vh;
+}
+
+.je-row-theme .je-input-group {
+	display: flex;
+	align-items: center;
+	margin-bottom: .5rem;
+	flex: 1 1 auto;
+}
+
+.je-input-group input {
+	flex: 1 1 0;
+	width: 100%;
+}
+
+.je-input-group label {
+	margin-right: .5rem;
+	flex: 0 0 80px;
+}
+
+.je-row-theme .je-input-group:last-child {
+	margin-right: 0;
+	flex: 1 0 0;
+}
+
+.theme-form-container .je-row-theme {
+	margin-bottom: 1rem;
+	flex-direction: column;
+	padding: 1rem;
+	border: dashed 1px rgba(0, 0, 0, .15);
+	position: relative;
+	margin-bottom: 1.5rem;
+}
+
+.theme-form-container .je-row-theme:last-child {
+	margin-bottom: 0;
+}
+
+#m-form-theme {
+	padding: 1rem;
+}
+
+.je-row-theme .close-row {
+	position: absolute;
+	top: -10px;
+	right: -10px;
+}
+
+.close-theme-g {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	border-radius: 50%;
+	align-items: center;
+	background-color: var(--color-accent);
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+}
+
+.container-checks {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.group-col {
+	width: 100%;
+}
+
+/*
+
+	Modificaciones al templ
+	
+*/
+.animateText {
+	opacity: 0;
+	transition: opacity 1s;
+	position: absolute;
+	right: 0px;
+	font-size: 17px
+}
+
+.animateText.active {
+	opacity: 1;
+}
+
+/******************/
+.je-modal_inner-wrapper {
+	width: 100%
+}
+
+.themes-buttons-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.wrapper-main {
+	display: block;
+}
+
+/*****************/
+
+/*Verify extension*/
+.verifyExtension {
+	max-width: 550px;
+	margin: 0 auto;
+}
+
+.verifyExtension__img {
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 3.5rem;
+	clip-path: polygon(0 10%, 50% 0, 100% 10%, 100% 90%, 50% 100%, 0 90%);
+	max-width: 50%;
+	animation: fromTopToBottom 500ms 1 linear, scale 500ms 800ms infinite
+		linear alternate;
+}
+
+.verifyExtension__title {
+	color: #fff;
+	font-size: 2em;
+	text-align: center;
+	display: block;
+	font-weight: bold;
+	text-shadow: 0 0 10px red;
+	animation: fromRightToLeft 500ms 1 linear;
+}
+
+.comment-teacher {
+	padding: 1rem;
+	border-radius: 5px;
+	background-color: #fff;
+	width: 90%;
+	max-width: 500px;
+	position: relative;
+}
+
+.comment-teacher__close {
+	right: 0 !important;
+	top: 0 !important;
+	transform: translate(50%, -50%) !important;
+}
+
+.comment-teacher__title {
+	font-weight: bold;
+	font-size: 15px;
+	margin: 0 0 1rem 0;
+	padding-bottom: .5rem;
+	padding-top: 1rem;
+	border-bottom: solid 1px rgba(0, 0, 0, .3);
+}
+
+.comment-teacher__text {
+	padding: 1rem;
+	margin-bottom: 0;
+}
+
+@media screen and (min-width: 700px) {
+	.left-wrapperr {
+		position: sticky;
+		top: 80px;
+	}
+	.teacher {
+		display: inline;
+	}
+	.courses-container .wrapper-course { 
+		--width-course: calc(100%/ 3);
+	}
+	.left-container {
+		flex-direction: row;
+		flex: 0 0 238px;
+		border-right: solid 2px #ff000052;
+		position: relative;
+	}
+	.left-container::before {
+		content: '';
+		position: absolute;
+		top: calc(50% - 8px);
+		top: 0;
+		background: #ff00001a;
+		border-width: 8px;
+		border-style: solid;
+		border-color: transparent #ff00001a;
+		right: -9px;
+	}
+	.grado-container {
+		max-height: calc(100vh - 250px);
+		flex-direction: column;
+		flex-direction: row;
+	}
+	.grado-container .grado-item {
+		width: 100%;
+		margin-bottom: 1rem;
+		margin-right: 0;
+		position: relative;
+		flex-basis: 100%;
+	}
+	.right-container {
+		/*flex: 1 0 0;*/
+		width: calc(100% - 238px);
+	}
+	.wrapper-main {
+		display: flex;
+	}
+	.grado-item.selected {
+		background: #d01e1e;;
+		color: #fff;
+		transition: all 2s;
+	}
+	.grado-item.selected::after {
+		right: 2px;
+		top: initial;
+		border-width: 8px;
+		border-color: transparent #ff000052 transparent transparent;
+		animation: none;
+		transform: initial;
+	}
+	.grado-item.selected::before {
+		content: '';
+		position: absolute;
+		width: 2px;
+		height: 100%;
+		right: 0;
+		background: #ff000052;
+		border-radius: 10px;
+	}
+	.nav-table_action i {
+		cursor: pointer;
+	}
+	.nav-table_action i:hover {
+		color: #ff000052;
+	}
+	.group-col {
+		width: 100%;
+		display: flex;
+		/*align-items: center;*/
+		justify-content: flex-start;
+		flex-direction: column;
+		/*text-align: center;*/
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.theme-form-container .je-row-theme {
+		flex-direction: row;
+	}
+	.je-row-theme .je-input-group:nth-child(1) {
+		flex: 0 0 30%;
+		margin-right: 3rem;
+		margin-bottom: 0;
+	}
+	.je-row-theme .je-input-group:nth-child(2) {
+		flex: 1 0 0;
+		margin-bottom: 0;
+	}
+	.je-row-theme .je-input-group:nth-child(2)>label {
+		flex-basis: 40px;
+	}
+}
+
+@media screen and (min-width: 905px) {
+	.wrapper-main>div {
+		padding: 1.5rem;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.courses-container .wrapper-course { 
+		--width-course: calc(100%/ 6);
+	}
+}

@@ -1,0 +1,73 @@
+.j-modal { 
+	--z-modal: 9000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1040;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .657);
+	overflow: auto;
+	z-index: var(--z-modal);
+}
+
+.j-modal__document {
+	margin: 1rem;
+}
+
+.j-modal__document--vertical {
+	display: flex;
+	align-items: center;
+	min-height: calc(100% - 3.5rem);
+}
+
+.j-modal__content {
+	width: 100%;
+	background-color: #fff;
+}
+
+.j-modal__header {
+	padding: 2rem;
+	border-bottom: solid 1px rgba(0, 0, 0, .2);
+}
+
+.j-modal__title {
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin: 0;
+}
+
+.j-modal__body {
+	padding: 2rem;
+}
+
+.j-modal__footer {
+	border-top: solid 1px rgba(0, 0, 0, .2);
+	padding: 2rem;
+}
+
+@media screen and (min-width: 576px) {
+	.j-modal__document {
+		margin: 1.75rem auto;
+		max-width: 500px;
+	}
+	.j-modal__document--small, .j-modal__document--large,
+		.j-modal__document--full {
+		max-width: calc(100% - 2rem);
+	}
+	.j-modal__document--full {
+		margin: 1rem;
+	}
+}
+
+@media screen and (min-width: 825px) {
+	.j-modal__document--small {
+		max-width: 768px;
+	}
+}
+
+@media screen and (min-width: 1275px) {
+	.j-modal__document--large {
+		max-width: 1200px;
+	}
+}

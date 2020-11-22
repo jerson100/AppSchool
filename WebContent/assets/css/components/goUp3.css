@@ -1,4 +1,4 @@
-.goUp{
+.goUp {
 	width: 50px;
 	height: 50px;
 	display: flex;
@@ -13,22 +13,24 @@
 	right: 2rem;
 	z-index: 99999;
 	transform: translateX(100%) rotate(0deg) scale(0);
-	transition: transform 500ms, opacity 0s 500ms, visibility 0s 500ms, background-color 500ms;
+	transition: transform 500ms, opacity 0s 500ms, visibility 0s 500ms,
+		background-color 500ms;
 	cursor: pointer;
 }
 
-.goUp__icon{
+.goUp__icon {
 	color: #fff;
 	font-size: 20px;
 }
 
-.goUp:hover{
+.goUp:hover {
 	background-color: var(--red-school-alt);
 }
 
-.goUp--active{
+.goUp--active {
 	opacity: 1;
 	visibility: visible;
 	transform: translateX(0) rotate(360deg) scale(1);
-	transition: transform 500ms, opacity 0s, visibility 0s, background-color 500ms;
+	transition: transform 500ms, opacity 0s, visibility 0s, background-color
+		500ms;
 }

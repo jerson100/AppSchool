@@ -1,59 +1,50 @@
-.glide img{
+.glide img {
 	width: 100%;
 	object-fit: contain;
 	height: 250px;
 }
 
-.glide ul
-{
+.glide ul {
 	margin: 0;
 	padding: 0;
 }
 
-.glide li{
+.glide li {
 	margin: 0;
 	padding: 0;
 }
 
 /***************BANNER******************/
-
-.banner-inner{
+.banner-inner {
 	width: 100%;
 }
 
-.banner-inner .title-banner{
+.banner-inner .title-banner {
 	text-align: center;
 	font-size: 20px;
 	padding: 1.5rem 0;
-	
 }
-
 
 /*************FIN BANNER****************/
 
-
 /*************DETAILS*******************/
-
-.details-container{
+.details-container {
 	width: 100%;
 }
 
-.details-container .container-button{
+.details-container .container-button {
 	height: 101px;
 }
 
-.glide{
-	background-color: rgba(0,0,0,.2);
+.glide {
+	background-color: rgba(0, 0, 0, .2);
 }
 
-@media screen and (min-width:700px){
-	
-	.glide img{
+@media screen and (min-width:700px) {
+	.glide img {
 		height: 400px;
 	}
-	
-	.details-container .container-button{
+	.details-container .container-button {
 		height: 120px;
 	}
-	
 }

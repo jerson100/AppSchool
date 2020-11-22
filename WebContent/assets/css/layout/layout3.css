@@ -1,0 +1,50 @@
+.je-container {
+	display: flex;
+	max-width: 1024px;
+	width: 100%;
+	flex-wrap: wrap;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.je-item {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	width: 100%;
+	margin: 0;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex.column {
+	flex-direction: column;
+}
+
+.flex.center {
+	justify-content: center;
+	align-items: center;
+}
+
+.flex.spacebetween {
+	justify-content: space-between;
+}
+
+.je-wrapper {
+	padding: 1rem;
+}
+
+.je-mb-1 {
+	margin-bottom: 1rem;
+}
+
+.flex--center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.txt-align-c {
+	text-align: center;
+}

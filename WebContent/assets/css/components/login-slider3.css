@@ -1,4 +1,4 @@
-.login-slider{
+.login-slider {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
@@ -7,17 +7,17 @@
 }
 
 .login-slider::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: #00000094;
-    z-index: 2;
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: #00000094;
+	z-index: 2;
 }
 
-.login-slider__list{
+.login-slider__list {
 	white-space: nowrap;
 	height: inherit;
 	width: inherit;
@@ -27,28 +27,28 @@
 	z-index: 2;
 }
 
-.login-slider__desktop{
+.login-slider__desktop {
 	position: absolute;
 	top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    filter: blur(25px);
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 1;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	filter: blur(25px);
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: 1;
 }
 
-.login-slider__item{
+.login-slider__item {
 	width: 100%;
-	height: 100%;	
-	display: block;	
+	height: 100%;
+	display: block;
 	background-size: auto;
 	background-position: center center;
 	background-repeat: no-repeat;
 }
 
-.login-slider__item--active{
+.login-slider__item--active {
 	animation: movSuave 500ms 1s 2 alternate ease;
 }
 

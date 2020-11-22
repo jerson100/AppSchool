@@ -1,0 +1,221 @@
+.days-container {
+	overflow: hidden;
+	padding: 3rem 0;
+}
+
+.days-container, .days-container .day-item, .day-item>span {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.days-container .day-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 1rem;
+}
+
+.day-item>span {
+	align-items: center;
+}
+
+.days-container .day-item {
+	/*border: solid 1px red;*/
+	border-radius: 5px;
+	margin-bottom: 1rem;
+	width: 50%;
+	justify-content: center;
+	overflow: hidden;
+	transition: transform .5s ease;
+	/*transform: translate(0,-200%) rotate(0deg);*/
+	transform: scale(0) rotate(0);
+	position: relative;
+	background: white;
+}
+
+.days-container .day-item:nth-child(1) {
+	z-index: 5;
+	/*transform: translate(-200%,-400%) rotate(0deg);*/
+}
+
+.days-container .day-item:nth-child(2) {
+	z-index: 4;
+}
+
+.days-container .day-item:nth-child(3) {
+	z-index: 3;
+}
+
+.days-container .day-item:nth-child(4) {
+	z-index: 2;
+}
+
+.days-container .day-item:nth-child(5) {
+	z-index: 1;
+	/*transform: translate(200%,400%) rotate(0deg);*/
+}
+
+.day-item>span {
+	justify-content: center;
+	cursor: pointer;
+	/*clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);*/
+	background: #438eb9;
+	color: #fff;
+	justify-content: center;
+	width: 150px;
+	height: 50px;
+	cursor: pointer;
+	border-radius: 10px;
+	animation: animateCourse 2s 4s infinite alternate ease;
+}
+
+@keyframes animateCourse {from { clip-path:polygon(0%15%, 0%0%, 15%0%,
+	85%0%, 100%0%, 100%15%, 100%85%, 100%100%, 85%100%, 15%100%, 0%100%, 0%85%);
+	background: #438eb9;
+}
+
+to {
+	clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%,
+		85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+	background: #438eb9d9;
+}
+
+}
+.day-content {
+	max-height: 0px;
+	transition: max-height 1s ease;
+	width: 100%;
+	text-align: center;
+	/*line-height: 1rem;*/
+	line-height: 1.5rem;
+	font-size: 12px;
+	max-width: 200px;
+	/* max-height: calc(100vh - 300px);*/
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.day-item.active .day-content {
+	/*max-height: 800px;*/
+	/*calc(100vh - 300px);*/
+	max-height: 1200px;
+	/*animation: rotateDay 1s 1 ease;*/
+}
+
+.day-item.active .class-container {
+	animation: opacity 1s 0s 1 ease;
+}
+
+.day-content p {
+	margin: 0 0 2px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.separator {
+	position: relative;
+	width: 2px;
+	height: 25px;
+	background-color: red;
+	margin: 0 auto;
+	margin-bottom: 1rem;
+}
+
+.separator::before {
+	content: '';
+	position: absolute;
+	left: -4.599px;
+	bottom: -8px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: red transparent transparent transparent;
+}
+
+.class-container {
+	/*clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+    background: #438eb9;
+    color: #fff;
+    padding: 2rem 0;*/
+	border: dashed 1px #438eb9;
+	border-style: dotted;
+	padding: .5rem;
+	border-radius: 10px;
+	background-color: #438eb914;
+}
+
+.day-item.active .name-course {
+	animation: nameCourse 1s 1 ease;
+}
+
+.day-item.active .hour-course {
+	animation: hourCourse 1s 1 ease;
+}
+
+.day-item.active .name-teacher {
+	animation: nameTeacher 1s 1 ease;
+}
+
+@keyframes opacity { 
+	0%{
+		opacity: 0;
+	}
+
+	100%{
+		opacity:1;
+	}
+}
+
+@keyframes hourCourse {
+	from { 
+		transform:scale(0)translateX(100%);
+	}
+
+	to {
+		transform: scale(1) translateX(0%);
+	}
+}
+
+@keyframes nameTeacher {
+	from { 
+		transform:scale(0)translateY(100%);	
+	}
+
+	to {
+		transform: scale(1) translateY(0%);
+	}
+}
+
+@keyframes nameCourse {
+	from { 
+		transform:scale(0)translateX(-100%);	
+	}
+
+	to {
+		transform: scale(1) translateX(0%);
+	}
+}
+
+@keyframes rotateDay { 
+	0%{
+		transform: scale(0) rotate(0deg) translateY(-100%);
+	}
+/*from{
+		transform: scale(0) rotate(0deg);
+	}
+	to{
+		transform: scale(1) rotate(360deg);
+	}*/
+}
+@media screen and (min-width: 750px) {
+	.days-container {
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+	.days-container .day-item {
+		width: 100%;
+	}
+}

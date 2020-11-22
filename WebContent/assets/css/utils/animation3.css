@@ -1,40 +1,41 @@
-@keyframes fromRightToLeft{
-	from{
-		transform: translateX(100%);
+@keyframes fromRightToLeft {
+	from { 
+		transform:translateX(100%);
 	}
-	to{
+	to {
 		transform: translateX(0);
 	}
 }
 
-@Keyframes toTop{
-	from{
-		transform: translateY(0);
+@Keyframes toTop {
+	from { 
+		transform:translateY(0);
 	}
-	to{
+
+	to {
 		transform: translateY(-60px);
 	}
-}
 
-@keyframes fromTopToBottom{
-	from{
-		transform: translateY(-100%);
+}
+@keyframes fromTopToBottom {
+	from { 
+		transform:translateY(-100%);
 	}
-	to{
+
+	to {
 		transform: translateY(0);
 	}
 }
-
-@keyframes scale{
-	from{
-		transform: scale(1);
+@keyframes scale {
+	from { 
+		transform:scale(1);
 	}
-	to{
+	to {
 		transform: scale(1.2);
 	}
 }
 
-@keyframes movSuave{
+@keyframes movSuave {
 	/*0%, 20%{
 		transform: rotate(0deg);
 	}
@@ -55,26 +56,28 @@
 	}
 	80%, 100%{
 		transform: rotate(0deg);
-	}*/
-	from{
-		transform: scale(1) rotate(0);
+	}*/ 
+	from { 
+		transform:scale(1)rotate(0);
 	}
-	to{
+	to {
 		transform: scale(0) rotate(360deg);
 	}
 }
-
-@keyframes boxShadowFadeIn{
+@keyframes boxShadowFadeIn { 
 	0%,25%{
 		box-shadow: 0 0 0 -2px var(--color-negative);
 	}
 	25%,50%{
-		box-shadow: 0 0 0 2px var(--color-negative);
+		box-shadow:0 0 0 2px var(--color-negative);
 	}
-	50%, 75%{
+	50%,
+	75%{
 		box-shadow: 0 0 0 -2px var(--color-negative);
 	}
-	75%, 100%{
-		box-shadow: 0 0 0 2px var(--color-negative);
+		
+	75%,
+	100%{
+		box-shadow:0 0 0 2px var(--color-negative);
 	}
 }
