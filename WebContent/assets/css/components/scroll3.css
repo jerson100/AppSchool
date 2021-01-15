@@ -31,3 +31,29 @@
 	{
 	background: #d4d4d4;
 }
+
+
+/*
+.je-scroll::-webkit-scrollbar {
+    background-color: rgba(255, 255, 255, 0.02);
+    width: 12px;
+    height: 12px;
+  }
+
+  .je-scroll::-webkit-scrollbar-track {
+    background: rgb(214, 214, 214);
+  }
+
+  .je-scroll::-webkit-scrollbar-thumb {
+    background: rgb(195, 195, 195);
+    border-radius: 10px;
+    }
+    .je-scroll:hover {
+      background: rgb(180, 180, 180);
+    }
+    .je-scroll:active {
+      background: rgb(153, 153, 153);
+    }
+  
+
+*/

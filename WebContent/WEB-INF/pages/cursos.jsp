@@ -15,6 +15,10 @@
 <link rel="stylesheet" href="assets/css/utils/template/bootstrap.css" />
 <link rel="stylesheet" href="assets/css/utils/template/font-awesome.css" />
 
+<link rel="stylesheet" href="assets/css/theme/color3.css">
+<!-- <link rel="stylesheet"
+	href="assets/css/base/base3.css">-->
+
 <!-- text fonts -->
 <link rel="stylesheet" href="assets/css/utils/template/ace-fonts.css" />
 
@@ -26,8 +30,6 @@
   -->
 
 <link rel="stylesheet" href="assets/css/layout/layout3.css">
-
-<link rel="stylesheet" href="assets/css/theme/color3.css">
 
 <link rel="stylesheet" href="assets/css/components/button3.css">
 
