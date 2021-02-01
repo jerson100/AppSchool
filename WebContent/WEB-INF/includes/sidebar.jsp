@@ -29,12 +29,19 @@
 					class="menu-text"> Mi horario </span>
 			</a> <b class="arrow"></b></li>
 		</c:if>
-		<c:if test="${sessionScope.usuarioSesion.idPerfil == 4}">
-			<li class="open ${param.foco == '4' ? 'active':''}"><a
-				href="mantenimiento" style="display: flex; align-items: center;">
-					<i class="menu-icon fa fa-cog" style="font-weight: 700;"></i> <span
-					class="menu-text">Mantenimiento</span>
-			</a> <b class="arrow"></b></li>
+		<c:if test="${sessionScope.usuarioSesion.idPerfil == 3}">
+			<li class="open ${param.foco == '7' ? 'active':''}"><a
+				href="mantenimientoNoticias"
+				style="display: flex; align-items: center;"> <i
+					class="menu-icon far fa-clipboard" style="font-weight: 700"></i> <span
+					class="menu-text"> Mantenimiento Noticias</span>
+			</a> <b class="arrow"></b>
+			<li class="open ${param.foco == '8' ? 'active':''}"><a
+				href="zonaEstudiante/misNotas"
+				style="display: flex; align-items: center;"> <i
+					class="menu-icon far fa-clipboard" style="font-weight: 700"></i> <span
+					class="menu-text"> Mantenimiento Imágenes</span>
+			</a> <b class="arrow"></b>
 		</c:if>
 		<c:if test="${sessionScope.usuarioSesion.idPerfil == 1}">
 			<li class="open ${param.foco == '5' ? 'active':''}"><a

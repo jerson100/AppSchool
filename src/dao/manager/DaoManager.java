@@ -6,7 +6,9 @@ import dao.Aul_ContenidoDao;
 import dao.Aul_CursoDao;
 import dao.Aul_HorarioDao;
 import dao.Aul_PeriodoNotasDao;
+import dao.Aul_ProfesorMensajeDao;
 import dao.Aul_RegistroNotasDao;
+import dao.Aul_SeccionAlumnoDao;
 import dao.Aul_SeccionDao;
 import dao.Aul_SeccionGradoNivelDao;
 import dao.Aul_TrabajoDao;
@@ -80,6 +82,14 @@ public class DaoManager {
 			case AULPERIODONOTAS:
 				
 				return new Aul_PeriodoNotasDao();
+				
+			case AULSECCIONALUMNO:
+				
+				return new Aul_SeccionAlumnoDao();
+				
+			case AULPROFESORMENSAJE:
+				
+				return new Aul_ProfesorMensajeDao();
 				
 			default:
 				

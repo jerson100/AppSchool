@@ -12,12 +12,15 @@
 <link rel="shortcut icon" href="assets/img/static/logoColegio.jpg"
 	type="image/x-icon">
 <!-- Inicio nav -->
+
+<link rel="stylesheet" href="assets/css/theme/color3.css">
+<link rel="stylesheet"
+	href="assets/css/base/base3.css">
+
 <link rel="stylesheet" href="assets/css/utils/template/bootstrap.css" />
 <link rel="stylesheet" href="assets/css/utils/template/font-awesome.css" />
 
-<link rel="stylesheet" href="assets/css/theme/color3.css">
-<!-- <link rel="stylesheet"
-	href="assets/css/base/base3.css">-->
+
 
 <!-- text fonts -->
 <link rel="stylesheet" href="assets/css/utils/template/ace-fonts.css" />
@@ -60,6 +63,9 @@
 
 <link rel="stylesheet"
 	href="assets/css/pages/courses/uploadStudent3.css">
+	
+	<link rel="stylesheet"
+	href="assets/css/components/message.css">
 
 </head>
 <body class="no-skin je-scroll">
@@ -91,11 +97,10 @@
 			</div>
 
 			<div class="je-container wrapper-main" style="max-width: 100%;">
-
 				<c:if
 					test="${requestScope.tipoPerfil == 2 || requestScope.tipoPerfil == 3}">
-					<div class="left-container">
-						<div class="je-item left-wrapperr">
+					<div class="sections">
+						<div class="sections__wrapper je-item">
 							<h2 class="title-grados title">Secciones</h2>
 							<div class="grado-container je-scroll" id="gradoContainer">
 								<c:forEach items="${requestScope.listaSeccion}" var="seccion">
@@ -110,15 +115,16 @@
 						</div>
 					</div>
 				</c:if>
-				<div class="right-container"
-					<c:if test="${requestScope.tipoPerfil==1}"><c:out value="style=width:100%;"></c:out></c:if>>
-					<div class="je-item">
-						<h3 class="title" style="display: none">Cursos:</h3>
-						<div class="courses-container" id="coursesContainer">
+				<!-- courses aquí -->
+				<div class="courses">
+					<c:if test="${requestScope.tipoPerfil==1}"><c:out value="style=width:100%;"></c:out></c:if>
+					<div class="courses__left">
+						<h2 class="title" style="display: none">Cursos:</h2>
+						<div class="courses__container je-scroll" id="coursesContainer">
 							<c:forEach var="curso" items="${requestScope.listaCursos}">
-								<div class="wrapper-course">
-									<div class="item-course">
-										<div class="icon-course">
+								<div class="courses__wrapper">
+									<div class="course">
+										<div class="course__icon">
 											<i data-profesor="${curso.profesor}"
 												data-idSecCurPro="${curso.idSecCurPro}"
 												class="menu-icon ${curso.icono}"></i>
@@ -130,8 +136,9 @@
 								</div>
 							</c:forEach>
 						</div>
+						
 					</div>
-					<div class="je-item">
+					<div class="courses__right">
 						<div class="tables-container">
 							<!-- <h4 class="title">Contenidos:</h4>-->
 							<p id="msg"
@@ -159,7 +166,7 @@
 								</div>
 							</c:if>
 							<div class="tabs">
-								<ul class="tabs__list">
+								<ul class="tabs__list je-scroll" style="overflow: auto;">
 									<li class="tabs__item tabs__item--active"><i
 										class="tabs__icon fas fa-chalkboard-teacher"></i> <a
 										href="#tableContent" class="tabs__link">Contenidos</a></li>
@@ -168,6 +175,12 @@
 										href="#tableClass" class="tabs__link">Clases en vivo</a></li>
 									<li class="tabs__item"><i class="tabs__icon fas fa-book"></i>
 										<a href="#tableWork" class="tabs__link">Tareas y trabajos</a>
+									</li>
+									<li class="tabs__item"><i class="tabs__icon fas fa-book"></i>
+										<a href="#tableStudents" class="tabs__link">Alumnos</a>
+									</li>
+									<li class="tabs__item"><i class="tabs__icon fas fa-book"></i>
+										<a href="#tableMessage" class="tabs__link">Mensajes</a>
 									</li>
 								</ul>
 								<div class="tabs__section tabs__section--active"
@@ -180,15 +193,51 @@
 								<div class="tabs__section" data-table="tableWork">
 									<table class="table-data__table"></table>
 								</div>
+								<div class="tabs__section" data-table="tableStudents">
+									<table class="table-data__table"></table>
+								</div>
+								<div class="tabs__section" data-table="tableMessage">
+								    <div class="teacher-message">
+								    	<div class="message-send">
+											<textarea class="teacher-message__textarea" placeholder="Ingrese un mensaje"></textarea>								    	
+											<button class="je-btn je-btn--smaller">Agregar Mensaje</button>								    	
+								    	</div>
+										<div class="teacher-message__list">
+											<c:forEach var="i"   begin="1" end="5">
+												<div class="message">
+													<div class="message__left">
+														<img src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/09/09/15996060793746.jpg" alt="user" class="message__image">
+													</div>
+													<div class="message__right">
+														<div class="message__header">
+															<span class="message__name">
+																<b>
+																	Jerson Ramírez Ortiz
+																</b>
+															</span>
+															<time>
+																06/08/2021 a las 05:30
+															</time>
+														</div>
+														<div class="message__body">
+															<p>
+																Soy un mensaje de prueba
+															</p>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+								    </div>
+								</div>
 							</div>
-						</div>
+						</div>	
 					</div>
-				</div>
 			</div>
 		</div>
 
 		<!-- Modal  - Resourse -->
-
+	
 		<div class="mod mod--resource">
 			<div class="mod__inner">
 				<div class="resource">
@@ -371,7 +420,7 @@
 			</div>
 		</div>
 	</div>
-
+	<%@include file="../includes/whatsapp.jsp"%>
 	<%@include file="../includes/footer.jsp"%>
 	<script type="text/javascript">
 		window.jQuery

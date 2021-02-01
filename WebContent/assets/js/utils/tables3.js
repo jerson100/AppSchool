@@ -42,8 +42,10 @@ class DataTable {
         this.columns.forEach(column=>{
             aux += `<th class="table-data__column table-data__header">${column.name}</th>`;
         });
-        if(this.actions.options.length > 0){
-        	aux += `<th class="table-data__column table-data__header">Acciones</th>`;	
+        if(this.actions && this.actions.options){
+        	if(this.actions.options.length > 0){
+        		aux += `<th class="table-data__column table-data__header">Acciones</th>`;	
+        	}        	
         }
         thead.innerHTML = `
             <tr class="table-data__row table-data__row--border">${aux}</tr>   
@@ -223,7 +225,7 @@ class DataTable {
 
         });
 
-        if(this.actions.options.length > 0){
+        if(this.actions && this.actions.options && this.actions.options.length > 0){
         	
         	let actionText = "";
         	

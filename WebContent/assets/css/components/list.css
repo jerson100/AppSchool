@@ -1,0 +1,57 @@
+.je-list{
+	margin: 0 0 1rem 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+}
+
+.je-list__item{
+	margin-right: 1rem;
+	margin-bottom: 1rem;
+}
+
+.je-list__itemt:last-child{
+	margin-right: 0;
+}
+
+/*
+
+	description lists
+
+*/
+
+.je-list--description  .je-list__item{
+	display: flex;
+}
+
+.je-list--description .je-list__left{
+	flex: 0 0 100px;
+	max-width:  100px;
+}
+
+.je-list--description .je-list__right{
+	flex: 1 0 0;
+	margin-left: 1rem;
+}
+
+.je-list--description  .je-list__icon{
+	margin-right: .5rem;	
+}
+
+
+
+/*
+	vertical
+*/
+
+.je-list--dir-vertical{
+	flex-direction: column;
+}
+
+.je-list--dir-vertical .je-list__item{
+	margin-right: 0;
+}
+
+.je-list--dir-vertical  .je-list__item:last-child {
+	margin-bottom: 0;
+}

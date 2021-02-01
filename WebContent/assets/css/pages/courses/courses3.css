@@ -28,9 +28,7 @@ h2 {
 */
 .grado-container {
 	display: flex;
-	/*---*/
 	flex-wrap: wrap;
-	max-height: 164px;
 	border: solid 1px rgba(0, 0, 0, .05);
 	padding: 1rem;
 	overflow: auto;
@@ -46,7 +44,6 @@ h2 {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	/**/
 	flex: 0 0 calc(50% - .5rem);
 	margin-bottom: 1rem;
 }
@@ -57,7 +54,6 @@ h2 {
 
 .grado-item span {
 	text-align: center;
-	/**/
 	font-size: 11px;
 }
 
@@ -104,8 +100,8 @@ h2 {
 	margin-right: 0;
 }
 
-.left-container {
-	margin-bottom: 2rem;
+.sections {
+	padding: 3rem 1.5rem;
 }
 
 .title-grados {
@@ -126,7 +122,7 @@ h2 {
 	Cursos
 	
 */
-.courses-container {
+.courses__container {
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
@@ -134,24 +130,29 @@ h2 {
 	padding-bottom: 1rem;
 }
 
-.courses-container .wrapper-course {
+.courses__container .courses__wrapper {
 	margin-bottom: var(--margin);
 	width: var(--width-course);
 }
 
-.courses-container .wrapper-course:nth-child(2n) {
+.courses__right{
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+
+.courses__container .courses__wrapper:nth-child(2n) {
 	margin-right: 0;
 }
 
-.item-course {
+.course {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.item-course .icon-course {
-	width: 80px;
-	height: 80px;
+.course .course__icon {
+	width: 60px;
+	height: 60px;
 	border-radius: 5px;
 	background: #438eb9;
 	display: flex;
@@ -162,7 +163,7 @@ h2 {
 	transition: transform .3s ease;
 }
 
-.icon-course i {
+.course__icon i {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -170,21 +171,21 @@ h2 {
 	align-items: center;
 }
 
-.item-course .icon-course:hover {
+.course .course__icon:hover {
 	transform: scale(1.1);
 }
 
-.item-course .icon-course.selected {
+.course .course__icon.selected {
 	background-color: #d01e1e;
 	border: solid 3px #621919;
 }
 
-.icon-course i::before {
-	font-size: 50px;
+.course__icon i::before {
+	font-size: 35px;
 	color: #fff;
 }
 
-.item-course .text-course {
+.course .text-course {
 	display: block;
 	text-align: center;
 }
@@ -314,6 +315,8 @@ h2 {
 
 .wrapper-main {
 	display: block;
+	flex: 1 0 0;
+	flex-wrap: initial;
 }
 
 /*****************/
@@ -373,24 +376,28 @@ h2 {
 	margin-bottom: 0;
 }
 
+/*Teacher mensagge*/
+
+.teacher-message{
+	padding: 1rem 0;
+}
+
 @media screen and (min-width: 700px) {
-	.left-wrapperr {
-		position: sticky;
-		top: 80px;
-	}
+	
 	.teacher {
 		display: inline;
 	}
-	.courses-container .wrapper-course { 
-		--width-course: calc(100%/ 3);
+	.courses__container .courses__wrapper { 
+		--width-course: calc(100% / 3);
 	}
-	.left-container {
+	.sections {
+		display: flex;
 		flex-direction: row;
 		flex: 0 0 238px;
 		border-right: solid 2px #ff000052;
 		position: relative;
 	}
-	.left-container::before {
+	.sections::before {
 		content: '';
 		position: absolute;
 		top: calc(50% - 8px);
@@ -402,21 +409,22 @@ h2 {
 		right: -9px;
 	}
 	.grado-container {
-		max-height: calc(100vh - 250px);
-		flex-direction: column;
+		position: sticky;
+    	top: 80px;
 		flex-direction: row;
+		flex: 1 0 0;
+		overflow: auto;
+		max-height: calc(100vh - 35vh);
 	}
+	
 	.grado-container .grado-item {
 		width: 100%;
 		margin-bottom: 1rem;
 		margin-right: 0;
 		position: relative;
-		flex-basis: 100%;
+    	flex-basis: initial;
 	}
-	.right-container {
-		/*flex: 1 0 0;*/
-		width: calc(100% - 238px);
-	}
+	
 	.wrapper-main {
 		display: flex;
 	}
@@ -451,10 +459,8 @@ h2 {
 	.group-col {
 		width: 100%;
 		display: flex;
-		/*align-items: center;*/
 		justify-content: flex-start;
 		flex-direction: column;
-		/*text-align: center;*/
 	}
 }
 
@@ -474,16 +480,59 @@ h2 {
 	.je-row-theme .je-input-group:nth-child(2)>label {
 		flex-basis: 40px;
 	}
+	.sections{
+		display: flex;
+	}
+	
+	.sections__wrapper{
+		display: flex;
+		flex-direction: column;
+		flex: 1 0 0;
+	}
+	
+	.grado-container {
+		flex: 1 0 0;
+	}
+	
 }
 
 @media screen and (min-width: 905px) {
-	.wrapper-main>div {
-		padding: 1.5rem;
+	
+	.courses{
+		display: flex;
+		flex: 1 0 0;
 	}
+	
+	.courses__left{
+		flex: 0 0 200px;
+		display: flex;
+    	flex-direction: column;
+	}
+	
+	.courses__right{
+		flex: 0 0 calc(100% - 200px);
+    	max-width:calc(100% - 200px);
+	}
+	
+	.courses__container{
+	    flex: 1 0 0;
+    	overflow: auto;
+    	margin-top: 3rem;
+    	margin-bottom: 3rem;
+	}
+	
+	.courses__container .courses__wrapper { 
+		--width-course: 100%;
+	}
+		
 }
 
 @media screen and (min-width: 1200px) {
-	.courses-container .wrapper-course { 
-		--width-course: calc(100%/ 6);
+	
+	.grado-container{
+		max-height: initial;
 	}
+	
+}
+	
 }

@@ -9,8 +9,8 @@
 	opacity: 0;
 	visibility: hidden;
 	position: fixed;
-	bottom: 2rem;
-	right: 2rem;
+	bottom: 8rem;
+    right: 2rem;
 	z-index: 99999;
 	transform: translateX(100%) rotate(0deg) scale(0);
 	transition: transform 500ms, opacity 0s 500ms, visibility 0s 500ms,

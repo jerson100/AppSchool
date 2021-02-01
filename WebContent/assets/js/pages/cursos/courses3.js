@@ -12,12 +12,12 @@
 			  $modalHeader = document.querySelector(".resource__header"),
 			  $tagFileName = document.querySelector(".tag__file-name"),
 			  $tagSections = Array.from($modalOptions.querySelectorAll(".tag__section")),
-			  tableContent=null,tableClass=null,tableWork=null,idSecCurPro=null;
+			  tableContent=null,tableClass=null,tableWork=null,tableStudents = null,idSecCurPro=null,idSecGraNiv=null;
 			  
 			  /*BOOLEANS*/
 		let flagUpdateContent = false,
 			flagUpdateClass = false,
-			flagUpdateWork = false;
+			flagUpdateWork = false;  
 		
 		/*
 		 * Este método nos permite actualizar la data de las tablas.
@@ -45,6 +45,11 @@
 						data = await API.getData(`trabajo?idSecCurPro=${idSecCurPro}`);
 						dataArray = data.estado ? data.trabajos : [];
 						break;
+					case 'tableStudents':
+						tableReference = tableStudents;
+						data =  await API.getData(`alumnos?idSecGraNiv=${idSecGraNiv}`);
+						dataArray = data.estado  ? data.alumnos : [];
+						break;
 				}
 				tableReference.updateData(dataArray);
 				tableReference.table.scrollIntoView({block: "start", behavior: "smooth"});
@@ -52,7 +57,7 @@
 				if(e.status==401||e.status==403){
 					location.href = 'login';
 				}else{
-					console.log("Error: "+e);
+					console.log(e);
 				}
 			}finally{
 				load.remove();
@@ -85,7 +90,13 @@
 					"callback" : function(){
 						setDataTable('tableWork');
 					}
-				}
+				},
+				{
+					"href" : "tableStudents",
+					"callback" : function(){
+						setDataTable('tableStudents');
+					}
+				},
 			]);
 		};
 		
@@ -310,7 +321,7 @@
 							$nombreProfesorSeleccionado.textContent = `Docente: ${e.target.dataset.profesor}`;							
 						}
 						//removeClass(),"selected");
-						ELEMENTS.removeClass(Array.from($coursesContainer.querySelectorAll(".icon-course")),["selected"]);
+						ELEMENTS.removeClass(Array.from($coursesContainer.querySelectorAll(".course__icon")),["selected"]);
 						if(e.target.tagName === 'I'){
 							e.target.parentElement.classList.add("selected");
 						}else{
@@ -355,7 +366,7 @@
 						
 						//obtenemos el idSecGraNiv para listar todos los cursos 
 						//de esa sección - grado
-						let idSecGraNiv = e.target.dataset.idsecgraniv;
+						idSecGraNiv = e.target.dataset.idsecgraniv;
 						
 						let load = loader();
 						
@@ -415,10 +426,10 @@
 						    div;
 						courses.forEach(course=>{
 							div = document.createElement("div");
-							div.classList.add("wrapper-course");
+							div.classList.add("courses__wrapper");
 							div.innerHTML += `
-								<div class="item-course"">
-								<div class="icon-course">
+								<div class="course">
+								<div class="course__icon">
 								<i data-idSecCurPro="${course.idSecCurPro}" data-profesor="${course.profesor}" class="menu-icon ${course.icono}"></i>
 								</div>
 								<span data-idSecCurPro="${course.idSecCurPro}" data-profesor="${course.profesor}" class="text-course-name">${course.descCurso}</span>
@@ -723,7 +734,27 @@
                     }
                 }
             });
-		};
+			
+			
+			tableStudents = new DataTable({
+	            table: '[data-table="tableStudents"] table',
+	            options: {
+                	row: {
+                		bgcolor: "#358bbc1c" 
+                	}         
+                },
+	            columns: [
+	                {
+	                    name: 'Estudiante',
+	                    var: 'alumno',
+	                    type: 'text'
+	                }
+	            ],
+	            rowsCount: 10,
+	            navigator: true,
+			});
+			
+		}
 		
 		/*Método para mostar el modal de comentario de los docentes*/
 		const showModalComent = (comentario) => {
